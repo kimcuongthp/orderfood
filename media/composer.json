@@ -1,0 +1,34 @@
+{
+  "name": "botble/media",
+  "description": "Media package for Laravel application",
+  "type": "project",
+  "license": "GNU",
+  "autoload": {
+    "psr-4": {
+      "Botble\\Media\\": "src",
+      "Botble\\Support\\": "support/src"
+    }
+  },
+  "authors": [
+    {
+      "name": "Sang Nguyen",
+      "email": "sangnguyenplus@gmail.com"
+    }
+  ],
+  "require": {
+    "intervention/image": "~2.3",
+    "league/flysystem-aws-s3-v3": "~1.0",
+    "ralouphie/mimey": "~1.0",
+    "chumper/zipper": "^1.0"
+  },
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Botble\\Media\\Providers\\MediaServiceProvider"
+      ],
+      "aliases":{
+        "RvMedia": "Botble\\Media\\Facades\\RvMediaFacade"
+      }
+    }
+  }
+}

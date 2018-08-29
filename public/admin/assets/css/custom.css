@@ -1,0 +1,81 @@
+.dd-handle .slug {
+    color: #ccc;
+    font-size: 10px;
+    margin-left: 20px;
+    position: relative;
+    top: -1px;
+}
+.dd-item .actions {
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    padding: 6px;
+    background: #ddd;
+}
+.actions a {
+    font-size: 10px;
+    padding: 5px 10px;
+    background: #aaa;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.actions .delete {
+    background: #EA6153;
+}
+.panel > .panel-heading .panel-title {
+    font-size: 14px;
+}
+.admin-section-title {
+    clear: both;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 0px;
+}
+.list-unstyled ul {
+    margin-left: 17px;
+}
+.panel-category .checkbox-replace {
+    margin-bottom: 10px;
+}
+.admin-section-title h3 {
+    display: inline-block;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.admin-section-title a {
+    margin-left: 10px;
+    margin-top: -8px;
+}
+
+.search-form-full .form-group, .search-form-full .form-group .form-control {
+    margin: 0px;
+}
+.pagination-outter {
+    text-align: center;
+}
+.generate_slug {
+    cursor: pointer;
+}
+.page-container .main-content {
+    display: block;
+}
+.modal .modal-header .close {
+    background: transparent;
+}
+.rv-media-container .rv-btn-add-folder {
+    width: auto !important;
+}
+.remove {
+    cursor: pointer;
+}
+@media screen and (max-width: 992px)
+{
+    .search-form-full {
+        margin-top: 20px !important;
+    }
+}
+.p-error {
+    margin-top: 10px;
+}
