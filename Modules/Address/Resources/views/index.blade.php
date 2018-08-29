@@ -22,7 +22,7 @@
                                 <div class="dd-handle">
                                     {{ $city->name }}
                                 </div>
-                                <div class="actions"><a href="{{ route('address.city.edit', $city->id) }}" class="edit">Sửa</a> <a href="" class="delete">Xóa</a></div>
+                                <div class="actions"><a href="{{ route('address.city.edit', $city->id) }}" class="edit edit_city">Sửa</a> <a href="javascript:;" data-id="{{ $city->id }}" class="delete delete_city">Xóa</a></div>
                             </li>
                         @endforeach
                     @endif
@@ -58,8 +58,8 @@
                             <td>{{ $district->city->name or "" }}</td>
                             <td>
                                 <div class="actions">
-                                    <a href="" id="edit_district" class="edit">Sửa</a>
-                                    <a href="" id="delete_district" class="delete">Xóa</a>
+                                    <a href="{{ route('address.district.edit', $district->id) }}" class="edit edit_district">Sửa</a>
+                                    <a href="javascript:;" data-id="{{ $district->id }}" class="delete delete_district">Xóa</a>
                                 </div>
                             </td>
                         </tr>
@@ -149,17 +149,14 @@
         </div>
     </div>
 @stop
-@push('css-stack')
-    <link rel="stylesheet" href="/admin/plugins/sweetalert2/sweetalert2.min.css" />
-@endpush
 @push('js-stack')
     <script src="/admin/assets/js/jquery.nestable.js"></script>
-    <script src="/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/admin/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script>
         $(document).ready(function($)
         {
             $('.dd').nestable({
-                maxDepth: 2
+                maxDepth: 1
             });
 
             $('.dd').on('change', function() {
@@ -170,18 +167,18 @@
             });
 
 
-            $('.actions .edit').click(function(e){
+            $('.actions .edit_city').click(function (e) {
                 $('#update-city').modal('show', {backdrop: 'static'});
                 e.preventDefault();
                 href = $(this).attr('href');
                 $('#update-city .modal-body').load(href);
             });
 
-            $('.action #edit_district').click(function () {
-               $('#update-district').modal('show', {backdrop: 'static'});
-               e.preventDefault();
-               href = $(this).attr('href');
-
+            $('.actions .edit_district').click(function (e) {
+                $('#update-district').modal('show', {backdrop: 'static'});
+                e.preventDefault();
+                href = $(this).attr('href');
+                $('#update-district .modal-body').load(href);
             });
 
             $('#submit-update-city').click(function () {
@@ -192,6 +189,16 @@
                 }
                 <?php endforeach; ?>
                $('#update-city-form').submit();
+            });
+
+            $('#submit-update-district').click(function () {
+                <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
+                if($('#update-district-form #{{ $locale }}_name').val() == '') {
+                    toastr.error('Điền thiếu dữ liệu, vui lòng kiểm tra lại!', 'Lỗi!', opts);
+                    return;
+                }
+                <?php endforeach; ?>
+                $('#update-district-form').submit();
             });
 
             $('#submit-new').click(function()
@@ -215,6 +222,120 @@
                {
                    $('#append_city').html('');
                }
+            });
+
+            $('.delete_district').click(function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: 'Bạn có chắc chắn muốn xóa?',
+                    text: "Bạn sẽ không thể phục hồi dữ liệu này!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xóa!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url : '/backend/address/districts/'+id+'/delete',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (data) {
+                                if(data.status === 'success')
+                                {
+                                    swal(
+                                        'Xong!',
+                                        data.message,
+                                        'success'
+                                    );
+                                }
+                                else if(data.status === 'error'){
+                                    swal(
+                                        'Lỗi!',
+                                        data.message,
+                                        'error'
+                                    );
+                                }
+                                else {
+                                    swal(
+                                        'Lỗi!',
+                                        'Lỗi không xác định vui lòng thử lại',
+                                        'error'
+                                    );
+                                }
+                                location.reload(true);
+                            },
+                            error: function (e)
+                            {
+                                swal(
+                                    'Lỗi!',
+                                    'Lỗi không xác định vui lòng thử lại',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                })
+            });
+
+            $('.delete_city').click(function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: 'Bạn có chắc chắn muốn xóa?',
+                    text: "Bạn sẽ không thể phục hồi dữ liệu này!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xóa!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            url : '/backend/address/cities/'+id+'/delete',
+                            type: 'post',
+                            dataType: 'json',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (data) {
+                                if(data.status === 'success')
+                                {
+                                    swal(
+                                        'Xong!',
+                                        data.message,
+                                        'success'
+                                    );
+                                }
+                                else if(data.status === 'error'){
+                                    swal(
+                                        'Lỗi!',
+                                        data.message,
+                                        'error'
+                                    );
+                                }
+                                else {
+                                    swal(
+                                        'Lỗi!',
+                                        'Lỗi không xác định vui lòng thử lại',
+                                        'error'
+                                    );
+                                }
+                                location.reload(true);
+                            },
+                            error: function (e)
+                            {
+                                swal(
+                                    'Lỗi!',
+                                    'Lỗi không xác định vui lòng thử lại',
+                                    'error'
+                                );
+                            }
+                        });
+                    }
+                })
             });
         });
 

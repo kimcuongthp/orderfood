@@ -12,4 +12,9 @@ class City extends Model
 
     public $translatedAttributes = ['name'];
     protected $fillable = ['name'];
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
 }

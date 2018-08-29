@@ -13,10 +13,11 @@ class AddressController extends Controller
     public function index()
     {
         $cities = City::defaultOrder()->get()->toTree();
-        $districts = District::all();
+        $districts = District::with('city')->get();
         return view('address::index', compact('cities', 'districts'));
     }
 
+    #Lưu dữ liệu tỉnh thành quận huyện
     public function store(Request $request)
     {
         #Kiểm tra kiểu
@@ -71,18 +72,28 @@ class AddressController extends Controller
 
     }
 
+    #Sắp xếp thứ tự Tỉnh thành
     public function order(Request $request)
     {
         $order = json_decode($request->order, true);
         City::rebuildTree($order);
     }
 
+    #Show giao diện sửa thành phố
     public function editCity(City $city)
     {
         return view('address::city.edit', compact('city'));
     }
 
+    #Show giao diện sửa quận huyện
+    public function editDistrict(District $district)
+    {
+        $cities = City::all();
+        return view('address::district.edit', compact('district', 'cities'));
+    }
 
+
+    #Cập nhật dữ liệu thành phố
     public function updateCity(City $city, Request $request)
     {
         try {
@@ -106,9 +117,84 @@ class AddressController extends Controller
 
     }
 
+    #Cập nhât dữ liệu quận huyện
+    public function updateDistrict(District $district, Request $request)
+    {
+        try{
+
+            $district->city_id = $request->city_id;
+            foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
+                $name = $locale . '_name';
+                $district->translate($locale)->name = $request->{$name};
+            }
+            $district->save();
+
+            return redirect()->back()->with([
+                'note_type'  =>  'success',
+                'note'       =>  'Lưu Thành phố thành công!'
+            ]);
+        }
+        catch (\Exception $e)
+        {
+            return redirect()->back()->with([
+                'note_type' => 'error',
+                'note'      => 'Lỗi xảy ra! Vui lòng báo với quản trị viên.'
+            ]);
+        }
+    }
+
+    #Show tất cả thành phố
     public function loadAllCity()
     {
         $cities = City::all();
         return view('address::city.select', compact('cities'));
+    }
+
+    #Xóa quận huyện
+    public function deleteDistrict(District $district)
+    {
+        try{
+            $district->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Xóa thành công!'
+            ]);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Có lỗi xảy ra vui lòng báo với quản trị viên!'
+            ]);
+        }
+
+    }
+
+    #Xóa thành phố
+    public function deleteCity(City $city)
+    {
+        try{
+            $city->delete();
+
+            #Xóa city_id của quận huyện
+            if(count($city->districts))
+            {
+                foreach($city->districts as $district)
+                {
+                    $district->city_id = '';
+                }
+            }
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Xóa thành công!'
+            ]);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Có lỗi xảy ra vui lòng báo với quản trị viên!'
+            ]);
+        }
     }
 }
