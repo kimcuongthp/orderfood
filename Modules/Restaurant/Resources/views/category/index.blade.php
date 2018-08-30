@@ -19,9 +19,11 @@
                 <td class="text-center">{{$loop->iteration}}</td>
                 <td>{{$categories->name}}</td>
                 <td></td>
-                <td  class="text-center">
-                    <button class="btn btn-blue btn-xs" onclick="fnUpdate('{{$categories->id}}')"><i class="glyphicon glyphicon-pencil"></i> </button>
-                    <button class="btn btn-red btn-xs" onclick="fnDelete('{{$categories->id}}')"><i class="glyphicon glyphicon-trash"></i></button>
+                <td>
+                    <div class="actions">
+                        <a href="javascript:;" onclick="fnUpdate('{{$categories->id}}')" class="edit">Sửa</a>
+                        <a href="javascript:;" onclick="fnDelete('{{$categories->id}}')" class="delete">Xóa</a>
+                    </div>
                 </td>
             </tr>
         @endforeach
