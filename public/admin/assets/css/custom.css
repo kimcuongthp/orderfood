@@ -82,3 +82,20 @@
 .swal2-popup {
     font-size: 1.5rem !important;
 }
+
+
+#tbCategory tr th:first-child{
+    width: 80px;
+}
+#tbCategory tr th:last-child{
+    width: 150px;
+    text-align: center;
+}
+#tbCategory tr th:nth-child(3){
+    width: 200px;
+    text-align: center;
+}
+#tbCategory tr th{
+    text-align: center;
+}
+
