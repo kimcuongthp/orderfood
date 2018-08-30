@@ -6,7 +6,7 @@
 
             <!-- logo -->
             <div class="logo">
-                <a href="index.html">
+                <a href="/backend">
                     <img src="/admin/assets/images/logo@2x.png" width="120" alt="" />
                 </a>
             </div>
@@ -47,8 +47,14 @@
                 <ul>
                     <li>
                         <a href="{{ route('restaurant.create') }}">
-                            <i class="entypo-plus"></i>
-                            <span class="title">Thêm Nhà Hàng</span>
+                            <i class="entypo-right-open-mini"></i>
+                            <span class="title">Thêm nhà hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('category.index') }}">
+                            <i class="entypo-right-open-mini"></i>
+                            <span class="title">Danh mục nhà hàng</span>
                         </a>
                     </li>
                 </ul>

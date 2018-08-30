@@ -1,18 +1,19 @@
 @extends('backend.layouts.master')
 @section('content')
 <div class="admin-section-title">
-    <h3><i class="entypo-archive"></i> Phân loại nhà hàng</h3>
-    <button class="btn btn-success pull-right" onclick="fnUpdate(0)">  Thêm mới</button>
+    <h3><i class="entypo-archive"></i> Danh mục nhà hàng</h3>
+    <a class="btn btn-success" onclick="fnUpdate(0)"><i class="entypo-plus-circled"></i>  Thêm mới</a>
 </div>
-
-<div class="row" style="margin: 0px;">
-    <table class="table table-bordered table-hover " id="tbCategory">
-        <tr>
-            <th>STT</th>
-            <th>Tên loại</th>
-            <th>Nhà hàng</th>
-            <th></th>
-        </tr>
+<div class="row">
+    <table class="table table-bordered" id="tbCategory">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên loại nhà hàng</th>
+                <th>Nhà hàng</th>
+                <th>Tác vụ</th>
+            </tr>
+        </thead>
         @foreach($category as $categories)
             <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
@@ -42,7 +43,7 @@
     <script src="/admin/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script>
         function fnUpdate(id) {
-            $('#modalCategory').load('category/modal/'+id).modal('show');
+            $('#modalCategory').load('categories/category/modal/'+id).modal('show');
         }
 
         function fnCategorySubmit(){
@@ -69,7 +70,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url : '/backend/category/delete/'+id,
+                        url : 'categories/category/delete/'+id,
                         type: 'post',
                         dataType: 'json',
                         data: {
