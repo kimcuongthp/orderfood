@@ -3,7 +3,11 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Tạo mới danh mục</h4>
+            @if($data->id == 0)
+            <h4 class="modal-title">Tạo mới danh mục nhà hàng</h4>
+            @else
+            <h4 class="modal-title">Cập nhật danh mục nhà hàng</h4>
+            @endif
         </div>
         <div class="modal-body">
             {!! Form::open(['route' => ['category.update'], 'method' => 'post', 'id' => 'update-category-form']) !!}
