@@ -33,92 +33,25 @@
             <!-- add class "multiple-expanded" to allow multiple submenus to open -->
             <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
             <li class="has-sub">
-                <a href="index.html">
+                <a href="/backend">
                     <i class="entypo-gauge"></i>
                     <span class="title">Dashboard</span>
                 </a>
+            </li>
+            @role('Staff')
+            <li class="has-sub">
+                <a href="#">
+                    <i class="entypo-right-open"></i>
+                    <span class="title">Nhà Hàng</span>
+                </a>
                 <ul>
                     <li>
-                        <a href="index.html">
-                            <span class="title">Dashboard 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard-2.html">
-                            <span class="title">Dashboard 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard-3.html">
-                            <span class="title">Dashboard 3</span>
-                        </a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="skin-black.html">
-                            <span class="title">Skins</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="skin-black.html">
-                                    <span class="title">Black Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-white.html">
-                                    <span class="title">White Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-purple.html">
-                                    <span class="title">Purple Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-cafe.html">
-                                    <span class="title">Cafe Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-red.html">
-                                    <span class="title">Red Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-green.html">
-                                    <span class="title">Green Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-yellow.html">
-                                    <span class="title">Yellow Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-blue.html">
-                                    <span class="title">Blue Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-facebook.html">
-                                    <span class="title">Facebook Skin</span>
-                                    <span class="badge badge-secondary badge-roundless">New</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="highlights.html">
-                            <span class="title">What's New</span>
-                            <span class="badge badge-success badge-roundless">v2.0</span>
+                        <a href="{{ route('restaurant.create') }}">
+                            <i class="entypo-plus"></i>
+                            <span class="title">Thêm Nhà Hàng</span>
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="index.html" target="_blank">
-                    <i class="entypo-monitor"></i>
-                    <span class="title">Frontend</span>
-                </a>
             </li>
             <li class="has-sub">
                 <a href="#">
@@ -128,14 +61,20 @@
                 <ul>
                     <li>
                         <a href="{{ route('address.index') }}">
-                            <i class="entypo-flow-line"></i>
+                            <i class="entypo-location"></i>
                             <span class="title">Tỉnh thành - Quận huyện</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('media.index') }}">
+                            <i class="entypo-picture"></i>
+                            <span class="title">Thư viện ảnh</span>
                         </a>
                     </li>
                 </ul>
             </li>
+            @endrole
         </ul>
-
     </div>
 
 </div>

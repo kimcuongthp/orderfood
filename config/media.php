@@ -31,7 +31,7 @@ return [
     ],
     'route' => [
         'prefix' => '/backend/media', // Media URL. Ex: media => http://laravel.dev/media
-        'middleware' => ['web', 'auth'],
+        'middleware' => ['web', 'auth', 'role:Staff'],
         'options' => [],
     ],
     'views' => [

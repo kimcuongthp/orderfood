@@ -5,6 +5,8 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -31,5 +33,18 @@ class UserController extends Controller
     public function showDashboard()
     {
         return view('backend.dashboard');
+    }
+
+    public function createRole()
+    {
+        $role = Role::firstOrCreate([
+            'name' => 'Staff'
+        ]);
+        //Auth::user()->assignRole('Staff');
+
+        $permission = Permission::create(['name' => 'media manager']);
+        $role->givePermissionTo($permission);
+//        dd($role);
+
     }
 }

@@ -133,7 +133,7 @@
     <?php endif; ?>
 
     @if ($errors->any())
-    toastr.error('Có lỗi xảy ra vui lòng thử lại!', 'Rất tiếc!', opts);
+    toastr.error('Lỗi nhập dữ liệu vui lòng kiểm tra lại!', 'Rất tiếc!', opts);
     @endif
 </script>
 <!-- Push JavaScripts -->

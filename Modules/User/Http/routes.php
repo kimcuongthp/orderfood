@@ -20,4 +20,10 @@ Route::group(['middleware'=> ['web','auth'], 'prefix' => 'backend', 'namespace' 
         'as' => 'show.dashboard',
         'uses' => 'UserController@showDashboard'
     ]);
+
+    #Tạo role và premission
+    Route::get('/role', [
+        'as' => 'create.role',
+        'uses' => 'UserController@createRole'
+    ]);
 });

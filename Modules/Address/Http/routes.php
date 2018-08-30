@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-    Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'backend/address', 'namespace' => 'Modules\Address\Http\Controllers'], function () {
+    Route::group(['middleware' => ['web', 'auth','role:Staff'], 'prefix' => 'backend/address', 'namespace' => 'Modules\Address\Http\Controllers'], function () {
         Route::get('/', [
             'as' => 'address.index',
             'uses' => 'AddressController@index'

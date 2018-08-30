@@ -17,16 +17,16 @@ class CreateTableNhahang extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('phone')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('image')->nullable();
             $table->string('video')->nullable();
-            $table->date('time_open');
-            $table->date('time_close');
+            $table->string('time_open')->nullable();
+            $table->string('time_close')->nullable();
             $table->tinyInteger('is_open')->default(1);
-            $table->float('price_min');
-            $table->float('price_max');
-            $table->float('trans_fee');
+            $table->float('price_min')->nullable();
+            $table->float('price_max')->nullable();
+            $table->float('trans_fee')->nullable();
             $table->integer('district_id');
             $table->integer('city_id');
             $table->integer('user_id');
@@ -37,7 +37,7 @@ class CreateTableNhahang extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('restaurant_id')->unsigned();
             $table->string('locale')->index();
 
