@@ -35,6 +35,7 @@ class CreateTableNhahang extends Migration
         });
         Schema::create('restaurant_translations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('description')->nullable();
             $table->string('address');
             $table->integer('restaurant_id')->unsigned();
@@ -77,10 +78,11 @@ class CreateTableNhahang extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurants');
+
         Schema::dropIfExists('restaurant_translations');
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('restaurants');
         Schema::dropIfExists('category_translations');
+        Schema::dropIfExists('categories');
         Schema::dropIfExists('restaurant_categories_relation');
     }
 }
