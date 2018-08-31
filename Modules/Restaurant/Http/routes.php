@@ -36,6 +36,43 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
             ]);
         });
 
+        # Router danh mục món ăn
+        Route::group(['prefix' => 'typeoffoods'], function(){
+            Route::get('/', [
+                'as' => 'typeoffood.index',
+                'uses' => 'TypeOfFoodController@index'
+            ]);
+            Route::get('/typeoffood/modal/{id}', [
+                'as' => 'typeoffood.modal',
+                'uses' => 'TypeOfFoodController@modal'
+            ]);
+            Route::post('/typeoffood/update', [
+                'as' => 'typeoffood.update',
+                'uses' => 'TypeOfFoodController@update'
+            ]);
+            Route::post('/typeoffood/delete/{id}', [
+                'as' => 'typeoffood.delete',
+                'uses' => 'TypeOfFoodController@delete'
+            ]);
+        });
 
+        #Router mon an
+        Route::group(['prefix' => 'foods'], function(){
+            Route::get('/{id?}', [
+                'as' => 'foods.index',
+                'uses' => 'FoodsController@index'
+            ])->where('id', '[0-9]+');
+            Route::get('/add', [
+                'uses' => 'FoodsController@show'
+            ]);
+            Route::get('/update/{id}', [
+                'uses' => 'FoodsController@show'
+            ]);
+            Route::post('/update', [
+                'as'=>'foods.update',
+                'uses' => 'FoodsController@update'
+            ]);
+
+        });
     });
 });

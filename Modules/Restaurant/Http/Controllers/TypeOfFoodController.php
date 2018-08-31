@@ -1,35 +1,50 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Tran Vuong
+ * Date: 8/30/2018
+ * Time: 3:11 PM
+ */
+
 namespace Modules\Restaurant\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Modules\Restaurant\Entities\Category;
+use Modules\Restaurant\Entities\TypeOfFood;
 
-class CategoryController extends Controller{
-    public  function index(){
-        $category = Category::all();
 
-        return view('restaurant::category.index',compact('category'));
+class TypeOfFoodController extends  Controller
+{
+    public function index(Request $request)
+    {
+        $restaurant_id = $request->input("restaurant_id");
+        if(!$restaurant_id) $restaurant_id =0;
+        $typeoffood =Typeoffood::where('restaurant_id',$restaurant_id)->get();
+        return view('restaurant::typeoffood.index',compact('typeoffood','restaurant_id'));
     }
 
-    public function  modal(Request $request){
+    public function modal(Request $request){
         $id=$request->route('id');
-        $data = Category::find($id);
-        if(!$data){
-            $data = new Category();
-            $data->id = 0;
+        $restaurant_id =$request->input('restaurant_id');
+        $type = Typeoffood::find($id);
+        if(!$type){
+            $type = new Typeoffood();
+            $type->id = 0;
+            $type->restautant_id =(int)$restaurant_id;
         }
-        return view('restaurant::category.modal',compact('data'));
+
+        return view('restaurant::typeoffood.modal',compact('type'));
     }
 
     public function update(Request $request){
         $id =$request->input('id');
-        $data = Category::find($id);
+        $restaurant_id =  $request->input('restaurant_id');
+        $data = Typeoffood::find($id);
         if(!$data){
-            $data = new Category();
+            $data = new Typeoffood();
+            $data->restaurant_id =$restaurant_id;
             $data->save();
             foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
                 $name = $locale.'_name';
@@ -46,7 +61,7 @@ class CategoryController extends Controller{
         }
         return redirect()->back()->with([
             'note_type'  =>  'success',
-            'note'       =>  'Lưu danh mục thành công!'
+            'note'       =>  'Lưu loại món ăn thành công!'
         ]);
     }
 
@@ -54,7 +69,7 @@ class CategoryController extends Controller{
     {
         try{
             $id=$request->route('id');
-            $data = Category::find($id);
+            $data = Typeoffood::find($id);
             $data->delete();
             return response()->json([
                 'status' => 'success',

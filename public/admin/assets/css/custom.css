@@ -105,3 +105,39 @@
     margin-left: 5px;
 }
 
+
+.btn-white{
+    background: #fff !important;
+
+}
+.btn-white:hover{
+    background: #fff !important;
+}
+
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+    border: 1px solid red !important;
+}
+.parsley-required{
+    color: red;
+}
+
+.parsley-errors-list {
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    opacity: 0;
+
+    transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+    opacity: 1;
+}
