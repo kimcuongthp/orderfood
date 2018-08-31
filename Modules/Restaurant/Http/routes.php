@@ -70,19 +70,31 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
         #Router mon an
         Route::group(['prefix' => 'foods'], function(){
-            Route::get('/{id?}', [
+            Route::get('/{res_id}/{type_id}', [
                 'as' => 'foods.index',
                 'uses' => 'FoodsController@index'
-            ])->where('id', '[0-9]+');
-            Route::get('/add', [
+            ])->where(['res_id'=> '[0-9]+','type_id'=>'[0-9]+']);
+
+            Route::get('/add/{res_id}', [
                 'uses' => 'FoodsController@show'
-            ]);
-            Route::get('/update/{id}', [
+            ])->where(['res_id'=> '[0-9]+']);
+
+            Route::get('/update/{res_id}/{id}', [
                 'uses' => 'FoodsController@show'
-            ]);
+            ])->where(['res_id'=> '[0-9]+','id'=>'[0-9]+']);;
+
             Route::post('/update', [
                 'as'=>'foods.update',
                 'uses' => 'FoodsController@update'
+            ]);
+            Route::post('/delete', [
+                'as'=>'foods.delete',
+                'uses' => 'FoodsController@delete'
+            ]);
+
+            Route::post('/changeStatus', [
+                'as'=>'foods.delete',
+                'uses' => 'FoodsController@changestatus'
             ]);
         });
     });

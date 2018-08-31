@@ -11,4 +11,9 @@ class Typeoffood extends Model
 
     public $translatedAttributes = ['name'];
     protected $fillable = [];
+
+    public function foods()
+    {
+        return $this->hasMany(Food::class);
+    }
 }

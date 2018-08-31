@@ -21,4 +21,13 @@ class Food extends Model
         'number_of_order',
         'status'
     ];
+
+    public  function typeoffood_name(){
+        return $this->fill(1);
+    }
+
+    public function typeoffood()
+    {
+        return $this->belongsTo(Typeoffood::class);
+    }
 }

@@ -18,8 +18,10 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td>{{$item->name}}</td>
-                    <td></td>
-                    <td>
+                    <td class="text-center pointer" onclick="window.location.href ='/backend/restaurant/foods/{{$restaurant_id}}/{{$item->id}}'">
+                        <a style="color:blue" >{{$item->foods->count()}}</a>
+                    </td>
+                    <td class="text-center">
                         <div class="actions">
                             <a href="javascript:;" onclick="fnUpdate('{{$item->id}}')" class="edit">Sửa</a>
                             <a href="javascript:;" onclick="fnDelete('{{$item->id}}')" class="delete">Xóa</a>

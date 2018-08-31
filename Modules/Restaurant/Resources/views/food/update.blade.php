@@ -7,7 +7,7 @@
         @if($food->id ==0)
             <h3><i class="entypo-archive"></i>   Thêm mới món ăn - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
             @else
-            <h3><i class="entypo-archive"></i>   cập nhật món ăn - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
+            <h3><i class="entypo-archive"></i>   Cập nhật món ăn - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
         @endif
     </div>
     <div class="row" style="margin: 0px;">
@@ -18,6 +18,7 @@
             </div>
             <div class="panel-body">
                 <input name="id" type="hidden" value="{{$food->id}}"/>
+                <input name="restaurant_id" type="hidden" value="{{$restaurant_id}}"/>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -26,7 +27,7 @@
                                 <select required class="form-control" name="typeoffood_id" data-style="btn-white">
                                     <option value="">Chọn loại món ăn</option>
                                     @foreach($typeoffood as $item )
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option {{$food->id !=0 && $food->typeoffood_id == $item->id  ? 'selected':'' }} value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -36,7 +37,7 @@
                         <div class="form-group">
                             <label for="price" class="col-sm-3 control-label">Giá tiền</label>
                             <div class="col-sm-5">
-                                <input required max="99999999" min="1000" autocomplete="off" type="number" name="price" class="form-control" id="price" placeholder="Giá món ăn">
+                                <input required max="99999999" min="1000" autocomplete="off" type="number" name="price" class="form-control" id="price" placeholder="Giá món ăn" value="{{$food->price}}" >
                             </div>
                         </div>
                     </div>
@@ -45,8 +46,8 @@
                             <label for="price" class="col-sm-3 control-label">Trạng thái</label>
                             <div class="col-sm-5">
                                 <select class="form-control" name="status"  data-style="btn-white">
-                                    <option value="1">Hiển thị món ăn</option>
-                                    <option value="0">Ẩn món ăn</option>
+                                    <option  {{$food->id !=0 && $food->status == 1  ? 'selected':'' }}  value="1">Hiển thị món ăn</option>
+                                    <option {{$food->id !=0 && $food->status == 0  ? 'selected':'' }} value="0">Ẩn món ăn</option>
                                 </select>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="{{ $locale }}_name" class="col-sm-3 control-label">Tên món ăn</label>
-                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} autocomplete="off" type="text" name="{{ $locale }}_name" class="form-control" id="{{ $locale }}_name" placeholder="Tên món ăn"></div>
+                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} value="{{$food->translate($locale) !=null ? $food->translate($locale)->name:''}}" autocomplete="off" type="text" name="{{ $locale }}_name" class="form-control" id="{{ $locale }}_name" placeholder="Tên món ăn"></div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +81,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="{{ $locale }}_description1" class="col-sm-3 control-label">Mô tả món ăn 1</label>
-                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} autocomplete="off" type="text" name="{{ $locale }}_description1" class="form-control" id="{{ $locale }}_description1" placeholder="Mô tả món ăn 1"></div>
+                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} autocomplete="off" type="text" value="{{$food->translate($locale) !=null ? $food->translate($locale)->description1:''}}" name="{{ $locale }}_description1" class="form-control" id="{{ $locale }}_description1" placeholder="Mô tả món ăn 1"></div>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="{{ $locale }}_description2" class="col-sm-3 control-label">Mô tả món ăn 2</label>
-                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} autocomplete="off" type="text" name="{{ $locale }}_description2" class="form-control" id="{{ $locale }}_description2" placeholder="Mô tả món ăn 2"></div>
+                                    <div class="col-sm-5"> <input {{$locale ==LaravelLocalization::getCurrentLocale()?'required':'' }} autocomplete="off" type="text" value="{{$food->translate($locale) !=null ? $food->translate($locale)->description2:''}}" name="{{ $locale }}_description2" class="form-control" id="{{ $locale }}_description2" placeholder="Mô tả món ăn 2"></div>
                                 </div>
                             </div>
                         </div>
@@ -104,16 +105,15 @@
         {!! Form::close() !!}
     </div>
 
+
 @endsection
 
 @push('js-stack')
     <script src="/admin/assets/js/jquery.nestable.js"></script>
     <script src="/admin/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js"></script>
-
     <script>
         $('select').selectpicker();
-
     </script>
 @endpush
 @push('css-stack')

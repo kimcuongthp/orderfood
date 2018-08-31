@@ -21,7 +21,7 @@ class TypeOfFoodController extends  Controller
     {
         $restaurant_id = $request->input("restaurant_id");
         if(!$restaurant_id) $restaurant_id =0;
-        $typeoffood =Typeoffood::where('restaurant_id',$restaurant_id)->get();
+        $typeoffood =Typeoffood::where('restaurant_id',$restaurant_id)->with('foods')->get();
         return view('restaurant::typeoffood.index',compact('typeoffood','restaurant_id'));
     }
 
