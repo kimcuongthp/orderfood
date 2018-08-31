@@ -41,7 +41,7 @@
             @role('Staff')
             <li class="has-sub">
                 <a href="#">
-                    <i class="entypo-right-open"></i>
+                    <i class="fa fa-coffee"></i>
                     <span class="title">Nhà Hàng</span>
                 </a>
                 <ul>
@@ -59,25 +59,17 @@
                     </li>
                 </ul>
             </li>
-            <li class="has-sub">
-                <a href="#">
-                    <i class="entypo-flow-tree"></i>
-                    <span class="title">Quản lý danh mục</span>
+            <li>
+                <a href="{{ route('media.index') }}">
+                    <i class="entypo-picture"></i>
+                    <span class="title">Thư viện ảnh</span>
                 </a>
-                <ul>
-                    <li>
-                        <a href="{{ route('address.index') }}">
-                            <i class="entypo-location"></i>
-                            <span class="title">Tỉnh thành - Quận huyện</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('media.index') }}">
-                            <i class="entypo-picture"></i>
-                            <span class="title">Thư viện ảnh</span>
-                        </a>
-                    </li>
-                </ul>
+            </li>
+            <li>
+                <a href="{{ route('address.index') }}">
+                    <i class="entypo-location"></i>
+                    <span class="title">Tỉnh thành / Quận huyện</span>
+                </a>
             </li>
             @endrole
         </ul>

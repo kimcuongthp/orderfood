@@ -4,6 +4,7 @@ namespace Modules\Address\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\HtmlString;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Address\Entities\City;
 use Modules\Address\Entities\District;
@@ -196,5 +197,31 @@ class AddressController extends Controller
                 'message' => 'Có lỗi xảy ra vui lòng báo với quản trị viên!'
             ]);
         }
+    }
+
+    #Lấy danh sách quyện huyện qua thành phố
+    public function districtsByCity(City $city)
+    {
+        $rs = [
+            [
+                'text' => 'Chọn quận huyện',
+                'value' => ''
+            ]
+        ];
+
+        if($city){
+            $districts = $city->districts;
+            if(count($districts))
+            {
+                foreach($districts as $district)
+                {
+                    array_push($rs, [
+                        'text' => $district->name,
+                        $district->id
+                    ]);
+                }
+            }
+        }
+        return $rs;
     }
 }

@@ -98,4 +98,10 @@
 #tbCategory tr th{
     text-align: center;
 }
+.form-groups-bordered > .form-group {
+    border: none;
+}
+.page-container .sidebar-menu #main-menu li a .fa {
+    margin-left: 5px;
+}
 

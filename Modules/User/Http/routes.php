@@ -20,10 +20,14 @@ Route::group(['middleware'=> ['web','auth'], 'prefix' => 'backend', 'namespace' 
         'as' => 'show.dashboard',
         'uses' => 'UserController@showDashboard'
     ]);
+    Route::post('/logout', [
+        'as' => 'do.logout',
+        'uses' => 'UserController@doLogout'
+    ]);
 
     #Tạo role và premission
-    Route::get('/role', [
-        'as' => 'create.role',
-        'uses' => 'UserController@createRole'
-    ]);
+//    Route::get('/role', [
+//        'as' => 'create.role',
+//        'uses' => 'UserController@createRole'
+//    ]);
 });

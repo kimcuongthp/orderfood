@@ -62,7 +62,7 @@ return [
         ],
         'javascript' => [
             'vendor/media/packages/lodash/lodash.min.js',
-            '//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js', // Comment it if your site have it already
+            //'//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js', // Comment it if your site have it already
             //'//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', // Comment it if your site have it already
             'vendor/media/packages/clipboard/clipboard.min.js',
             'vendor/media/packages/fancybox/dist/jquery.fancybox.js',

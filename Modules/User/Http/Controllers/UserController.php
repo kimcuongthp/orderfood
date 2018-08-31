@@ -30,6 +30,14 @@ class UserController extends Controller
             ]);
        }
     }
+    public function doLogout()
+    {
+        if(Auth::check())
+        {
+            Auth::logout();
+            return redirect()->route('show.login');
+        }
+    }
     public function showDashboard()
     {
         return view('backend.dashboard');

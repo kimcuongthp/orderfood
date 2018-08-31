@@ -17,7 +17,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
         #Route cho thành phố
         Route::bind('city', function ($id) {
-            return \Modules\Address\Entities\City::findOrFail($id);
+            return \Modules\Address\Entities\City::find($id);
         });
         Route::get('/cities/{city}/edit', [
             'as' => 'address.city.edit',
@@ -34,6 +34,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::post('cities/{city}/delete', [
             'as' => 'address.city.delete',
             'uses' => 'AddressController@deleteCity'
+        ]);
+        Route::get('cities/{city}/districts', [
+            'as' => 'address.districts.by.city',
+            'uses' => 'AddressController@districtsByCity'
         ]);
 
         #Route cho quận huyện

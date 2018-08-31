@@ -14,80 +14,79 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label for="username" class="col-sm-3 control-label">Tên tài khoản</label>
-                            <div class="col-sm-5">
-                                <input type="username" class="form-control" id="username" placeholder="Nhập tên đăng nhập cho tài khoản nhà hàng">
-                            </div>
-                        </div>
+                        {!! Form::normalInput('username','Tên tài khoản', 'Nhập tên tài khoản', '', $errors, true) !!}
+                        {!! Form::normalInput('user_email','Email', 'Nhập email cho tài khoản', '', $errors, true) !!}
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label">Mật khẩu</label>
                             <div class="col-sm-5">
-                                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu cho tài khoản nhà hàng">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu cho tài khoản nhà hàng">
                                 <span class="description">Mật khẩu ít nhất gồm 6 kí tự và không chứa kí tự khoảng trắng.</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="field-3" class="col-sm-3 control-label">Số điện thoại</label>
+                            <label for="category_id" class="col-sm-3 control-label">Danh mục nhà hàng</label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại nhà hàng">
+                                <select class="form-control select2" name="category_id[]" multiple="multiple">
+                                    @if(count($categories))
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('city_id') ? ' validate-has-error' : '' }}">
+                            <label class="col-sm-3 control-label">Thuộc Tỉnh thành</label>
+                            <div class="col-sm-5">
+                                <select name="city_id" id="select_city" class="selectboxit" data-first-option="false">
+                                    <option>Chọn Tỉnh thành</option>
+                                    @if(count($cities))
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if($errors->has('city_id'))
+                                    <span class="validate-has-error">{{ $errors->first('city_id') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label">Email</label>
+                            <label class="col-sm-3 control-label">Thuộc Quận huyện</label>
                             <div class="col-sm-5">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email nhà hàng">
+                                <select name="district_id" id="select_district" class="selectboxit" data-first-option="false">
+                                    <option>Chọn Quận huyện</option>
+                                </select>
                             </div>
                         </div>
+                        {!! Form::normalInput('phone','Số điện thoại', 'Nhập số điện thoại nhà hàng', '', $errors, true) !!}
+                        {!! Form::normalInput('email','Email nhà hàng', 'Nhập email nhà hàng', '', $errors, true) !!}
                         <div class="form-group">
                             <label for="image" class="col-sm-3 control-label">Ảnh đai diện</label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" name="image" id="image" placeholder="Chọn ảnh đại diện cho nhà hàng">
+                                <div class="fileinput fileinput-new">
+                                    <div class="fileinput-new thumbnail" style="max-width: 200px; height: auto;">
+                                        <img src="http://placehold.it/200x132" alt="avatar">
+                                    </div>
+                                    <div>
+									<span>
+										<button class="btn btn-white select-image fileinput-new btn_gallery">Chọn ảnh</button>
+										<button class="btn btn-white change-image fileinput-exists btn_gallery">Thay đổi</button>
+                                        <input type="hidden" name="image" class="input-file" value="" />
+									</span>
+                                        <button type="button" class="btn btn-orange remove-image fileinput-exists">Xóa</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="video" class="col-sm-3 control-label">Video</label>
-                            <div class="col-sm-5">
-                                <input type="url" class="form-control" name="video" id="video" placeholder="Nhập link video của nhà hàng">
-                                <span class="description">Chỉ cho phép link youtube.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="time_open" class="col-sm-3 control-label">Giá mở cửa</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="time_open" id="time_open" placeholder="Nhập thời gian nhà hàng đóng cửa">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="time_close" class="col-sm-3 control-label">Giờ đóng cửa</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="time_close" id="time_close" placeholder="Nhập thời gian nhà hàng đóng cửa">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="price_min" class="col-sm-3 control-label">Giá thấp nhất</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="price_min" id="price_min" placeholder="Nhập giá sản phẩm thấp nhất của nhà hàng">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="price_max" class="col-sm-3 control-label">Giá cao nhất</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="price_max" id="price_max" placeholder="Nhập giá sản phẩm cao nhất của nhà hàng">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="trans_fee" class="col-sm-3 control-label">Phí vận chuyển</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" name="trans_fee" id="trans_fee" placeholder="Nhập phí vận chuyển của nhà hàng">
-                                <span class="description">Nhập phí vận chuyển trên mỗi km.</span>
-                            </div>
-                        </div>
-
+                        {!! Form::normalInput('video','Link Video', 'Nhập link video giới thiệu nhà hàng', 'Chỉ cho phép link youtube', $errors, true) !!}
+                        {!! Form::normalInput('time_open','Giờ mở cửa', 'Nhập thời gian nhà hàng mở cửa', '', $errors, true) !!}
+                        {!! Form::normalInput('time_close','Giờ đóng cửa', 'Nhập thời gian nhà hàng đóng cửa', '', $errors, true) !!}
+                        {!! Form::normalInput('price_min','Giá thấp nhất', 'Nhập giá sản phẩm thấp nhất của nhà hàng', '', $errors, true) !!}
+                        {!! Form::normalInput('price_max','Giá cao nhất', 'Nhập giá sản phẩm cao nhất của nhà hàng', '', $errors, true) !!}
+                        {!! Form::normalInput('trans_fee','Phí vận chuyển', 'Nhập phí vận chuyển trên mỗi km.', '', $errors, true) !!}
                     </div>
-
                 </div>
-
             </div>
         </div>
 
@@ -109,22 +108,25 @@
                             <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
                             <?php $active = ($locale == LaravelLocalization::getCurrentLocale()) ? 'active' : ''; ?>
                             <div class="tab-pane {{ $active }}" id="{{ $locale }}">
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has($locale.'_name') ? ' validate-has-error' : '' }}">
                                     <label for="{{ $locale }}_name" class="col-sm-3 control-label">Tên nhà hàng</label>
                                     <div class="col-sm-5">
                                         <input type="text" class="form-control" name="{{ $locale }}_name" id="{{ $locale }}_name" value="{{ old("{$locale}_name") }}" placeholder="Nhập tên của nhà hàng">
+                                        @if($errors->has($locale.'_name'))
+                                            <span class="validate-has-error">{{ $errors->first($locale.'_name') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ $locale }}_name" class="col-sm-3 control-label">Mô tả</label>
                                     <div class="col-sm-5">
-                                        <textarea class="form-control" name="{{ $locale }}_description" id="{{ $locale }}_description" placeholder="Nhập mô tả nhà hàng"></textarea>
+                                        <textarea class="form-control" name="{{ $locale }}_description" id="{{ $locale }}_description" placeholder="Nhập mô tả nhà hàng">{{ old("{$locale}_description") }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ $locale }}_address" class="col-sm-3 control-label">Địa chỉ</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="{{ $locale }}_address" id="{{ $locale }}_address" placeholder="Nhập địa chỉ của nhà hàng">
+                                        <input type="text" class="form-control" name="{{ $locale }}_address" id="{{ $locale }}_address" value="{{ old("{$locale}_address") }}" placeholder="Nhập địa chỉ của nhà hàng">
                                     </div>
                                 </div>
                             </div>
@@ -140,3 +142,50 @@
         </div>
     {!! Form::close() !!}
 @stop
+@push('css-stack')
+    <link rel="stylesheet" href="/admin/assets/js/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="/admin/assets/js/select2/select2.css">
+    <link rel="stylesheet" href="/admin/assets/js/selectboxit/jquery.selectBoxIt.css">
+@endpush
+@push('js-stack')
+    <script src="/admin/assets/js/select2/select2.min.js"></script>
+    <script src="/admin/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    @include('media::partials.media')
+    <script src="{{ asset('vendor/media/js/jquery.addMedia.js') }}"></script>
+    <script>
+        if (jQuery().rvMedia) {
+
+            $('.btn_gallery').rvMedia({
+                multiple: false,
+                onSelectFiles: function (files, $el) {
+                    var firstItem = _.first(files);
+                    $('.input-file').val(firstItem.url);
+                    $('.thumbnail').html('<img src="'+firstItem.url+'" alt="avatar" />');
+                    $('.remove-image').removeClass('fileinput-exists');
+                    $('.change-image').removeClass('fileinput-exists');
+                    $('.select-image').addClass('fileinput-exists');
+                }
+            });
+
+            $('.remove-image').click(function(){
+                $('.input-file').val('');
+                $('.thumbnail').html('<img src="http://placehold.it/200x132" alt="avatar" />');
+                $('.remove-image').addClass('fileinput-exists');
+                $('.change-image').addClass('fileinput-exists');
+                $('.select-image').removeClass('fileinput-exists');
+            });
+
+            $('#select_city').change(function(){
+                var id = $(this).val();
+                var districtSelect = $('#select_district');
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: '/backend/address/cities/'+id+'/districts'
+                }).then(function (data) {
+
+                });
+            });
+        }
+    </script>
+@endpush

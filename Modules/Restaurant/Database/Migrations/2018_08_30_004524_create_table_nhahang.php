@@ -27,7 +27,7 @@ class CreateTableNhahang extends Migration
             $table->float('price_min')->nullable();
             $table->float('price_max')->nullable();
             $table->float('trans_fee')->nullable();
-            $table->integer('district_id');
+            $table->integer('district_id')->nullable();
             $table->integer('city_id');
             $table->integer('user_id');
 

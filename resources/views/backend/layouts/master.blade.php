@@ -14,11 +14,13 @@
 
     <link rel="stylesheet" href="/admin/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="/admin/assets/css/font-icons/entypo/css/entypo.css">
+    <link rel="stylesheet" href="/admin/assets/css/font-icons/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
     <link rel="stylesheet" href="/admin/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/admin/assets/css/neon-core.css">
     <link rel="stylesheet" href="/admin/assets/css/neon-theme.css">
     <link rel="stylesheet" href="/admin/assets/css/neon-forms.css">
+    <link rel="stylesheet" href="/admin/plugins/toast/jquery.toast.min.css">
     @stack('css-stack')
     <link rel="stylesheet" href="/admin/assets/css/custom.css">
 
@@ -58,12 +60,12 @@
             <div class="col-md-6 col-sm-4 clearfix hidden-xs">
                 <ul class="list-inline links-list pull-right">
                     <li>
-                        <a href=""
+                        <a href="{{ route('do.logout') }}"
                            onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">
+                                           document.getElementById('logout-form').submit();">
                             {{ __('Đăng xuất') }} <i class="entypo-logout right"></i>
                         </a>
-                        <form id="logout-form" action="" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('do.logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
@@ -94,7 +96,7 @@
 <script src="/admin/assets/js/joinable.js"></script>
 <script src="/admin/assets/js/resizeable.js"></script>
 <script src="/admin/assets/js/neon-api.js"></script>
-<script src="/admin/assets/js/toastr.js"></script>
+<script src="/admin/plugins/toast/jquery.toast.min.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->
@@ -105,27 +107,30 @@
 <script src="/admin/assets/js/neon-demo.js"></script>
 
 <script>
-    var opts = {
-        "closeButton": true,
-        "debug": false,
-        "positionClass": "toast-top-right",
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
 
     <?php if(Session::get('note') != '' && Session::get('note_type') != ''): ?>
 
     if('<?= Session::get("note_type") ?>' == 'success'){
-        toastr.success('<?= Session::get("note") ?>', "Thành công!", opts);
+        $.toast({
+            heading: 'Xong!',
+            text: '<?= Session::get("note") ?>',
+            icon: 'success',
+            position: 'top-right',
+            loader: false,
+            showHideTransition: 'slide',
+            hideAfter: 3000
+        })
     } else if('<?= Session::get("note_type") ?>' == 'error'){
-        toastr.error('<?= Session::get("note") ?>', "Rất tiếc!", opts);
+        //toastr.error('<?= Session::get("note") ?>', "Rất tiếc!", opts);
+        $.toast({
+            heading: 'Rất tiếc!',
+            text: '<?= Session::get("note") ?>',
+            icon: 'error',
+            position: 'top-right',
+            loader: false,
+            showHideTransition: 'slide',
+            hideAfter: 3000
+        });
     }
     <?php Session::forget('note');
     Session::forget('note_type');
@@ -133,7 +138,15 @@
     <?php endif; ?>
 
     @if ($errors->any())
-    toastr.error('Lỗi nhập dữ liệu vui lòng kiểm tra lại!', 'Rất tiếc!', opts);
+        $.toast({
+            heading: 'Lỗi',
+            text: 'Có lỗi xảy ra vui lòng kiểm tra lại thông tin',
+            position: 'top-right',
+            icon: 'error',
+            loader: false,
+            showHideTransition: 'slide',
+            hideAfter: 3000
+        });
     @endif
 </script>
 <!-- Push JavaScripts -->
