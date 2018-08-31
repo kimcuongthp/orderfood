@@ -46,11 +46,17 @@
         }
 
         function fnCategorySubmit(){
-
             <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
             if($('#update-category-form #{{ $locale }}_name').val() == '') {
-
-                toastr.error('Điền thiếu dữ liệu, vui lòng kiểm tra lại!', 'Lỗi!', opts);
+                $.toast({
+                    heading: 'Lỗi',
+                    text: 'Lỗi điền thiếu dữ liệu, vui lòng kiểm tra lại',
+                    position: 'top-right',
+                    icon: 'error',
+                    loader: false,
+                    showHideTransition: 'slide',
+                    hideAfter: 3000
+                });
                 return;
             }
             <?php endforeach; ?>

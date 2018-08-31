@@ -26,7 +26,7 @@
                         <td>{{ $restaurant->created_at->format('d/m/Y') }}</td>
                         <td>
                             <div class="actions">
-                                <a href="" class="edit">Sửa</a>
+                                <a href="{{ route('restaurant.edit', $restaurant->id) }}" class="edit" target="_blank">Sửa</a>
                                 <a href="" class="delete">Xóa</a>
                             </div>
                         </td>

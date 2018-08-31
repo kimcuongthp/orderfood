@@ -2,20 +2,17 @@
 namespace Modules\Restaurant\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Restaurant\Entities\Category;
 
 class CategoryController extends Controller{
-    public  function index(){
-        $category = Category::all();
-
-        return view('restaurant::category.index',compact('category'));
+    public function index(){
+        $categories = Category::all();
+        return view('restaurant::category.index',compact('categories'));
     }
 
-    public function  modal(Request $request){
+    public function modal(Request $request){
         $id=$request->route('id');
         $data = Category::find($id);
         if(!$data){

@@ -16,6 +16,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
             'uses' => 'RestaurantController@storeRestaurant'
         ]);
 
+        Route::bind('restaurant_id', function ($id) {
+            return \Modules\Restaurant\Entities\Restaurant::findOrFail($id);
+        });
+        Route::get('/{restaurant_id}/edit', [
+            'as' => 'restaurant.edit',
+            'uses' => 'RestaurantController@editRestaurant'
+        ]);
+        Route::post('/{restaurant_id}/update', [
+           'as' => 'restaurant.update',
+           'uses' => 'RestaurantController@updateRestaurant'
+        ]);
+
         #Route danh mục nhà hàng
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/', [
@@ -72,7 +84,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
                 'as'=>'foods.update',
                 'uses' => 'FoodsController@update'
             ]);
-
         });
     });
 });

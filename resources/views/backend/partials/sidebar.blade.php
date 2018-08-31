@@ -32,7 +32,7 @@
         <ul id="main-menu" class="main-menu">
             <!-- add class "multiple-expanded" to allow multiple submenus to open -->
             <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-            <li class="has-sub">
+            <li>
                 <a href="/backend">
                     <i class="entypo-gauge"></i>
                     <span class="title">Dashboard</span>
@@ -75,6 +75,12 @@
                 <a href="{{ route('address.index') }}">
                     <i class="entypo-location"></i>
                     <span class="title">Tỉnh thành / Quận huyện</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('do.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="entypo-logout right"></i>
+                    <span class="title">Đăng xuất</span>
                 </a>
             </li>
             @endrole

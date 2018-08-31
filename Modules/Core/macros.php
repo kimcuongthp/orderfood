@@ -7,7 +7,7 @@ Form::macro('normalInput', function($name, $title, $placeholder, $description = 
 {
     $string = '<div class="form-group'. ($errors->has($name) ? ' validate-has-error' : '') .'">';
     $string .= Form::label($name, $title, ['class' => 'control-label'. ($col ? ' col-sm-3' : '')]);
-    $data = !empty($object->{$name}) ? $object->{name} : '';
+    $data = !empty($object->{$name}) ? $object->{$name} : '';
     $string .= $col ? '<div class="col-sm-5">' : '';
     $string .= Form::text($name, old($name, $data),['class' => 'form-control', 'placeholder' => $placeholder]);
     $string .= $description ? '<span class="description">'.$description.'</span>' : '';

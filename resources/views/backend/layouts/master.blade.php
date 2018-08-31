@@ -121,7 +121,6 @@
             hideAfter: 3000
         })
     } else if('<?= Session::get("note_type") ?>' == 'error'){
-        //toastr.error('<?= Session::get("note") ?>', "Rất tiếc!", opts);
         $.toast({
             heading: 'Rất tiếc!',
             text: '<?= Session::get("note") ?>',

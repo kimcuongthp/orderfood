@@ -3,7 +3,7 @@
     <?php $active = ($locale == LaravelLocalization::getCurrentLocale()) ? 'active' : ''; ?>
     <li class="{{ $active }}">
         <a href="#{{ $locale }}2" data-toggle="tab">
-            <span class="visible-xs"><i class="entypo-home"></i></span>
+            <span class="visible-xs">{{ $language['native'] }}</span>
             <span class="hidden-xs">{{ $language['native'] }}</span>
         </a>
     </li>
