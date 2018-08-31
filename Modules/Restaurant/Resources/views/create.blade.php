@@ -175,15 +175,16 @@
                 $('.select-image').removeClass('fileinput-exists');
             });
 
+
             $('#select_city').change(function(){
                 var id = $(this).val();
-                var districtSelect = $('#select_district');
+                // var districtSelect = $('#select_district');
                 $.ajax({
                     type: 'GET',
-                    dataType: 'json',
                     url: '/backend/address/cities/'+id+'/districts'
                 }).then(function (data) {
-
+                    $('#select_district').html(data)
+                    $("#select_district").selectBoxIt("refresh");
                 });
             });
         }

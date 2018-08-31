@@ -23,7 +23,7 @@ class CreateRestaurantRequest extends FormRequest
             'price_max' => 'nullable|numeric',
             'trans_fee' => 'nullable|numeric',
             'vi_name' => 'required',
-            'user_email' => 'required',
+            'user_email' => 'required|email|unique:users,email',
         ];
 
         return $rules;
@@ -45,7 +45,8 @@ class CreateRestaurantRequest extends FormRequest
             'trans_fee.numeric' => 'Trường phí vận chuyển phải là số',
             'vi_name.required' => 'Điền tên nhà hàng ngôn ngữ Tiếng Việt',
             'user_email.required' => 'Không được bỏ trống email cho tài khoản',
-            ];
+            'user_email.unique' => 'Email đã được sử dựng',
+        ];
     }
 
     /**

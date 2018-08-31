@@ -19,7 +19,8 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        return 'hihi';
+        $restaurants = Restaurant::simplePaginate(1);
+        return view('restaurant::index', compact('restaurants'));
     }
     public function createRestaurant()
     {

@@ -52,6 +52,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('restaurant.index') }}">
+                            <i class="entypo-right-open-mini"></i>
+                            <span class="title">Danh sách nhà hàng</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('category.index') }}">
                             <i class="entypo-right-open-mini"></i>
                             <span class="title">Danh mục nhà hàng</span>

@@ -202,26 +202,17 @@ class AddressController extends Controller
     #Lấy danh sách quyện huyện qua thành phố
     public function districtsByCity(City $city)
     {
-        $rs = [
-            [
-                'text' => 'Chọn quận huyện',
-                'value' => ''
-            ]
-        ];
-
+        $rs = '<option value="">Chọn quận huyện</option>';
         if($city){
             $districts = $city->districts;
             if(count($districts))
             {
                 foreach($districts as $district)
                 {
-                    array_push($rs, [
-                        'text' => $district->name,
-                        $district->id
-                    ]);
+                    $rs .= '<option value="'.$district->id.'">'.$district->name.'</option>';
                 }
             }
         }
-        return $rs;
+        return new HtmlString($rs);
     }
 }

@@ -5,39 +5,36 @@
     <a class="btn btn-success" onclick="fnUpdate(0)"><i class="entypo-plus-circled"></i>  Thêm mới</a>
 </div>
 <div class="row">
-    <table class="table table-bordered" id="tbCategory">
-        <thead>
+    <div class="col-md-12">
+        <table class="table table-bordered" id="tbCategory">
+            <thead>
             <tr>
                 <th>STT</th>
                 <th>Tên loại nhà hàng</th>
                 <th>Nhà hàng</th>
                 <th>Tác vụ</th>
             </tr>
-        </thead>
-        @foreach($category as $categories)
-            <tr>
-                <td class="text-center">{{$loop->iteration}}</td>
-                <td>{{$categories->name}}</td>
-                <td></td>
-                <td>
-                    <div class="actions">
-                        <a href="javascript:;" onclick="fnUpdate('{{$categories->id}}')" class="edit">Sửa</a>
-                        <a href="javascript:;" onclick="fnDelete('{{$categories->id}}')" class="delete">Xóa</a>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-    </table>
-
+            </thead>
+            @if(count($categories))
+                @foreach($categories as $category)
+                    <tr>
+                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td>{{$category->name}}</td>
+                        <td></td>
+                        <td>
+                            <div class="actions">
+                                <a href="javascript:;" onclick="fnUpdate('{{$category->id}}')" class="edit">Sửa</a>
+                                <a href="javascript:;" onclick="fnDelete('{{$category->id}}')" class="delete">Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+        </table>
+    </div>
 </div>
-
-
-
 <div id="modalCategory" class="modal fade" role="dialog">
-
 </div>
-
-
 @endsection
 
 @push('js-stack')

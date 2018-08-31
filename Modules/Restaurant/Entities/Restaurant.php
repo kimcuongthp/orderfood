@@ -2,6 +2,7 @@
 
 namespace Modules\Restaurant\Entities;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 
@@ -29,4 +30,9 @@ class Restaurant extends Model
         'city_id',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

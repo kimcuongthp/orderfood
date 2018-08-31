@@ -35,5 +35,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
                 'uses' => 'CategoryController@delete'
             ]);
         });
+
+
     });
 });
