@@ -132,6 +132,7 @@
 
     <div class="form-group default-padding">
         <button type="submit" class="btn btn-success">Lưu lại</button>
+        <a href="{{ route('restaurant.index') }}" class="btn btn-default">Quay lại</a>
     </div>
     {!! Form::close() !!}
 @stop

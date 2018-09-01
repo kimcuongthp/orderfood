@@ -7,7 +7,7 @@
             <!-- logo -->
             <div class="logo">
                 <a href="/backend">
-                    <img src="/admin/assets/images/logo@2x.png" width="120" alt="" />
+                    <img src="/admin/assets/images/logo-sentora-vietnam.png" height="50px" alt="" />
                 </a>
             </div>
 
@@ -38,6 +38,23 @@
                     <span class="title">Dashboard</span>
                 </a>
             </li>
+            @role('Agency')
+            <li class="has-sub">
+                <a href="#">
+                    <i class="fa fa-coffee"></i>
+                    <span class="title">Nhà hàng của tôi</span>
+                </a>
+                <ul>
+                    <li>
+                        <?php $res = \Modules\Restaurant\Entities\Restaurant::where('user_id',Auth::user()->id)->first(); ?>
+                        <a href="{{ route('restaurant.edit', $res->id) }}">
+                            <i class="entypo-right-open-mini"></i>
+                            <span class="title">Sửa thông tin nhà hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endrole
             @role('Staff')
             <li class="has-sub">
                 <a href="#">
@@ -77,13 +94,13 @@
                     <span class="title">Tỉnh thành / Quận huyện</span>
                 </a>
             </li>
+            @endrole
             <li>
                 <a href="{{ route('do.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="entypo-logout right"></i>
                     <span class="title">Đăng xuất</span>
                 </a>
             </li>
-            @endrole
         </ul>
     </div>
 

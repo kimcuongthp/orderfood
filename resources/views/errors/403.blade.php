@@ -51,7 +51,7 @@
                     <div class="error-bottom-wrapper">
                         <h2>Rất tiếc!</h2>
                         <p>Bạn không có quyền truy cập trang này.</p>
-                        <a href="{{ url()->previous() }}" class="error-btn-2">Quay Lại</a>
+                        <a href="/backend" class="error-btn-2">Quay Lại</a>
                     </div>
                 </div>
             </div>

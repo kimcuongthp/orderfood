@@ -25,7 +25,7 @@ class UserController extends Controller
         }
         else {
             return response()->json([
-                'login_status' => 'error',
+                'login_status' => 'invalid',
                 'message' => trans('user::login.error')
             ]);
        }

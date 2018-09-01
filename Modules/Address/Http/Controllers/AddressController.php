@@ -14,7 +14,7 @@ class AddressController extends Controller
     public function index()
     {
         $cities = City::defaultOrder()->get()->toTree();
-        $districts = District::with('city')->get();
+        $districts = District::with('city')->simplePaginate(2);
         return view('address::index', compact('cities', 'districts'));
     }
 

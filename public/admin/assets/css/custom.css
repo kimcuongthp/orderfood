@@ -144,3 +144,6 @@ textarea.parsley-error {
 .pointer{
     cursor: pointer;
 }
+.page-container .sidebar-menu .logo-env {
+    padding: 20px
+}

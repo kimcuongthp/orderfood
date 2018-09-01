@@ -4,6 +4,7 @@ namespace Modules\Restaurant\Http\Controllers;
 
 use App\User;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Address\Entities\City;
@@ -19,7 +20,7 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::simplePaginate(1);
+        $restaurants = Restaurant::simplePaginate(10);
         return view('restaurant::index', compact('restaurants'));
     }
     public function createRestaurant()
@@ -88,6 +89,17 @@ class RestaurantController extends Controller
 
     public function editRestaurant(Restaurant $restaurant)
     {
+        #Check quyền agency
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        if(!$user->hasRole('Staff'))
+        {
+            $own_restaurant = Restaurant::where('user_id', $user->id)->firstOrFail();
+            if($own_restaurant->id !== $restaurant->id)
+            {
+                abort('404');
+            }
+        }
+
         $categories = Category::all();
         $cities = City::all();
 
@@ -110,6 +122,17 @@ class RestaurantController extends Controller
 
     public function updateRestaurant(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
+        #Check quyền agency
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        if(!$user->hasRole('Staff'))
+        {
+            $own_restaurant = Restaurant::where('user_id', $user->id)->firstOrFail();
+            if($own_restaurant->id !== $restaurant->id)
+            {
+                abort('404');
+            }
+        }
+
         #update thông tin nhà hàng
         $restaurant->update($request->all());
 

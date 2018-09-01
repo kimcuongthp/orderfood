@@ -1,19 +1,22 @@
 <?php
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
-    Route::group(['middleware' => ['web', 'auth', 'role:Staff'], 'prefix' => 'backend/restaurant', 'namespace' => 'Modules\Restaurant\Http\Controllers'], function () {
+    Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'backend/restaurant', 'namespace' => 'Modules\Restaurant\Http\Controllers'], function () {
 
         #Route Nhà hàng
         Route::get('/', [
             'as' => 'restaurant.index',
-            'uses' => 'RestaurantController@index'
+            'uses' => 'RestaurantController@index',
+            'middleware' => 'can:view_all_restaurant'
         ]);
         Route::get('/create', [
             'as' => 'restaurant.create',
-            'uses' => 'RestaurantController@createRestaurant'
+            'uses' => 'RestaurantController@createRestaurant',
+            'middleware' => 'can:create_restaurant'
         ]);
         Route::post('/create', [
             'as' => 'restaurant.store',
-            'uses' => 'RestaurantController@storeRestaurant'
+            'uses' => 'RestaurantController@storeRestaurant',
+            'middleware' => 'can:create_restaurant'
         ]);
 
         Route::bind('restaurant_id', function ($id) {

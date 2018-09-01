@@ -67,6 +67,9 @@
                 @endif
                 </tbody>
             </table>
+            <div class="text-center">
+                {!! $districts->links('vendor.pagination.simple-default') !!}
+            </div>
         </div>
     </div>
 
