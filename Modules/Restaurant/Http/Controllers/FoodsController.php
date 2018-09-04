@@ -37,9 +37,8 @@ class FoodsController extends Controller
     public function show(Request $request)
     {
 //        abort(404);
-        $restaurant_id =$request->input("res_id");
-        if(!$restaurant_id) $restaurant_id =0;
-        $id =$request->route('id');
+        $restaurant_id =$request->res_id;
+        $id =$request->id;
         $food = Food::find($id);
         if(!$food){
             $food = new Food();

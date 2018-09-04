@@ -5,7 +5,7 @@
         <a class="btn btn-success" id="add_food" href="/backend/restaurant/foods/add/{{$restaurant_id}}"><i class="entypo-plus-circled"></i>  Thêm mới</a>
     </div>
     <div class="row" style="margin: 0px;">
-        <form class="form-horizontal" action="/backend/restaurant/foods/0">
+        <form class="form-horizontal" action="/backend/restaurant/foods/{{$restaurant_id}}">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Phân loại</label>
                 <div class="col-sm-4">
