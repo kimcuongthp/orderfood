@@ -5,6 +5,25 @@
         <a class="btn btn-success" id="add_food" href="/backend/restaurant/foods/add/{{$restaurant_id}}"><i class="entypo-plus-circled"></i>  Thêm mới</a>
     </div>
     <div class="row" style="margin: 0px;">
+        <form class="form-horizontal" action="/backend/restaurant/foods/0">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Phân loại</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="type_id"  data-style="btn-white">
+                        <option value="0">Tất cả</option>
+                        @foreach($typeoffoods as $typeoffood)
+                            <option value="{{$typeoffood->id}}" {{$typeoffood->id ==$typeoffood_id ? 'selected':'' }}  >{{$typeoffood->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-default">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="row" style="margin: 0px;">
         <table class="table table-bordered ">
             <thead>
                 <tr >
@@ -67,11 +86,10 @@
     <script src="/admin/assets/js/jquery.nestable.js"></script>
     <script src="/admin/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js"></script>
     <script>
-        $('#add_food').click(function(e){
-            e.preventDefault();
-            $('#modal_add_food').modal('show');
-        });
+        $('select').selectpicker();
+
         function  fnChangeStatus(id,el) {
             var status =$(el).is(":checked") ==true ? 1:0;
             $.ajax({
@@ -142,5 +160,5 @@
 @endpush
 @push('css-stack')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css">
 @endpush

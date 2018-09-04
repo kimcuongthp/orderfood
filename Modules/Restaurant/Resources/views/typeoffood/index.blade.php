@@ -20,7 +20,7 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td>{{$item->name}}</td>
-                    <td class="text-center pointer" onclick="window.location.href ='/backend/restaurant/foods/{{$restaurant_id}}/{{$item->id}}'">
+                    <td class="text-center pointer" onclick="window.location.href ='/backend/restaurant/foods/{{$restaurant_id}}?type_id={{$item->id}}'">
                         <a>Xem <strong>{{$item->foods->count()}}</strong> món ăn</a>
                     </td>
                     <td class="text-center text-success">{{ $item->restaurant->name or "" }}</td>

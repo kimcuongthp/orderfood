@@ -54,7 +54,6 @@ class CreateMonanTable extends Migration
             $table->timestamps();
         });
 
-
     }
 
     /**
@@ -68,5 +67,7 @@ class CreateMonanTable extends Migration
         Schema::dropIfExists('food_translations');
         Schema::dropIfExists('typeoffoods');
         Schema::dropIfExists('foods');
+        Schema::dropIfExists('food_options');
+        Schema::dropIfExists('sub_options');
     }
 }
