@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Restaurant\Entities\Category;
+use Modules\Restaurant\Entities\Restaurant;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,7 @@ class HomeController extends Controller
     {
         $categories = Category::take(8)->get();
 //        dd($categories->first()->restaurants);
-        return view('frontend.index', compact('categories'));
+        $restaurants = Restaurant::all();
+        return view('frontend.index', compact('categories','restaurants'));
     }
 }

@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [
-    'as' => 'home',
-    'uses' => 'HomeController@index'
-]);
+Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+    Route::get('/', [
+        'as' => 'home',
+        'uses' => 'HomeController@index'
+    ]);
+});
+Route::get('/backend/media_alone', function(){
+    return view('media::media');
+})->middleware('auth');
 
 //Route::get('set', function(){
 //

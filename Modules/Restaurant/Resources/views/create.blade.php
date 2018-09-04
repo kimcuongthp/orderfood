@@ -16,11 +16,14 @@
                     <div class="panel-body">
                         {!! Form::normalInput('username','Tên tài khoản', 'Nhập tên tài khoản', '', $errors, true) !!}
                         {!! Form::normalInput('user_email','Email', 'Nhập email cho tài khoản', '', $errors, true) !!}
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('password') ? ' validate-has-error' : '' }}">
                             <label for="password" class="col-sm-3 control-label">Mật khẩu</label>
                             <div class="col-sm-5">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu cho tài khoản nhà hàng">
                                 <span class="description">Mật khẩu ít nhất gồm 6 kí tự và không chứa kí tự khoảng trắng.</span>
+                                @if($errors->has('password'))
+                                    <span class="validate-has-error">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,11 +83,35 @@
                             </div>
                         </div>
                         {!! Form::normalInput('video','Link Video', 'Nhập link video giới thiệu nhà hàng', 'Chỉ cho phép link youtube', $errors, true) !!}
-                        {!! Form::normalInput('time_open','Giờ mở cửa', 'Nhập thời gian nhà hàng mở cửa', '', $errors, true) !!}
-                        {!! Form::normalInput('time_close','Giờ đóng cửa', 'Nhập thời gian nhà hàng đóng cửa', '', $errors, true) !!}
-                        {!! Form::normalInput('price_min','Giá thấp nhất', 'Nhập giá sản phẩm thấp nhất của nhà hàng', '', $errors, true) !!}
-                        {!! Form::normalInput('price_max','Giá cao nhất', 'Nhập giá sản phẩm cao nhất của nhà hàng', '', $errors, true) !!}
+                        <div class="form-group{{ ($errors->has('time_open') ? ' validate-has-error' : '') }}">
+                            <label for="time_open" class="control-label col-sm-3">Giờ mở cửa</label>
+                            <div class="col-sm-5">
+                                <input class="form-control timepicker" placeholder="Nhập thời gian nhà hàng mở cửa" name="time_open" type="text" value="" id="time_open">
+                                @if($errors->has('time_open'))
+                                    <span class="validate-has-error">{{ $errors->first('time_open') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ ($errors->has('time_close') ? ' validate-has-error' : '') }}">
+                            <label for="time_open" class="control-label col-sm-3">Giờ đóng cửa</label>
+                            <div class="col-sm-5">
+                                <input class="form-control timepicker" placeholder="Nhập thời gian nhà hàng đóng cửa" name="time_close" type="text" value="" id="time_close">
+                                @if($errors->has('time_close'))
+                                    <span class="validate-has-error">{{ $errors->first('time_close') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        {!! Form::normalInput('price_min','Giá tối thiểu', 'Nhập giá tối thiểu của nhà hàng', '', $errors, true) !!}
                         {!! Form::normalInput('trans_fee','Phí vận chuyển', 'Nhập phí vận chuyển trên mỗi km.', '', $errors, true) !!}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Trạng thái</label>
+                            <div class="col-sm-5">
+                            <select name="status" class="selectboxit">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Không hoạt động</option>
+                            </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,7 +137,7 @@
                             <div class="tab-pane {{ $active }}" id="{{ $locale }}">
                                 <div class="form-group{{ $errors->has($locale.'_name') ? ' validate-has-error' : '' }}">
                                     <label for="{{ $locale }}_name" class="col-sm-3 control-label">Tên nhà hàng</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7">
                                         <input type="text" class="form-control" name="{{ $locale }}_name" id="{{ $locale }}_name" value="{{ old("{$locale}_name") }}" placeholder="Nhập tên của nhà hàng">
                                         @if($errors->has($locale.'_name'))
                                             <span class="validate-has-error">{{ $errors->first($locale.'_name') }}</span>
@@ -119,14 +146,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ $locale }}_name" class="col-sm-3 control-label">Mô tả</label>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-7">
                                         <textarea class="form-control" name="{{ $locale }}_description" id="{{ $locale }}_description" placeholder="Nhập mô tả nhà hàng">{{ old("{$locale}_description") }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="{{ $locale }}_address" class="col-sm-3 control-label">Địa chỉ</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" name="{{ $locale }}_address" id="{{ $locale }}_address" value="{{ old("{$locale}_address") }}" placeholder="Nhập địa chỉ của nhà hàng">
+                                    <div class="col-sm-7">
+                                        <textarea class="form-control" name="{{ $locale }}_address" id="{{ $locale }}_address" placeholder="Nhập địa chỉ của nhà hàng">{{ old("{$locale}_address") }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -148,8 +175,10 @@
     <link rel="stylesheet" href="/admin/assets/js/selectboxit/jquery.selectBoxIt.css">
 @endpush
 @push('js-stack')
+    <script src="/admin/assets/js/bootstrap-timepicker.min.js"></script>
     <script src="/admin/assets/js/select2/select2.min.js"></script>
     <script src="/admin/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    <script src="{{ asset('vendor/media/packages/ckeditor/ckeditor.js') }}"></script>
     @include('media::partials.media')
     <script src="{{ asset('vendor/media/js/jquery.addMedia.js') }}"></script>
     <script>
@@ -187,6 +216,30 @@
                     $("#select_district").selectBoxIt("refresh");
                 });
             });
+
+            var options = {
+                twentyFour:  true
+            }
+            $('.timepicker').timepicker({
+                showMeridian: false,
+            });
         }
+    </script>
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+            <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
+            CKEDITOR.replace('<?php echo $locale;?>_description', {
+                filebrowserImageBrowseUrl: '/backend/media_alone?media-action=select-files&method=ckeditor&type=image',
+                filebrowserImageUploadUrl: RV_MEDIA_URL.media_upload_from_editor + '?method=ckeditor&type=image&_token=' + $('meta[name="csrf-token"]').attr('content'),
+                filebrowserWindowWidth: '768',
+                filebrowserWindowHeight: '500',
+                height: 356,
+                allowedContent: true,
+                customConfig: '/admin/plugins/ckeditor/customConfig.js'
+            });
+            <?php endforeach; ?>
+        });
     </script>
 @endpush

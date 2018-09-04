@@ -32,6 +32,7 @@ class RestaurantController extends Controller
 
     public function storeRestaurant(CreateRestaurantRequest $request)
     {
+        dd($request->toArray());
         #Thêm vào bảng user trước
         $user = User::create([
             'name' => $request->username,

@@ -24,6 +24,8 @@ class CreateRestaurantRequest extends FormRequest
             'trans_fee' => 'nullable|numeric',
             'vi_name' => 'required',
             'user_email' => 'required|email|unique:users,email',
+            'time_open' => 'required',
+            'time_close' => 'required'
         ];
 
         return $rules;
@@ -46,6 +48,8 @@ class CreateRestaurantRequest extends FormRequest
             'vi_name.required' => 'Điền tên nhà hàng ngôn ngữ Tiếng Việt',
             'user_email.required' => 'Không được bỏ trống email cho tài khoản',
             'user_email.unique' => 'Email đã được sử dựng',
+            'time_open.required' => 'Vui lòng nhập giờ mở cửa',
+            'time_close.required' => 'Vui lòng nhập giờ đóng cửa'
         ];
     }
 

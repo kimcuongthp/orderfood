@@ -12,7 +12,8 @@ class Restaurant extends Model
     public $translatedAttributes = [
         'name',
         'description',
-        'address'
+        'address',
+        'alert',
     ];
     protected $fillable = [
         'phone',

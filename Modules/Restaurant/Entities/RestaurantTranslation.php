@@ -10,6 +10,7 @@ class RestaurantTranslation extends Model
     protected $fillable = [
         'name',
         'description',
-        'address'
+        'address',
+        'alert'
     ];
 }

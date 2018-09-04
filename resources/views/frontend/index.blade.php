@@ -96,21 +96,23 @@
                 </div>
                 <div class="col-md-9" id="listCardv2">
                     <div class="row">
-                        <?php for($i=1;$i<=8;$i++) { ?>
-                        <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
-                            <a class="card">
-                                <div class="dotOnline online">
-                                    <i class="fas fa-circle"></i>
+                        @if(count($restaurants))
+                            @foreach($restaurants as $restaurant)
+                                <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
+                                    <a class="card">
+                                        <div class="dotOnline online">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <img class="card-img-top" src="{{ $restaurant->image }}" />
+                                        <div class="card-body">
+                                            <p class="card-head">{{ $restaurant->name }}</p>
+                                            <p class="card-text">{{ $restaurant->address }}</p>
+                                            <p class="card-note">{{ $restaurant->description }}</p>
+                                        </div>
+                                    </a>
                                 </div>
-                                <img class="card-img-top" src="/frontend/images/foody-1.jpg" />
-                                <div class="card-body">
-                                    <p class="card-head">Some quick example </p>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <p class="card-note">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </a>
-                        </div>
-                        <?php } ?>
+                                @endforeach
+                        @endif
                     </div>
                     <div class="row">
                         <!--Pagination-->

@@ -36,7 +36,7 @@ class CreateTableNhahang extends Migration
         Schema::create('restaurant_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('address')->nullable();
             $table->integer('restaurant_id')->unsigned();
             $table->string('locale')->index();
