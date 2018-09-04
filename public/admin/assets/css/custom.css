@@ -144,9 +144,12 @@ textarea.parsley-error {
 .pointer{
     cursor: pointer;
 }
-.page-container .sidebar-menu .logo-env {
-    padding: 20px
+.table-cus td{
+    line-height: 20px !important;
 }
-.text-middle {
-    vertical-align: middle !important;
+.table-cus td{
+    line-height: 20px !important;
+
+
+
 }
