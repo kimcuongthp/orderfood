@@ -5,6 +5,7 @@ namespace Modules\Restaurant\Entities;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
+use Modules\Address\Entities\City;
 
 class Restaurant extends Model
 {
@@ -39,5 +40,13 @@ class Restaurant extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class,'restaurant_categories_relation','restaurant_id');
+    }
+    public function typeoffood(){
+        return $this->hasMany(Typeoffood::class);
+    }
+
+    public function city(){
+
+        return $this->belongsTo(City::class);
     }
 }

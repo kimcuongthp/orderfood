@@ -52,39 +52,39 @@ $( window ).resize(function() {
 });
 
 function checkScreen(){
-  if(window.innerWidth >1000){
-      var height = $(window).scrollTop();
-      var tmp =$('.nh-sp').height() + $('.nh-menu .list-group').height() -500;
-      if(height > tmp){
-        $('.nh-menu').css({"position":'absolute','bottom':'0px','top':'unset'});
-      }else if(height > 420){
-          $('.nh-menu').css({"position":'fixed','top':'71px'});
-      }else{
-          $('.nh-menu').css({"position":'absolute','top':'0px','bottom':'unset'});
-      }
-
-      var nhsp =0;
-      if($('.nh-sp').height()  > 0){
-        nhsp =$('.nh-sp').height();
-      }else if($('#danhgia').height() > 0){
-        nhsp =$('#danhgia').height();
-      }else if($('#gioithieu').height() > 0){
-        nhsp =$('#gioithieu').height();
-      }
-      if(nhsp <600){
-        nhsp =600;
-      }
-
-      var tmp2 =nhsp + $('.nh-order .box-order').height() -300;
-      if(height > tmp2){
-        $('.box-order').css({"position":'absolute','bottom':'0px','top':'unset','right': 'unset'});
-      }else if(height > 420){
-        var w = ((window.innerWidth -1200) /2 )+32;
-        $('.box-order').css({"position":'fixed','top':'71px','right': w,'width':300 });
-      }else{
-        $('.box-order').css({"position":'absolute','top':'0px','bottom':'unset','right':'unset'});
-      }
-  }
+  // if(window.innerWidth >1000){
+  //     var height = $(window).scrollTop();
+  //     var tmp =$('.nh-sp').height() + $('.nh-menu .list-group').height() -500;
+  //     if(height > tmp){
+  //       $('.nh-menu').css({"position":'absolute','bottom':'0px','top':'unset'});
+  //     }else if(height > 420){
+  //         $('.nh-menu').css({"position":'fixed','top':'71px'});
+  //     }else{
+  //         $('.nh-menu').css({"position":'absolute','top':'0px','bottom':'unset'});
+  //     }
+  //
+  //     var nhsp =0;
+  //     if($('.nh-sp').height()  > 0){
+  //       nhsp =$('.nh-sp').height();
+  //     }else if($('#danhgia').height() > 0){
+  //       nhsp =$('#danhgia').height();
+  //     }else if($('#gioithieu').height() > 0){
+  //       nhsp =$('#gioithieu').height();
+  //     }
+  //     if(nhsp <600){
+  //       nhsp =600;
+  //     }
+  //
+  //     var tmp2 =nhsp + $('.nh-order .box-order').height() -300;
+  //     if(height > tmp2){
+  //       $('.box-order').css({"position":'absolute','bottom':'0px','top':'unset','right': 'unset'});
+  //     }else if(height > 420){
+  //       var w = ((window.innerWidth -1200) /2 )+32;
+  //       $('.box-order').css({"position":'fixed','top':'71px','right': w,'width':300 });
+  //     }else{
+  //       $('.box-order').css({"position":'absolute','top':'0px','bottom':'unset','right':'unset'});
+  //     }
+  // }
   if(window.innerWidth < 1000){
     if(tmplist == 0){
       tmplist =1;

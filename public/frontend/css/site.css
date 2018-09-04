@@ -1671,6 +1671,7 @@ height: 100%;
 .box-info{
   margin-left: 80px;
   margin-right: 120px;
+  min-height: 75px;
 }
 .box-info p{
   margin-bottom: 2px;
@@ -1936,7 +1937,9 @@ height: 100%;
   }
 }
 
-
+.nh-sp{
+  width: 100% !important;
+}
 #gioithieu,#danhgia,#thucdon{
   min-height: 600px;
 }

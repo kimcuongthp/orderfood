@@ -20,6 +20,13 @@ Route::get('/backend/media_alone', function(){
     return view('media::media');
 })->middleware('auth');
 
+Route::get('/restaurant/{id?}', [
+    'as' => 'restaurant',
+    'uses' => 'RestaurantController@index'
+]);
+
+
+
 //Route::get('set', function(){
 //
 //    #Tìm role staff
