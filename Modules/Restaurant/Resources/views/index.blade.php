@@ -14,6 +14,7 @@
                     <th>Địa chỉ</th>
                     <th>Người quản lí</th>
                     <th>Ngày đăng kí</th>
+                    <th>Danh sách loại món ăn</th>
                     <th>Tác vụ</th>
                 </tr>
                 </thead>
@@ -32,6 +33,11 @@
                         <td style="vertical-align: middle;">{{ $restaurant->address }}</td>
                         <td style="vertical-align: middle;">{{ $restaurant->user->name or "" }}</td>
                         <td style="vertical-align: middle;">{{ $restaurant->created_at->format('d/m/Y') }}</td>
+                        <td style="vertical-align: middle;">
+                            <a href="{{ route('typeoffood.index') }}?restaurant_id={{ $restaurant->id }}" class="btn btn-white">
+                                <i class="fa fa-search"></i> Xem danh sách
+                            </a>
+                        </td>
                         <td style="vertical-align: middle;">
                             <a href="{{ route('restaurant.edit', $restaurant->id) }}" class="btn btn-default">
                                 <i class="fa fa-edit"></i> Sửa

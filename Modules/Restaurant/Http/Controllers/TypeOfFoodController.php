@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Restaurant\Entities\Restaurant;
 use Modules\Restaurant\Entities\TypeOfFood;
 
 
@@ -20,8 +21,7 @@ class TypeOfFoodController extends  Controller
     public function index(Request $request)
     {
         $restaurant_id = $request->input("restaurant_id");
-        if(!$restaurant_id) $restaurant_id =0;
-        $typeoffood =Typeoffood::where('restaurant_id',$restaurant_id)->with('foods')->get();
+        $typeoffood = Typeoffood::where('restaurant_id',$restaurant_id)->with('foods')->get();
         return view('restaurant::typeoffood.index',compact('typeoffood','restaurant_id'));
     }
 
@@ -34,12 +34,11 @@ class TypeOfFoodController extends  Controller
             $type->id = 0;
             $type->restautant_id =(int)$restaurant_id;
         }
-
         return view('restaurant::typeoffood.modal',compact('type'));
     }
 
     public function update(Request $request){
-        $id =$request->input('id');
+        $id = $request->input('id');
         $restaurant_id =  $request->input('restaurant_id');
         $data = Typeoffood::find($id);
         if(!$data){

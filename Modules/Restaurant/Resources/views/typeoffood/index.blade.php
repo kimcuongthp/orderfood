@@ -1,34 +1,40 @@
 @extends('backend.layouts.master')
 @section('content')
     <div class="admin-section-title">
-        <h3><i class="entypo-archive"></i> Loại món ăn - Nhà hàng : restaurant_id {{$restaurant_id}}</h3>
-        <a class="btn btn-success" onclick="fnUpdate(0)"><i class="entypo-plus-circled"></i>  Thêm mới</a>
+        <h3><i class="entypo-list"></i> Danh sách thực đơn</h3>
+        <a class="btn btn-success" onclick="fnUpdate(0)"><i class="entypo-plus-circled"></i>  Thêm món ăn</a>
     </div>
     <div class="row" style="margin: 0px;">
-        <table class="table table-bordered" id="tbCategory">
+        <table class="table table-bordered text-middle" id="tbCategory">
             <thead>
             <tr>
-                <th>STT</th>
-                <th>Tên loại món ăn</th>
-                <th>Món ăn</th>
+                <th style="width: 25px">STT</th>
+                <th>Tên thực đơn</th>
+                <th>Danh sách thực đơn</th>
+                <th>Nhà hàng</th>
                 <th>Tác vụ</th>
             </tr>
             </thead>
+            @if(count($typeoffood))
             @foreach($typeoffood as $item)
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td>{{$item->name}}</td>
                     <td class="text-center pointer" onclick="window.location.href ='/backend/restaurant/foods/{{$restaurant_id}}/{{$item->id}}'">
-                        <a style="color:blue" >{{$item->foods->count()}}</a>
+                        <a>Xem <strong>{{$item->foods->count()}}</strong> món ăn</a>
                     </td>
-                    <td class="text-center">
-                        <div class="actions">
-                            <a href="javascript:;" onclick="fnUpdate('{{$item->id}}')" class="edit">Sửa</a>
-                            <a href="javascript:;" onclick="fnDelete('{{$item->id}}')" class="delete">Xóa</a>
-                        </div>
+                    <td class="text-center text-success">{{ $item->restaurant->name or "" }}</td>
+                    <td>
+                            <a href="javascript:;" onclick="fnUpdate('{{$item->id}}')" class="btn btn-default">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="javascript:;" onclick="fnDelete('{{$item->id}}')" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
                     </td>
                 </tr>
             @endforeach
+            @endif
         </table>
     </div>
     <div id="modalTypeOfFood" class="modal fade" role="dialog">

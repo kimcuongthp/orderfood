@@ -24,15 +24,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
         });
         Route::get('/{restaurant_id}/edit', [
             'as' => 'restaurant.edit',
-            'uses' => 'RestaurantController@editRestaurant'
+            'uses' => 'RestaurantController@editRestaurant',
+            'middleware' => 'can:edit_restaurant'
         ]);
         Route::post('/{restaurant_id}/update', [
            'as' => 'restaurant.update',
-           'uses' => 'RestaurantController@updateRestaurant'
+           'uses' => 'RestaurantController@updateRestaurant',
+            'middleware' => 'can:edit_restaurant'
         ]);
 
         #Route danh mục nhà hàng
-        Route::group(['prefix' => 'categories'], function(){
+        Route::group(['middleware' => 'can:manager_restaurant_categories', 'prefix' => 'categories'], function(){
             Route::get('/', [
                 'as' => 'category.index',
                 'uses' => 'CategoryController@index'
@@ -71,7 +73,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
             ]);
         });
 
-        #Router mon an
+        #Router món ăn
         Route::group(['prefix' => 'foods'], function(){
             Route::get('/{res_id}/{type_id}', [
                 'as' => 'foods.index',

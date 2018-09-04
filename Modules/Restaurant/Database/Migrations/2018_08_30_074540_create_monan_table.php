@@ -28,7 +28,6 @@ class CreateMonanTable extends Migration
 
             $table->unique(['typeoffood_id', 'locale']);
             $table->foreign('typeoffood_id')->references('id')->on('typeoffoods')->onDelete('cascade');
-            $table->timestamps();
         });
 
         Schema::create('foods', function (Blueprint $table) {

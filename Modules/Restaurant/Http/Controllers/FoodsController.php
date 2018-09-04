@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Restaurant\Entities\Food;
+use Modules\Restaurant\Entities\Restaurant;
 use Modules\Restaurant\Entities\Typeoffood;
 
 
@@ -21,11 +22,12 @@ class FoodsController extends Controller
     {
         $restaurant_id =$request->route("res_id");
         $typeoffood_id =$request->route('type_id');
+        $typeoffood = Typeoffood::find($typeoffood_id);
         $foods = Food::with('typeoffood')->where('typeoffood_id',$typeoffood_id)->get();
-        return view('restaurant::food.index',compact('restaurant_id','typeoffood_id','foods'));
+        return view('restaurant::food.index',compact('restaurant_id','typeoffood_id','typeoffood','foods','restaurant'));
     }
 
-    public function  show(Request $request)
+    public function show(Request $request)
     {
         $restaurant_id =$request->input("res_id");
         if(!$restaurant_id) $restaurant_id =0;

@@ -147,3 +147,6 @@ textarea.parsley-error {
 .page-container .sidebar-menu .logo-env {
     padding: 20px
 }
+.text-middle {
+    vertical-align: middle !important;
+}
