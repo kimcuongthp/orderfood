@@ -132,9 +132,18 @@ class RestaurantController extends Controller
                 abort('404');
             }
         }
-
         #update thông tin nhà hàng
         $restaurant->update($request->all());
+
+        #update thông tin các trường đa ngôn ngữ
+        foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
+            if ($request->input($locale . '_name')) {
+                $restaurant->translateOrNew($locale)->name = $request->input($locale . '_name');
+                $restaurant->translateOrNew($locale)->address = $request->input($locale . '_address');
+                $restaurant->translateOrNew($locale)->description = $request->input($locale . '_description');
+            }
+        }
+        $restaurant->save();
 
         #Xóa thông tin bảng liên kết nhà hàng và danh mục
         RCRelation::where('restaurant_id',$restaurant->id)->delete();

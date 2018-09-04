@@ -11,4 +11,9 @@ class Category extends Model
 
     public $translatedAttributes = ['name'];
     protected $fillable = [];
+
+    public function restaurants()
+    {
+        return $this->belongsToMany(Restaurant::class,'restaurant_categories_relation', 'category_id');
+    }
 }
