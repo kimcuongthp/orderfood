@@ -17,7 +17,7 @@ class AddToRestaurantTable extends Migration
 //            $table->tinyInteger('status')->default(1);
         });
         Schema::table('restaurant_translations', function (Blueprint $table) {
-            $table->string('alert');
+            $table->string('alert')->nullable();
         });
     }
 

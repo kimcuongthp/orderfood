@@ -106,7 +106,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Trạng thái</label>
                             <div class="col-sm-5">
-                            <select name="status" class="selectboxit">
+                            <select name="is_open" class="selectboxit">
                                 <option value="1">Hoạt động</option>
                                 <option value="0">Không hoạt động</option>
                             </select>
@@ -154,6 +154,12 @@
                                     <label for="{{ $locale }}_address" class="col-sm-3 control-label">Địa chỉ</label>
                                     <div class="col-sm-7">
                                         <textarea class="form-control" name="{{ $locale }}_address" id="{{ $locale }}_address" placeholder="Nhập địa chỉ của nhà hàng">{{ old("{$locale}_address") }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="{{ $locale }}_alert" class="col-sm-3 control-label">Thông báo</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="{{ $locale }}_alert" id="{{ $locale }}_alert" value="{{ old("{$locale}_alert") }}" placeholder="Nhập thông báo của nhà hàng">
                                     </div>
                                 </div>
                             </div>
@@ -216,10 +222,6 @@
                     $("#select_district").selectBoxIt("refresh");
                 });
             });
-
-            var options = {
-                twentyFour:  true
-            }
             $('.timepicker').timepicker({
                 showMeridian: false,
             });
@@ -227,7 +229,6 @@
     </script>
     <script>
         'use strict';
-
         $(document).ready(function () {
             <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
             CKEDITOR.replace('<?php echo $locale;?>_description', {

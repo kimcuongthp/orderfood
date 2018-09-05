@@ -100,14 +100,18 @@
                             @foreach($restaurants as $restaurant)
                                 <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
                                     <a class="card">
-                                        <div class="dotOnline online">
+                                        @php
+                                            $now = strtotime(\Illuminate\Support\Carbon::now()->format('H:i'));
+                                            $status = ($restaurant->is_open === 1) ? ' online' : ' offline';
+                                        @endphp
+                                        <div class="dotOnline{{ $status }}">
                                             <i class="fas fa-circle"></i>
                                         </div>
                                         <img class="card-img-top" src="{{ $restaurant->image }}" />
                                         <div class="card-body">
                                             <p class="card-head">{{ $restaurant->name }}</p>
                                             <p class="card-text">{{ $restaurant->address }}</p>
-                                            <p class="card-note">{{ $restaurant->description }}</p>
+                                            <p class="card-note">{{ $restaurant->alert }}</p>
                                         </div>
                                     </a>
                                 </div>

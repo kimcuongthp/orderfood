@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::take(8)->get();
+        $categories = Category::with('restaurants')->take(8)->get();
 //        dd($categories->first()->restaurants);
         $restaurants = Restaurant::all();
         return view('frontend.index', compact('categories','restaurants'));

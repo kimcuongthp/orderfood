@@ -26,7 +26,6 @@ class Restaurant extends Model
         'time_close',
         'is_open',
         'price_min',
-        'price_max',
         'trans_fee',
         'district_id',
         'city_id',

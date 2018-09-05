@@ -66,6 +66,7 @@ class RestaurantController extends Controller
                 $restaurant->translateOrNew($locale)->name = $request->input($locale . '_name');
                 $restaurant->translateOrNew($locale)->address = $request->input($locale . '_address');
                 $restaurant->translateOrNew($locale)->description = $request->input($locale . '_description');
+                $restaurant->translateOrNew($locale)->alert = $request->input($locale . '_alert');
             }
         }
         $restaurant->save();
@@ -142,6 +143,7 @@ class RestaurantController extends Controller
                 $restaurant->translateOrNew($locale)->name = $request->input($locale . '_name');
                 $restaurant->translateOrNew($locale)->address = $request->input($locale . '_address');
                 $restaurant->translateOrNew($locale)->description = $request->input($locale . '_description');
+                $restaurant->translateOrNew($locale)->alert = $request->input($locale . '_alert');
             }
         }
         $restaurant->save();
