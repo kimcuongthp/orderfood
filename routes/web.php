@@ -19,6 +19,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'as' => 'restaurant',
         'uses' => 'RestaurantController@index'
     ]);
+	Route::post('/restaurant/rate', [
+		'as' => 'restaurant.rate',
+		'uses' => 'RestaurantController@rate'
+	]);
 });
 
 
