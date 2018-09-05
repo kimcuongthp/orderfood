@@ -200,16 +200,17 @@ class AddressController extends Controller
     }
 
     #Lấy danh sách quyện huyện qua thành phố
-    public function districtsByCity(City $city)
+    public function districtsByCity($city_id, Request $request)
     {
-        $rs = '<option value="">Chọn quận huyện</option>';
+        $city = City::findOrFail($city_id);
+        $rs = '<option value="0">'.trans('frontend.select_district',[], $request->locale).'</option>';
         if($city){
             $districts = $city->districts;
             if(count($districts))
             {
                 foreach($districts as $district)
                 {
-                    $rs .= '<option value="'.$district->id.'">'.$district->name.'</option>';
+                    $rs .= '<option value="'.$district->id.'">'.$district->translate($request->locale)->name.'</option>';
                 }
             }
         }

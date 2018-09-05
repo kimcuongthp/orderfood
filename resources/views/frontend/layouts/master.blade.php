@@ -171,7 +171,7 @@
         once: true
     });
 </script>
+@stack('js-stack')
 </body>
-
 </html>
 

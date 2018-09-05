@@ -12,9 +12,10 @@
         </div>
         <div id="box-timkiem">
             <div id="box-search">
+                <form method="get" action="{{ route('restaurant.search') }}">
                 <div class="row" id="chooselocation">
-                    <a  class="active">Vị trí của bạn</a>
-                    <a >Địa chỉ của tôi</a>
+                    <a class="active">{{ trans('frontend.your_location') }}</a>
+                    <a>{{ trans('frontend.my_location') }}</a>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-8 diachicuatoi" style="display:none;padding:0px;padding-top:5px;">
@@ -23,56 +24,26 @@
                         </select>
                     </div>
                     <div class="col-6 col-sm-4 vitricuaban">
-                        <select class="form-control selectbox">
-                            <option>Chon thanh pho</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
+                        <select class="form-control selectbox" name="city" id="select_city">
+                            <option value="0">{{ trans('frontend.select_city') }}</option>
+                            @if(count($cities))
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="col-6 col-sm-4 vitricuaban">
-                        <select class="form-control selectbox">
-                            <option>Chon quan huyen</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
+                        <select class="form-control selectbox" name="district" id="select_district">
+                            <option value="0">{{ trans('frontend.select_district') }}</option>
                         </select>
                     </div>
                     <div class="col-12 col-sm-4">
-                        <button class="btn">Tim kiem</button>
+                        <button type="submit" class="btn">{{ trans('frontend.search') }}</button>
                     </div>
                 </div>
-                <div class="row" style="height: 30px;" onclick='$("#tknangcao").toggle()'>
-                    <span>Tìm nâng cao</span>
-                </div>
-                <div class="row" id="tknangcao" style="display: none">
-                    <div class="col-6 col-sm-4">
-                        <select class="form-control selectbox">
-                            <option>Ten nha hang</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                        </select>
-                    </div>
-                    <div class="col-6 col-sm-4">
-                        <select class="form-control selectbox">
-                            <option>Ten mon an</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                        </select>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <select class="form-control selectbox">
-                            <option>Phan loai</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                            <option>Select city</option>
-                        </select>
-                    </div>
-                </div>
+                </form>
             </div>
-
         </div>
     </div>
     <!--Begin collapse danh sach nha hang-->
@@ -81,12 +52,18 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" >{{ trans('frontend.all') }}
+                        @php
+                            $active = (request('category')) ? '' : ' active';
+                        @endphp
+                        <a href="{{ url('/') }}" class="list-group-item list-group-item-action action{{ $active }}" id="list-home-list" data-toggle="list">{{ trans('frontend.all') }}
                             <span class="badge badge-pill light-blue float-right">{{ $count_restaurants }}</span>
                         </a>
                         @if(count($categories))
                             @foreach($categories as $category)
-                                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list">{{ $category->name }}
+                                @php
+                                    $active = (request('category') == $category->id) ? ' active' : '';
+                                @endphp
+                                <a href="{{ url('/').'?category='.$category->id }}" class="list-group-item list-group-item-action action{{ $active }}" id="list-profile-list" data-toggle="list">{{ $category->name }}
                                     <span class="badge badge-pill light-blue float-right">{{ $category->restaurants->count() }}</span>
                                 </a>
                             @endforeach
@@ -95,10 +72,32 @@
                     </div>
                 </div>
                 <div class="col-md-9" id="listCardv2">
-                    @include('frontend.load')
+                    <div class="row">
+                        @if(count($restaurants))
+                            @foreach($restaurants as $restaurant)
+                                <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
+                                    <a href="{{ route('restaurant', $restaurant->id) }}" title="{{ $restaurant->name }}" class="card">
+                                        @php
+                                            $now = strtotime(\Illuminate\Support\Carbon::now()->format('H:i'));
+                                            $status = ($restaurant->is_open === 1 || ($now > strtotime($restaurant->time_open) && $now < strtotime($restaurant->time_close))) ? ' online' : ' offline';
+                                        @endphp
+                                        <div class="dotOnline{{ $status }}">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <img class="card-img-top" src="{{ $restaurant->image }}" />
+                                        <div class="card-body">
+                                            <p class="card-head">{{ $restaurant->name }}</p>
+                                            <p class="card-text">{{ $restaurant->address }}</p>
+                                            <p class="card-note">{{ $restaurant->alert }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                     <div class="row">
                         <!--Pagination-->
-                        {!! $restaurants->links('vendor.pagination.frontend') !!}
+                        {!! $restaurants->links('vendor/pagination/frontend') !!}
                     </div>
                 </div>
             </div>
@@ -421,5 +420,22 @@
         </div>
     </div>
     <!--  -->
-
 @endsection
+@push('js-stack')
+    <script>
+        $('.action').click(function(){
+            $('.action').removeClass('active');
+            window.location.href = $(this).attr('href');
+        });
+
+        $('#select_city').change(function(){
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '/backend/address/cities/'+id+'/districts?locale={{ LaravelLocalization::getCurrentLocale() }}'
+            }).then(function (data) {
+                $('#select_district').html(data);
+            });
+        });
+    </script>
+@endpush

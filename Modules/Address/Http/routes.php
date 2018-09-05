@@ -1,6 +1,16 @@
 <?php
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
+
+    Route::group(['namespace' => 'Modules\Address\Http\Controllers'], function (){
+        Route::get('backend/address/cities/{city_id}/districts', [
+            'as' => 'address.districts.by.city',
+            'uses' => 'AddressController@districtsByCity',
+            'namespace' => 'Modules\Address\Http\Controllers'
+        ]);
+    });
+
+
     Route::group(['middleware' => ['web', 'auth','role:Staff'], 'prefix' => 'backend/address', 'namespace' => 'Modules\Address\Http\Controllers'], function () {
         Route::get('/', [
             'as' => 'address.index',
@@ -34,10 +44,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         Route::post('cities/{city}/delete', [
             'as' => 'address.city.delete',
             'uses' => 'AddressController@deleteCity'
-        ]);
-        Route::get('cities/{city}/districts', [
-            'as' => 'address.districts.by.city',
-            'uses' => 'AddressController@districtsByCity'
         ]);
 
         #Route cho quận huyện

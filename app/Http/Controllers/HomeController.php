@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Address\Entities\City;
+use Response;
+use Illuminate\Support\Facades\View;
 use Modules\Restaurant\Entities\Category;
 use Modules\Restaurant\Entities\Restaurant;
 
@@ -13,15 +16,13 @@ class HomeController extends Controller
         $categories = Category::with('restaurants')->take(8)->get();
         $count_restaurants = Restaurant::count();
         $restaurants = Restaurant::paginate(8);
-        if($request->ajax())
+        $cities = City::all();
+        if($request->category)
         {
-            return view('frontend.load', ['restaurants' => $restaurants])->render();
+            $category = Category::findOrFail($request->category);
+            $restaurants = $category->restaurants()->paginate(8);
+            $restaurants->withPath('?category='.$request->category);
         }
-        return view('frontend.index', compact('categories','restaurants','count_restaurants'));
+        return view('frontend.index', compact('categories','restaurants','count_restaurants','cities'));
     }
-
-//    public function restaurants_ajax(Request $request)
-//    {
-//
-//    }
 }
