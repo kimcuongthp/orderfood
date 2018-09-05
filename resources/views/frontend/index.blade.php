@@ -99,7 +99,7 @@
                         @if(count($restaurants))
                             @foreach($restaurants as $restaurant)
                                 <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
-                                    <a class="card">
+                                    <a href="{{ route('restaurant', $restaurant->id) }}" title="{{ $restaurant->name }}" class="card">
                                         @php
                                             $now = strtotime(\Illuminate\Support\Carbon::now()->format('H:i'));
                                             $status = ($restaurant->is_open === 1 || ($now > strtotime($restaurant->time_open) && $now < strtotime($restaurant->time_close))) ? ' online' : ' offline';
