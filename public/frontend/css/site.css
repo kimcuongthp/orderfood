@@ -1544,8 +1544,14 @@ height: 100%;
   padding: 5px 0px;
 }
 .nd-status{
-  color: green;
+
   margin-right: 10px;
+}
+.nd-status.online{
+  color: green;
+}
+.nd-status.offline{
+  color: red;
 }
 .btn-google{
   margin-top: 5px;
