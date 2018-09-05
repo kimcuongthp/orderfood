@@ -81,8 +81,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" >Tất cả
-                            <span class="badge badge-pill light-blue float-right">92</span>
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" >{{ trans('frontend.all') }}
+                            <span class="badge badge-pill light-blue float-right">{{ $count_restaurants }}</span>
                         </a>
                         @if(count($categories))
                             @foreach($categories as $category)
@@ -95,58 +95,10 @@
                     </div>
                 </div>
                 <div class="col-md-9" id="listCardv2">
-                    <div class="row">
-                        @if(count($restaurants))
-                            @foreach($restaurants as $restaurant)
-                                <div class="col-6 col-sm-4 col-lg-3 listCardv2-item">
-                                    <a href="{{ route('restaurant', $restaurant->id) }}" title="{{ $restaurant->name }}" class="card">
-                                        @php
-                                            $now = strtotime(\Illuminate\Support\Carbon::now()->format('H:i'));
-                                            $status = ($restaurant->is_open === 1 || ($now > strtotime($restaurant->time_open) && $now < strtotime($restaurant->time_close))) ? ' online' : ' offline';
-                                        @endphp
-                                        <div class="dotOnline{{ $status }}">
-                                            <i class="fas fa-circle"></i>
-                                        </div>
-                                        <img class="card-img-top" src="{{ $restaurant->image }}" />
-                                        <div class="card-body">
-                                            <p class="card-head">{{ $restaurant->name }}</p>
-                                            <p class="card-text">{{ $restaurant->address }}</p>
-                                            <p class="card-note">{{ $restaurant->alert }}</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                @endforeach
-                        @endif
-                    </div>
+                    @include('frontend.load')
                     <div class="row">
                         <!--Pagination-->
-                        <nav aria-label="pagination ">
-                            <ul class="pagination justify-content-end">
-
-                                <!--Arrow left-->
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        {!! $restaurants->links('vendor.pagination.frontend') !!}
                     </div>
                 </div>
             </div>

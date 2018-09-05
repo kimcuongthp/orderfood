@@ -18,31 +18,26 @@
     <div class="row" id="header">
         <div class="" id="mainmenu">
             <div class="container">
-                <img id="imglogo1" src="/frontend/images/logo2.png"/>
+                <a href="{{ url('/').'/'.LaravelLocalization::getCurrentLocale() }}">
+                    <img id="imglogo1" src="/frontend/images/logo2.png" alt="logo"/>
+                </a>
                 <div class="menux-center">
                     <img id="imgtext" src="/frontend/images/slogan02.png"/>
                 </div>
                 <div class="menu-right">
-
                     <div class="dropdown">
-                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                            <div class="flag"> <i class="flag-us"></i> <span>United States</span>  </div>
+                        <button type="button" class="btn dropdown-toggle waves-effect waves-light" data-toggle="dropdown">
+                            <div class="flag"> <i class="flag-us"></i> <span>{{ LaravelLocalization::getCurrentLocaleName() }}</span>  </div>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
-                                <div class="flag"> <i class="flag-us"></i> <span>United States</span>  </div>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <div class="flag"> <i class="flag-australia"></i> <span>Australia</span>  </div>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <div class="flag"> <i class="flag-Bangladesh"></i> <span>Bangladesh</span>  </div>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <div class="flag"> <i class="flag-Belgium"></i> <span>Belgium</span>  </div>
-                            </a>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    <div class="flag"><i class="flag-us"></i> <span>{{ $properties['native'] }}</span></div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
+
                     <a href="#" class="login" id="loginOrdeFood">
                         <i class="icon-login"></i> Login
                     </a>

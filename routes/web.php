@@ -15,15 +15,18 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'as' => 'home',
         'uses' => 'HomeController@index'
     ]);
+    Route::get('/restaurant/{id?}', [
+        'as' => 'restaurant',
+        'uses' => 'RestaurantController@index'
+    ]);
 });
+
+
 Route::get('/backend/media_alone', function(){
     return view('media::media');
 })->middleware('auth');
 
-Route::get('/restaurant/{id?}', [
-    'as' => 'restaurant',
-    'uses' => 'RestaurantController@index'
-]);
+
 
 
 
