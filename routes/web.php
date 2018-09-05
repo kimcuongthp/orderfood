@@ -19,10 +19,17 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'as' => 'restaurant',
         'uses' => 'RestaurantController@index'
     ]);
+<<<<<<< HEAD
     Route::get('/search', [
         'as' => 'restaurant.search',
         'uses' => 'SearchController@index'
     ]);
+=======
+	Route::post('/restaurant/rate', [
+		'as' => 'restaurant.rate',
+		'uses' => 'RestaurantController@rate'
+	]);
+>>>>>>> c59eb0461324160a7730c4e0f92073f0a818100a
 });
 
 

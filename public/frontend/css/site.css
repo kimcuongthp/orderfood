@@ -1972,12 +1972,15 @@ height: 100%;
   border-bottom: 1px solid #fff;
   display: block;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .comment-item-img{
   width: 50px;
   height: 50px;
   float: left;
+  border: 1px solid #d3d3d3;
+  overflow: hidden;
 }
 .comment-item-user{
   margin-left: 20px;
@@ -2006,7 +2009,7 @@ height: 100%;
   border-radius: 1px;
 }
 #nhahangv2 .col-md-3 .active{
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 14px;
   color: #fff;
   background: #ff8000;

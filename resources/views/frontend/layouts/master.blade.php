@@ -171,7 +171,11 @@
         once: true
     });
 </script>
+<<<<<<< HEAD
 @stack('js-stack')
+=======
+@stack('scripts')
+>>>>>>> c59eb0461324160a7730c4e0f92073f0a818100a
 </body>
 </html>
 
