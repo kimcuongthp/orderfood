@@ -3,13 +3,24 @@
 namespace Modules\Restaurant\Entities;
 
 use App\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;
 use Modules\Address\Entities\City;
 
 class Restaurant extends Model
 {
-    use Translatable;
+    use Translatable, Sluggable;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
     public $translatedAttributes = [
         'name',
         'description',
@@ -19,7 +30,6 @@ class Restaurant extends Model
     protected $fillable = [
         'phone',
         'email',
-        'status',
         'image',
         'video',
         'time_open',

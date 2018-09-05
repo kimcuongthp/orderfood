@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.1.3",
         "botble/media": "*@dev",
+        "cviebrock/eloquent-sluggable": "^4.5",
         "dimsav/laravel-translatable": "^9.1",
         "fideloper/proxy": "^4.0",
         "kalnoy/nestedset": "^4.3",

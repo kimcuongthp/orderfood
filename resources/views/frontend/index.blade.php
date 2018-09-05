@@ -102,7 +102,7 @@
                                     <a class="card">
                                         @php
                                             $now = strtotime(\Illuminate\Support\Carbon::now()->format('H:i'));
-                                            $status = ($restaurant->is_open === 1) ? ' online' : ' offline';
+                                            $status = ($restaurant->is_open === 1 || ($now > strtotime($restaurant->time_open) && $now < strtotime($restaurant->time_close))) ? ' online' : ' offline';
                                         @endphp
                                         <div class="dotOnline{{ $status }}">
                                             <i class="fas fa-circle"></i>
