@@ -5,14 +5,33 @@ return [
     'trans_fee'=>"Phí ship",
     'create_time'=>'Ngày tạo',
     'all' => 'Tất cả',
-<<<<<<< HEAD
     'search' => 'Tìm kiếm',
     'your_location' => 'Vị trí của bạn',
     'my_location' => 'Địa chỉ của tôi',
     'select_city' => 'Chọn thành phố',
-    'select_district' => 'Chọn quận huyện'
-=======
+    'select_district' => 'Chọn quận huyện',
     'delivery_by' =>'Người giao',
-    'please_leave_your_review' =>'Để lại đánh giá của bạn'
->>>>>>> c59eb0461324160a7730c4e0f92073f0a818100a
+    'please_leave_your_review' =>'Để lại đánh giá của bạn',
+    'login' => 'Đăng nhập',
+    'register' => 'Đăng kí',
+    'sign_in_fb' => 'Đăng nhập bằng Facebook',
+    'or' => 'hoặc',
+    'your_email_phone' => 'Email/SĐT của bạn',
+    'your_password' => 'Mật khẩu của bạn',
+    'your_username' => 'Tên đăng nhập',
+    'your_email' => 'Email của bạn',
+    'your_r_password' => 'Mật khẩu',
+    'retype_password' => 'Nhập lại mật khẩu',
+    'sign_up' => 'Đăng kí',
+    'update_userinfo' => 'Cập nhật thông tin người dùng',
+    'userinfo' => 'Thông tin người dùng',
+    'favorite_restaurants' => 'Nhà hàng yêu thích',
+    'order_history' => 'Lịch sử đơn hàng',
+    'change_password' => 'Đổi mật khẩu',
+    'logout' => 'Đăng xuất',
+    'your_address' => 'Địa chỉ của bạn',
+    'your_phone' => 'Số điện thoại',
+    'your_name' => 'Tên của bạn',
+    'save_changes' => 'Lưu thay đổi '
+
 ];

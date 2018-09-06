@@ -11,25 +11,38 @@
 |
 */
 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-    Route::get('/', [
+    #Route đăng nhập
+    Route::post('login', [
+        'as' => 'user.login',
+        'uses' => 'LoginController@doLogin'
+    ]);
+    Route::get('userinfo', [
+        'as' => 'user.info',
+        'uses' => 'UserController@index',
+        'middleware' => 'auth'
+    ]);
+    Route::post('userinfo', [
+        'as' => 'update.user.info',
+        'uses' => 'UserController@update',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('', [
         'as' => 'home',
         'uses' => 'HomeController@index'
     ]);
-    Route::get('/restaurant/{id?}', [
+    Route::get('restaurant/{id?}', [
         'as' => 'restaurant',
         'uses' => 'RestaurantController@index'
     ]);
-<<<<<<< HEAD
-    Route::get('/search', [
+    Route::get('search', [
         'as' => 'restaurant.search',
         'uses' => 'SearchController@index'
     ]);
-=======
-	Route::post('/restaurant/rate', [
+	Route::post('restaurant/rate', [
 		'as' => 'restaurant.rate',
 		'uses' => 'RestaurantController@rate'
 	]);
->>>>>>> c59eb0461324160a7730c4e0f92073f0a818100a
 });
 
 

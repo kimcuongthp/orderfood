@@ -27,7 +27,7 @@
                 <div class="menu-right">
                     <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle waves-effect waves-light" data-toggle="dropdown">
-                            <div class="flag"> <i class="flag-us"></i> <span>{{ LaravelLocalization::getCurrentLocaleName() }}</span>  </div>
+                            <div class="flag"> <i class="flag-us"></i> <span style="text-transform: none">{{ LaravelLocalization::getCurrentLocaleName() }}</span>  </div>
                         </button>
                         <div class="dropdown-menu">
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -37,10 +37,16 @@
                             @endforeach
                         </div>
                     </div>
+                    @if(Auth::check())
+                        <a href="{{ route('user.info') }}" class="login">
+                            <i class="icon-user"></i> {{ Auth::user()->name }}
+                        </a>
+                    @else
+                        <a href="javascript:;" class="login" id="loginOrdeFood">
+                            <i class="icon-login"></i> {{ trans('frontend.login') }}
+                        </a>
+                    @endif
 
-                    <a href="#" class="login" id="loginOrdeFood">
-                        <i class="icon-login"></i> Login
-                    </a>
                 </div>
             </div>
         </div>
@@ -62,87 +68,7 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="modalLRFormDemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-        <div class="modal-content">
-            <div class="modal-c-tabs">
-                <ul class="nav nav-tabs tabs-2 light-blue darken-3" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#panel17" role="tab">
-                            <i class="fa fa-user mr-1"></i> Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#panel18" role="tab">
-                            <i class="fa fa-user-plus mr-1"></i> Register</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <!--Panel 17-->
-                    <div class="tab-pane fade in show active" id="panel17" role="tabpanel">
-
-                        <!--Body-->
-                        <div class="modal-body mb-1">
-                            <div class="md-form form-sm text-center" style="margin-top:0px;">
-                                <button type="button" class="btn btn-fb"><i class="fab fa-facebook-f pr-1"></i> Sign in with Facebook</button>
-                            </div>
-                            <div class="row text-center" style="display:block">
-                                <div style="width: 100%; height: 13px; border-bottom: 1px solid #d3d3d3; text-align: center">
-                  <span style="font-size: 14px;font-weight: 600; padding: 0 10px;background:#fff">
-                    Or
-                  </span>
-                                </div>
-                            </div>
-                            <div class="md-form form-sm">
-                                <i class="fa fa-envelope prefix"></i>
-                                <input type="text" id="form2" class="form-control form-control-sm">
-                                <label for="form2">Your email/phone</label>
-                            </div>
-
-                            <div class="md-form form-sm">
-                                <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="form3" class="form-control form-control-sm">
-                                <label for="form3">Your password</label>
-                            </div>
-                            <div class="text-center mt-4">
-                                <button class="btn btn-info">Log in
-                                    <i class="fa fa-sign-in ml-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="panel18" role="tabpanel">
-                        <div class="modal-body">
-                            <div class="md-form form-sm">
-                                <i class="fa fa-envelope prefix"></i>
-                                <input type="text" id="form14" class="form-control form-control-sm">
-                                <label for="form14">Your email</label>
-                            </div>
-
-                            <div class="md-form form-sm">
-                                <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="form5" class="form-control form-control-sm">
-                                <label for="form5">Your password</label>
-                            </div>
-
-                            <div class="md-form form-sm">
-                                <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="form6" class="form-control form-control-sm">
-                                <label for="form6">Repeat password</label>
-                            </div>
-
-                            <div class="text-center form-sm mt-4">
-                                <button class="btn btn-info">Sign up
-                                    <i class="fa fa-sign-in ml-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('frontend.partials.modal_login')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
 <script src="/frontend/js/popper.min.js"></script>
@@ -171,11 +97,8 @@
         once: true
     });
 </script>
-<<<<<<< HEAD
 @stack('js-stack')
-=======
 @stack('scripts')
->>>>>>> c59eb0461324160a7730c4e0f92073f0a818100a
 </body>
 </html>
 
