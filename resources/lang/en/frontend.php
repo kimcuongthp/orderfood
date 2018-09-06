@@ -32,7 +32,7 @@ return [
     'your_address' => 'Your address',
     'your_phone' => 'Your phone',
     'your_name' => 'Your name',
-    'save_changes' => 'Save changes'
+    'save_changes' => 'Save changes',
 
     'please_leave_your_review' =>'please leave your review',
     'minimum'=>'Minimum',

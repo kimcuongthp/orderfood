@@ -20,7 +20,7 @@ return [
     'minimum'=>'Tối thiểu',
     'menu' => 'THỰC ĐƠN',
     'introduce'=>'GIỚI THIỆU',
-    'review' =>'ĐÁNH GIÁ'
+    'review' =>'ĐÁNH GIÁ',
     'your_email_phone' => 'Email/SĐT của bạn',
     'your_password' => 'Mật khẩu của bạn',
     'your_username' => 'Tên đăng nhập',
