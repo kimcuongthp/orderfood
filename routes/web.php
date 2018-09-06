@@ -43,6 +43,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 		'as' => 'restaurant.rate',
 		'uses' => 'RestaurantController@rate'
 	]);
+    Route::get('/restaurant/food/option/{id}', [
+        'as' => 'restaurant.food_option',
+        'uses' => 'RestaurantController@option'
+    ]);
+    Route::post('/restaurant/food/order-item', [
+        'as' => 'restaurant.order_item',
+        'uses' => 'RestaurantController@orderItem'
+    ]);
 });
 
 

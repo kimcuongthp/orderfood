@@ -1534,6 +1534,18 @@ height: 100%;
 .nd-name{
   font-weight: 600;
   font-size: 20px;
+  position: relative;
+}
+.nd-name .btn-love{
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 12px;
+  box-shadow: none;
+  border: 1px solid red;
+  color: red !important;
 }
 .nh-rate{
   color: orange;
@@ -1824,6 +1836,32 @@ height: 100%;
   padding: 0px;
   margin: 0px;
   box-shadow: none;
+}
+
+
+.modal-data::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+.modal-data::-webkit-scrollbar
+{
+  width: 5px;
+  background-color: #F5F5F5;
+}
+
+.modal-data::-webkit-scrollbar-thumb
+{
+  background-color: #F90;
+  background-image: -webkit-linear-gradient(45deg,
+  rgba(255, 255, 255, .2) 25%,
+  transparent 25%,
+  transparent 50%,
+  rgba(255, 255, 255, .2) 50%,
+  rgba(255, 255, 255, .2) 75%,
+  transparent 75%,
+  transparent)
 }
 
 .modal-data{
@@ -2182,4 +2220,31 @@ height: 100%;
 #chooselocation a.active{
   color: orange;
   border-bottom: 1px solid orange;
+}
+
+
+.fade-scale {
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: all .25s linear;
+  -o-transition: all .25s linear;
+  transition: all .25s linear;
+}
+
+.fade-scale.in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.button-plus-minus .btn-minus{
+  padding: 6px 10px !important;
+  margin: 0px;
+}
+.button-plus-minus input{
+  line-height: 22px !important;
+  text-align: center;
+}
+.button-plus-minus .btn-plus{
+  padding: 6px 10px !important;
+  margin: 0px;
 }

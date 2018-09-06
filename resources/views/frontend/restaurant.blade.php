@@ -22,6 +22,7 @@
                     </div>
                     <div class="row nd-name">
                         {{$restaurant->name}}
+                        <a class=" btn-love btn btn-sm btn-white"> <i class="fas fa-heart"></i> Yeu thich</a>
                     </div>
                     <div class="row nd-adress">
                         {{$restaurant->address}}
@@ -66,7 +67,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                Nguoiwf giao
+                                {{trans('frontend.delivery_by')}}
                             </div>
                             <div class="row" style="color: red;font-weight: 700">
                                 Orderfood.vn
@@ -74,7 +75,7 @@
                         </div>
                         <div class="col">
                             <div class="row">
-                                Tối thiểu
+                                {{trans('frontend.minimum')}}
                             </div>
                             <div class="row">
                                 {{number_format($restaurant->price_min)}} <sup>đ</sup>
@@ -88,19 +89,19 @@
         </div>
     </div>
 
-    <div class="row" id="nd-detail">
-        <div class="container" style="position:relative">
+    <div class="row" id="nd-detail" ng-app ="myApp">
+        <div class="container" style="position:relative" ng-controller="RestaurantCtrl">
             <div class="row" >
                 <div class="nh-tab">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="thucdon-tab" data-toggle="tab" href="#thucdon" role="tab" aria-controls="thucdon" aria-selected="true">THỰC ĐƠN</a>
+                            <a class="nav-link active" id="thucdon-tab" data-toggle="tab" href="#thucdon" role="tab" aria-controls="thucdon" aria-selected="true">{{trans('frontend.menu')}}  </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="danhgia-tab" data-toggle="tab" href="#danhgia" role="tab" aria-controls="danhgia" aria-selected="false">ĐÁNH GIÁ</a>
+                            <a class="nav-link" id="danhgia-tab" data-toggle="tab" href="#danhgia" role="tab" aria-controls="danhgia" aria-selected="false">{{trans('frontend.review')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="gioithieu-tab" data-toggle="tab" href="#gioithieu" role="tab" aria-controls="gioithieu" aria-selected="false">GIỚI THIỆU</a>
+                            <a class="nav-link" id="gioithieu-tab" data-toggle="tab" href="#gioithieu" role="tab" aria-controls="gioithieu" aria-selected="false">{{trans('frontend.introduce')}}</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -117,7 +118,7 @@
                                     @foreach($restaurant->typeoffood as $typeoffood)
                                         <div class="box-item" id="box-item-{{$typeoffood->id}}">
                                             <h2>{{$typeoffood->name}}</h2>
-                                            <?php $foods = \Modules\Restaurant\Entities\Food::where(['typeoffood_id'=>$typeoffood->id,'status'=>1])->get(); ?>
+                                            @php $foods = \Modules\Restaurant\Entities\Food::with('food_options')->where(['typeoffood_id'=>$typeoffood->id,'status'=>1])->get(); @endphp
 
                                             @foreach($foods as $food)
                                                 <div class="box-item-detail">
@@ -132,7 +133,7 @@
                                                     </div>
                                                     <div class="box-price">
                                                         <span>{{number_format($food->price)}} <sup>đ</sup></span>
-                                                        <button type="button" onclick="fnModalFood('{{$food->id}}')" class="btn btn-outline-warning btn-sm waves-effect px-3"><i class="fas fa-plus" aria-hidden="true"></i></button>
+                                                        <button type="button" onclick="fnModalFood('{{$food->id}}','{{$food->food_options->count()}}')" class="btn btn-outline-warning btn-sm waves-effect px-3"><i class="fas fa-plus" aria-hidden="true"></i></button>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -274,122 +275,15 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalFood" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="box-item-detail" style="width:100%">
-                            <div class="box-img">
-                                <img class="img-thumbnail" src="public/images/monan.jpg" alt="">
-                            </div>
-                            <div class="box-info">
-                                <h3 class="box-info-title">Tra den sua tuoi suong sao</h3>
-                                <p class="box-info-attr">Size M</p>
-                                <p class="box-info-text">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                                <p class="box-info-count">Da duoc dat 120 lan</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="modal-data">
-                            <h3>Mức đường <span>(Bắt buộc chọn nhieu loại)</span> </h3>
-                            <div class="row h3-item">
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="foodcb1">
-                                        <label class="custom-control-label" for="foodcb1">Banh Oreo</label>
-                                        <span> + 6,000d</span>
-                                        <div class="button-plus-minus" style="float:right">
-                                            <button type="button" name="button"><i class="fas fa-minus"></i></button>
-                                            <input type="text" name="" value="" >
-                                            <button type="button" name="button"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="foodcb2">
-                                        <label class="custom-control-label" for="foodcb2">Them kem cheese</label>
-                                        <span> + 6,000d</span>
-                                        <div class="button-plus-minus" style="float:right">
-                                            <button type="button" name="button"><i class="fas fa-minus"></i></button>
-                                            <input type="text" name="" value="" >
-                                            <button type="button" name="button"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="foodcb3">
-                                        <label class="custom-control-label" for="foodcb3">Tran chau ngoc trai</label>
-                                        <span> + 6,000d</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="foodcb4">
-                                        <label class="custom-control-label" for="foodcb4">Tran chau den</label>
-                                        <span> + 6,000d</span>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <h3>Mức đường <span>(Bắt buộc chọn 1 loại)</span> </h3>
-                            <div class="row h3-item">
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="foodrd1" name="radio">
-                                        <label class="custom-control-label" for="foodrd1">100% da</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="foodrd2" name="radio">
-                                        <label class="custom-control-label" for="foodrd2">75% da</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="foodrd3" name="radio">
-                                        <label class="custom-control-label" for="foodrd3">50% da</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="foodrd4" name="radio">
-                                        <label class="custom-control-label" for="foodrd4">25% da</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="button-plus-minus">
-                            <button type="button" name="button"><i class="fas fa-minus"></i></button>
-                            <input type="text" name="" value="" >
-                            <button type="button" name="button"><i class="fas fa-plus"></i></button>
-                        </div>
 
-                        <button url="#" class="btn btn-orange btn-sm"> <i class="fas fa-plus"></i> 340.000 <sup>d</sup> </button>
+    <div class="modal " id="modalFood"  tabindex="-1" role="dialog">
 
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 
 @push('scripts')
-    <script >
-        $('#form-rate').submit(function () {
-            var rate =$('[name=rates]').val();
-            var message =$('[name=message]').val();
-            if(rate =='' || rate == undefined || message ==''){
-                alert('Vui lòng đánh giá và để lại nội dung tin nhắn.');
-                return false;
-            }
-        })
-    </script>
+    <script src="/frontend/js/angular.min.js"></script>
+    <script src="/frontend/js/order.js"></script>
 @endpush
 

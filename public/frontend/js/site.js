@@ -142,10 +142,6 @@ $(".rating").each(function(item) {
     $(this).html(html);
 });
 
-function fnModalFood(){
-  $('#modalFood').modal('show');
-}
-
 var boxItem =[];
 var tempTop =0;
 $('.box-item').each(function(item){

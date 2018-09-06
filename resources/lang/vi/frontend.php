@@ -16,6 +16,11 @@ return [
     'register' => 'Đăng kí',
     'sign_in_fb' => 'Đăng nhập bằng Facebook',
     'or' => 'hoặc',
+    'please_leave_your_review' =>'Để lại đánh giá của bạn',
+    'minimum'=>'Tối thiểu',
+    'menu' => 'THỰC ĐƠN',
+    'introduce'=>'GIỚI THIỆU',
+    'review' =>'ĐÁNH GIÁ'
     'your_email_phone' => 'Email/SĐT của bạn',
     'your_password' => 'Mật khẩu của bạn',
     'your_username' => 'Tên đăng nhập',

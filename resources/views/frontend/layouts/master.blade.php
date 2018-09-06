@@ -86,6 +86,7 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <script src="/frontend/js/site.js"></script>
 
 

@@ -34,4 +34,9 @@ return [
     'your_name' => 'Your name',
     'save_changes' => 'Save changes'
 
+    'please_leave_your_review' =>'please leave your review',
+    'minimum'=>'Minimum',
+    'menu' => 'MENU',
+    'introduce'=>'INTRODUCE',
+    'review' =>'REVIEW'
 ];
