@@ -94,7 +94,7 @@ class RestaurantController extends Controller
     /// 5 dang van chuyen
     /// 6 hoan thanh
 
-    public function orderItem(Request $request){
+    public function orderItemModal(Request $request){
         if(Auth::user()==null) {
             return response()->json([
                 'status' => false,
@@ -169,6 +169,5 @@ class RestaurantController extends Controller
             'status' => true,
             'msg'=>'updated'
         ]);
-
     }
 }

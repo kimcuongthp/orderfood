@@ -79,7 +79,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     ]);
     Route::post('/restaurant/food/order-item', [
         'as' => 'restaurant.order_item',
-        'uses' => 'RestaurantController@orderItem'
+        'uses' => 'RestaurantController@orderItemModal'
+    ]);
+    Route::post('/restaurant/food/order-item-no-modal', [
+        'as' => 'restaurant.order_item',
+        'uses' => 'RestaurantController@orderItemNoModal'
     ]);
 
 });

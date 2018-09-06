@@ -8,7 +8,7 @@ $('#form-rate').submit(function () {
 })
 function  fnModalFood(id,count) {
     if(count ==0){
-
+        addOrderOption(id);
     }else{
         showModal(id);
     }
@@ -22,12 +22,12 @@ $('#modalFood').on('hidden.bs.modal', function (e) {
     $('#modalFood').html('');
 })
 
-var order= {
-    food_id:0,
-    total:0,
-    item:0,
-    data:[]
-};
+var order= {food_id:0,total:0,item:0,data:[]};
+
+function addOrderOption(id){
+
+}
+
 
 $('#modalFood').on('shown.bs.modal',function (e) {
 
@@ -46,7 +46,7 @@ $('#modalFood').on('shown.bs.modal',function (e) {
             $('#modalFood input[name=numberFood]').trigger('change');
         }
     })
-   
+
 
     $('#modalFood input[name=numberFood]').change(function () {
 
