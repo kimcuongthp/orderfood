@@ -37,6 +37,10 @@ return [
     'your_address' => 'Địa chỉ của bạn',
     'your_phone' => 'Số điện thoại',
     'your_name' => 'Tên của bạn',
-    'save_changes' => 'Lưu thay đổi '
+    'save_changes' => 'Lưu thay đổi',
+    'favorite' => 'Yêu thích',
+    'list_favorite' => 'Danh sách nhà hàng yêu thích',
+    'change_pass' => 'Đổi mật khẩu',
+    'admin_manager' => 'Trang quản trị'
 
 ];

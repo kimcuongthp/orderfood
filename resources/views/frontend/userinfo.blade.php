@@ -51,18 +51,17 @@
         <div class="container" id="usermenu">
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="list-group">
-                        <a href="/userinfo" class="list-group-item active waves-light"> <i class="fas fa-user"></i> {{ trans('frontend.userinfo') }}</a>
-                        <a href="/yeuthich" class="list-group-item waves-effect"><i class="fas fa-clipboard-list"></i> {{ trans('frontend.favorite_restaurants') }}</a>
-                        <a href="/lichsu" class="list-group-item waves-effect"><i class="fas fa-cart-arrow-down"></i> {{ trans('frontend.order_history') }}</a>
-                        <a href="/doimatkhau" class="list-group-item waves-effect"><i class="fas fa-unlock"></i> {{ trans('frontend.change_password') }}</a>
-                        <a href="/" class="list-group-item waves-effect"><i class="fas fa-sign-out-alt"></i> {{ trans('frontend.logout') }}</a>
-                    </div>
+                    @include('frontend.partials.sidebar_userinfo')
                 </div>
                 <div class="col-sm-9">
                     <h3>{{ trans('frontend.update_userinfo') }}</h3>
                     <hr>
                         {!! Form::open(['route' => 'update.user.info']) !!}
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="md-form form-sm">

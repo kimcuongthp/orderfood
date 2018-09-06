@@ -33,10 +33,13 @@ return [
     'your_phone' => 'Your phone',
     'your_name' => 'Your name',
     'save_changes' => 'Save changes',
-
     'please_leave_your_review' =>'please leave your review',
     'minimum'=>'Minimum',
     'menu' => 'MENU',
     'introduce'=>'INTRODUCE',
-    'review' =>'REVIEW'
+    'review' =>'REVIEW',
+    'favorite' => 'Favorite',
+    'list_favorite' => 'List Favorite Restaurants',
+    'change_pass' => 'Change password',
+    'admin_manager' => 'Admin manager'
 ];

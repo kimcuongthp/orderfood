@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\FavoriteRestaurant;
 use App\Order;
 use App\OrderDetail;
 use App\OrderOptionDetail;
@@ -31,7 +32,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::with('typeoffood','categories','city')->find($id) or abort(404);
         $isOpen = false;
         $now =Carbon::now()->format('H:i');
-        if(strtotime($restaurant->time_open) < strtotime($now) && strtotime($now) < strtotime($restaurant->time_close)) $isOpen = true;
+        if($restaurant->is_open === 1 && strtotime($restaurant->time_open) < strtotime($now) && strtotime($now) < strtotime($restaurant->time_close)) $isOpen = true;
         $priceMaxMin= collect(DB::select("select max(price) as 'max', min(price) as 'min' from foods f,typeoffoods t, restaurants r where r.id=:id and f.typeoffood_id = t.id and r.id = t.restaurant_id",['id'=>$id]))->first();
         $star = collect(DB::select('select round(sum(star)/count(*)) as star  from rates where rates.restaurant_id = :id',['id'=>$id]))->first();
         $star = $star==null ? 5 : $star->star;
@@ -42,7 +43,9 @@ class RestaurantController extends Controller
             $rated = false;
         }
 
-        return view('frontend.restaurant',compact('restaurant','isOpen','priceMaxMin','star','comments','rated'));
+        $fav = FavoriteRestaurant::where('restaurant_id',$restaurant->id)->where('user_id',Auth::user()->id)->first() ? true : false;
+
+        return view('frontend.restaurant',compact('restaurant','isOpen','priceMaxMin','star','comments','rated','fav'));
     }
 
     public function rate(Request $request){

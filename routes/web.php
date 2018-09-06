@@ -27,6 +27,36 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'middleware' => 'auth'
     ]);
 
+    #Route favorite restaurant
+    Route::get('favorite', [
+        'as' => 'show.favorite',
+        'uses' => 'FavoriteController@view_favorite',
+        'middleware' => 'auth'
+    ]);
+    Route::post('favorite', [
+        'as' => 'favorite',
+        'uses' => 'FavoriteController@favorite',
+        'middleware' => 'auth'
+    ]);
+
+    #Route đổi mật khẩu
+    Route::get('change-password', [
+        'as' => 'user.change_password',
+        'uses' => 'UserController@changePassword',
+        'middleware' => 'auth'
+    ]);
+    Route::post('change-password', [
+        'as' => 'user.do_change_password',
+        'uses' => 'UserController@doChangePassword',
+        'middleware' => 'auth'
+    ]);
+
+    Route::post('logout', [
+        'as' => 'user.logout',
+        'uses' => 'UserController@doLogout',
+        'middleware' => 'auth'
+    ]);
+
     Route::get('', [
         'as' => 'home',
         'uses' => 'HomeController@index'
@@ -51,6 +81,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'as' => 'restaurant.order_item',
         'uses' => 'RestaurantController@orderItem'
     ]);
+
 });
 
 

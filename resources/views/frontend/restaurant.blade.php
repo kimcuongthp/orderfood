@@ -22,7 +22,11 @@
                     </div>
                     <div class="row nd-name">
                         {{$restaurant->name}}
-                        <a class=" btn-love btn btn-sm btn-white"> <i class="fas fa-heart"></i> Yeu thich</a>
+                        @if($fav)
+                            <a class="btn-love btn btn-sm btn-white" data-action="remove-favorite"> <i class="favorite-icon fas fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                        @else
+                            <a class="btn-love btn btn-sm btn-white" data-action="add-favorite"> <i class="favorite-icon far fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                        @endif
                     </div>
                     <div class="row nd-adress">
                         {{$restaurant->address}}
@@ -285,5 +289,38 @@
 @push('scripts')
     <script src="/frontend/js/angular.min.js"></script>
     <script src="/frontend/js/order.js"></script>
+    <script>
+        $('.btn-love').click(function () {
+            var action = $(this).attr('data-action');
+            $.ajax({
+                url: '{{ route('favorite') }}',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    action: action,
+                    id: '{{ $restaurant->id }}',
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (data) {
+                    if(data.status === 'success')
+                    {
+                        if(data.type === 1){
+                            $('.btn-love').attr('data-action', 'remove-favorite');
+                            $('.favorite-icon').removeClass('far');
+                            $('.favorite-icon').addClass('fas');
+                        }
+                        else{
+                            $('.btn-love').attr('data-action', 'add-favorite');
+                            $('.favorite-icon').removeClass('fas');
+                            $('.favorite-icon').addClass('far');
+                        }
+                    }
+                },
+                error: function(e) {
+                    alert('Có lỗi xảy ra, thử lại sau!');
+                }
+            });
+        })
+    </script>
 @endpush
 
