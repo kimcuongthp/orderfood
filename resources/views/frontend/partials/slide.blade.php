@@ -1,12 +1,15 @@
+<?php
+    if(Route::currentRouteName() === 'restaurant.search') {
+
+    }
+?>
 <div class="row" id="slide">
     <div class="owl-carousel owl-theme">
-        <div class="item"><img src="/frontend/images/slide/001.jpg"/></div>
-        <div class="item"><img src="/frontend/images/slide/002.jpg" /></div>
-        <div class="item"><img src="/frontend/images/slide/003.jpg" /></div>
-        <div class="item"><img src="/frontend/images/slide/004.jpg" /></div>
-        <div class="item"><img src="/frontend/images/slide/005.jpg" /></div>
-        <div class="item"><img src="/frontend/images/slide/006.jpg" /></div>
-        <div class="item"><img src="/frontend/images/slide/007.jpg" /></div>
+        @if(count($slides))
+            @foreach($slides as $slide)
+                <div class="item"><img src="{{ $slide->image }}" alt="{{ $slide->name }}" /></div>
+            @endforeach
+        @endif
     </div>
     <div id="box-timkiem">
         <div id="box-search">
@@ -26,14 +29,23 @@
                             <option value="0">{{ trans('frontend.select_city') }}</option>
                             @if(count($cities))
                                 @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    <?php
+                                    if(Route::currentRouteName() === 'restaurant.search') {
+                                        $selected = (request('city') == $city->id) ? ' selected' : '';
+                                    }
+                                    else {
+                                        $selected = '';
+                                        $html = '<option value="0">Chọn quận huyện</option>';
+                                    }
+                                    ?>
+                                    <option value="{{ $city->id }}"{{$selected}}>{{ $city->name }}</option>
                                 @endforeach
                             @endif
                         </select>
                     </div>
                     <div class="col-6 col-sm-4 vitricuaban">
                         <select class="form-control selectbox" name="district" id="select_district">
-                            <option value="0">{{ trans('frontend.select_district') }}</option>
+                            {!! $html !!}
                         </select>
                     </div>
                     <div class="col-12 col-sm-4">

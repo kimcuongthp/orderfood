@@ -55,4 +55,5 @@ class UserController extends Controller
 //        dd($role);
 
     }
+
 }

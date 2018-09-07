@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Modules\Address\Entities\City;
 use Response;
-use Illuminate\Support\Facades\View;
 use Modules\Restaurant\Entities\Category;
 use Modules\Restaurant\Entities\Restaurant;
 

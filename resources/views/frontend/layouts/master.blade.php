@@ -18,7 +18,10 @@
     <div class="row" id="header">
         <div class="" id="mainmenu">
             <div class="container">
-                <a href="{{ url('/').'/'.LaravelLocalization::getCurrentLocale() }}">
+                @php
+                    $locale = 'vi' === LaravelLocalization::getCurrentLocale() ? '' : LaravelLocalization::getCurrentLocale();
+                @endphp
+                <a href="{{ url('/').'/'.$locale }}">
                     <img id="imglogo1" src="/frontend/images/logo2.png" alt="logo"/>
                 </a>
                 <div class="menux-center">

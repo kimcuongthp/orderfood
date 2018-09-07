@@ -1,12 +1,12 @@
 {
-    "name": "Migrate",
-    "alias": "migrate",
+    "name": "Slider",
+    "alias": "slider",
     "description": "",
     "keywords": [],
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\Migrate\\Providers\\MigrateServiceProvider"
+        "Modules\\Slider\\Providers\\SliderServiceProvider"
     ],
     "aliases": {},
     "files": [

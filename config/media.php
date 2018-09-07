@@ -5,8 +5,6 @@ return [
     // These sizes will be auto generate when upload an image
     'sizes' => [
         'thumb' => '150x150',
-        'featured' => '560x380',
-        'medium' => '540x360',
     ],
     'driver' => [
         'local' => [

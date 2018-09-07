@@ -1,5 +1,5 @@
 {
-    "name": "nwidart/migrate",
+    "name": "nwidart/slider",
     "description": "",
     "authors": [
         {
@@ -10,7 +10,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Migrate\\Providers\\MigrateServiceProvider"
+                "Modules\\Slider\\Providers\\SliderServiceProvider"
             ],
             "aliases": {
                 
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Migrate\\": ""
+            "Modules\\Slider\\": ""
         }
     }
 }

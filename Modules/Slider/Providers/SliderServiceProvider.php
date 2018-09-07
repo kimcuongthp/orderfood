@@ -1,11 +1,12 @@
 <?php
 
-namespace Modules\Migrate\Providers;
+namespace Modules\Slider\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Slider\Composers\SlideComposers;
 
-class MigrateServiceProvider extends ServiceProvider
+class SliderServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -26,6 +27,9 @@ class MigrateServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+
+        view()->composer('frontend.partials.slide', SlideComposers::class);
     }
 
     /**
@@ -46,10 +50,10 @@ class MigrateServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('migrate.php'),
+            __DIR__.'/../Config/config.php' => config_path('slider.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/config.php', 'migrate'
+            __DIR__.'/../Config/config.php', 'slider'
         );
     }
 
@@ -60,7 +64,7 @@ class MigrateServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/migrate');
+        $viewPath = resource_path('views/modules/slider');
 
         $sourcePath = __DIR__.'/../Resources/views';
 
@@ -69,8 +73,8 @@ class MigrateServiceProvider extends ServiceProvider
         ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/migrate';
-        }, \Config::get('view.paths')), [$sourcePath]), 'migrate');
+            return $path . '/modules/slider';
+        }, \Config::get('view.paths')), [$sourcePath]), 'slider');
     }
 
     /**
@@ -80,12 +84,12 @@ class MigrateServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/migrate');
+        $langPath = resource_path('lang/modules/slider');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'migrate');
+            $this->loadTranslationsFrom($langPath, 'slider');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'migrate');
+            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'slider');
         }
     }
 

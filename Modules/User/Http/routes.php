@@ -30,4 +30,15 @@ Route::group(['middleware'=> ['web','auth'], 'prefix' => 'backend', 'namespace' 
 //        'as' => 'create.role',
 //        'uses' => 'UserController@createRole'
 //    ]);
+
+    #Route khách hàng
+    Route::get('users', [
+        'as' => 'show.users',
+        'uses' => 'KhachHangController@index',
+    ]);
+
+    Route::get('users/{user_id}/edit', [
+        'as' => 'user.edit',
+        'uses' => 'KhachHangController@edit'
+    ]);
 });

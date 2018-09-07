@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Migrate\Database\Seeders;
+namespace Modules\Slider\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class MigrateDatabaseSeeder extends Seeder
+class SliderDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

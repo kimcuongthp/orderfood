@@ -56,6 +56,12 @@
             </li>
             @endrole
             @role('Staff')
+            <li>
+                <a href="{{ route('slide') }}">
+                    <i class="entypo-picture"></i>
+                    <span class="title">Quản lí slide</span>
+                </a>
+            </li>
             <li class="has-sub">
                 <a href="#">
                     <i class="fa fa-coffee"></i>
@@ -81,6 +87,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('show.users') }}">
+                    <i class="fa fa-users"></i>
+                    <span class="title">Người dùng</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('media.index') }}">
