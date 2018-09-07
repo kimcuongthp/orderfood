@@ -27,7 +27,7 @@ class CreateOrderStatus extends Migration
             $table->string('locale')->index();
 
             $table->unique(['order_status_id','locale']);
-            $table->foreign('order_status_id')->references('id')->on('order_status')->onDelete('cascade');
+            $table->foreign('order_status_id')->references('id')->on('order_statuses')->onDelete('cascade');
         });
     }
 
