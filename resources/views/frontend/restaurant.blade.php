@@ -228,49 +228,45 @@
                 <div class="nh-order">
                     <div class="box-order">
                         <div class="box-order-title">
-                            <button type="button" name="button" class="btn">Reset</button>
+                            <button type="button" name="button" onclick="fnResetOrder('{{$restaurant->id}}')" class="btn">Reset</button>
                         </div>
                         <div class="box-order-list">
-                            <?php for($i =1 ;$i<=10;$i++) {?>
-                            <div class="box-order-item">
-                                <div class="row">
-                                    <span><b>Mango milk tea</b> - Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</span>
+
+                            <div class="box-order-item" ng-repeat="item in orders">
+                                <div class="row" style="min-height: 27px;">
+                                    <span ng-bind-html="item.name" style="line-height: 27px;"></span>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="input-group order-button">
-                            <span class="input-group-btn">
-                          <button type="button" class="btn btn-number" data-type="minus" data-field="quant[1]">
-                              <i class="fas fa-minus"></i>
-                            </button>
-                            </span>
-                                            <input type="text" name="quant[1]" class="input-number" value="1">
                                             <span class="input-group-btn">
-                              <button type="button" class="btn btn-number" data-type="plus" data-field="quant[1]">
-                              <i class="fas fa-plus"></i>
-                            </button>
-                            </span>
+                                                <button type="button" class="btn btn-number" data-id="<% item.id %>" onclick="fnFoodMinus(this,'{{$restaurant->id}}')" data-type="minus"><i class="fas fa-minus"></i></button>
+                                            </span>
+                                            <input type="text" class="input-number" data-id="<%item.id%>" readonly value="<% item.quality %>">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-number" data-id="<%item.id%>"  onclick="fnFoodPlus(this,'{{$restaurant->id}}')" data-type="plus"><i class="fas fa-plus"></i></button>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="col">39,0000 <sup>đ</sup> </div>
+                                    <div class="col"> <% item.price | number:0 %> <sup>đ</sup> </div>
                                 </div>
                             </div>
-                            <?php } ?>
+
                         </div>
                         <div class="row box-order-plus">
                             <div class="col-4">Cộng</div>
-                            <div class="col-8">1.0000.0000 <sup>đ</sup></div>
+                            <div class="col-8"><% price | number:0 %> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-vc">
                             <div class="col-8">Phí vận chuyển</div>
-                            <div class="col-4">6.0000 <sup>đ</sup></div>
+                            <div class="col-4"> <% trans_fee | number:0 %> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-sum">
                             <div class="col-4">Tổng</div>
-                            <div class="col-8">1.0000.0000 <sup>đ</sup></div>
+                            <div class="col-8"> <% sum  | number:0%> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-button">
-                            <button type="button" name="button" class="btn btn-warning waves-effect ">Thanh toan</button>
+                            <button type="button" name="button" data-price-min="{{$restaurant->price_min}}" data-price="<% sum %>" onclick="fnCheckPrice('{{ $restaurant->id }}',this)" class="btn btn-warning waves-effect ">{{trans('frontend.order_now')}}</button>
                         </div>
                     </div>
                 </div>
@@ -281,13 +277,13 @@
     <!-- Modal -->
 
 
-    <div class="modal " id="modalFood"  tabindex="-1" role="dialog">
-
-    </div>
+    <div class="modal " id="modalFood"  tabindex="-1" role="dialog"></div>
+    <div class="modal " id="modalOrder"  tabindex="-1" role="dialog"></div>
 @endsection
 
 @push('scripts')
     <script src="/frontend/js/angular.min.js"></script>
+    <script src="/frontend/js/angular-sanitize.min.js"></script>
     <script src="/frontend/js/order.js"></script>
     <script>
         $('.btn-love').click(function () {
@@ -321,6 +317,20 @@
                 }
             });
         })
+		
+		setTimeout(function () {
+            DetailOrder('{{$restaurant->id}}');
+        },100);
+
+        function fnCheckPrice(res_id,el) {
+            var price =parseInt($(el).attr('data-price'));
+            var price_min = parseInt($(el).attr('data-price-min'));
+            if(price < price_min ){
+                alert('Đơn hàng phải lớn hơn hoặc bằng đơn hàng tối thiểu');
+            }else{
+                fnOrderNow(res_id);
+            }
+        }
     </script>
 @endpush
 

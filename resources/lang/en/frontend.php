@@ -41,5 +41,6 @@ return [
     'favorite' => 'Favorite',
     'list_favorite' => 'List Favorite Restaurants',
     'change_pass' => 'Change password',
-    'admin_manager' => 'Admin manager'
+    'admin_manager' => 'Admin manager',
+    'order_now'=>'Order now'
 ];

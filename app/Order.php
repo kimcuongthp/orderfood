@@ -16,4 +16,7 @@ class Order extends Model
     protected $fillable = [
         'restaurant_id', 'user_id', 'price','trans_fee','sum_price','status'
     ];
+    public function order_detail(){
+        return $this->hasMany(OrderDetail::class);
+    }
 }

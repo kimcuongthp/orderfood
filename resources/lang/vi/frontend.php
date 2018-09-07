@@ -41,6 +41,7 @@ return [
     'favorite' => 'Yêu thích',
     'list_favorite' => 'Danh sách nhà hàng yêu thích',
     'change_pass' => 'Đổi mật khẩu',
-    'admin_manager' => 'Trang quản trị'
+    'admin_manager' => 'Trang quản trị',
+    'order_now'=>'Đặt hàng'
 
 ];

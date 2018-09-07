@@ -16,4 +16,7 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_id','food_id', 'name', 'quality','price'
     ];
+    public function order_option_detail(){
+        return $this->hasMany(OrderOptionDetail::class);
+    }
 }

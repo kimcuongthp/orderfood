@@ -1780,6 +1780,7 @@ height: 100%;
 
 .box-order-list{
   max-height: 300px;
+  min-height: 300px;
   overflow-y: auto;
   border-bottom: 1px solid #ddd;
   background: #eee;
@@ -2247,4 +2248,18 @@ height: 100%;
 .button-plus-minus .btn-plus{
   padding: 6px 10px !important;
   margin: 0px;
+}
+#listOrderDetail li{
+  position: relative;
+}
+#listOrderDetail li div{
+  width: calc(100% - 100px);
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#listOrderDetail li span{
+  width: 90px;
+  float: right;
 }

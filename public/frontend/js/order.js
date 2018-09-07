@@ -25,7 +25,20 @@ $('#modalFood').on('hidden.bs.modal', function (e) {
 var order= {food_id:0,total:0,item:0,data:[]};
 
 function addOrderOption(id){
-
+    $.ajax({
+        method:'post',
+        url:'/restaurant/food/order-item-no-modal',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            food_id:id
+        }
+    }).done(function (result) {
+        if(result.status ==false){
+            alert(result.msg);
+        }else{
+            DetailOrder(result.restaurant_id);
+        }
+    })
 }
 
 
@@ -115,6 +128,7 @@ $('#modalFood').on('shown.bs.modal',function (e) {
         }).done(function (result) {
             if(result.status ==true){
                 $('#modalFood').modal('hide');
+                DetailOrder(result.restaurant_id);
             }else{
                 alert(result.msg);
             }
@@ -158,23 +172,128 @@ function LoadOrder() {
                 price:price
             }
             order.total= order.total + order.item * parseInt(price);
-            console.log(order);
             order.data.push(data);
         }
     })
 }
-
+var DetailOrder;
 // angularjs
-var app = angular.module('myApp', [], function($interpolateProvider) {
+var app = angular.module('myApp', ['ngSanitize'], function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 });
 app.controller('RestaurantCtrl', function($scope, $http) {
-    $scope.test =new Date();
-    setInterval(function(){
-        $scope.$apply(function () {
-            $scope.test =new Date();
-        });
-        }, 1000);
+    $scope.orders =[];
+    $scope.price =0;
+    $scope.sum =0;
+    $scope.trans_fee =0;
+    DetailOrder = function (id) {
+        $http({
+            method: 'POST',
+            url: '/restaurant/food/order-detail',
+            data:{
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                restaurant_id:id
+            }
+        }).then(function successCallback(response) {
+            var result =response.data;
+            if(result.status ==true){
 
+                $scope.orders =result.orders;
+                $scope.price =result.price;
+                $scope.sum =result.sum;
+                $scope.trans_fee =result.trans_fee;
+
+
+
+            }
+        }, function errorCallback(response) {
+
+        });
+    }
 });
+
+function fnFoodMinus(e,restaurant_id) {
+    var id = $(e).attr('data-id');
+    $.ajax({
+        method:'post',
+        url:'/restaurant/food/item-minus',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id:id
+        }
+    }).done(function (result) {
+        if(result.status ==false){
+
+        }else{
+            DetailOrder(restaurant_id);
+        }
+    })
+}
+function fnFoodPlus(e,restaurant_id) {
+    var id = $(e).attr('data-id');
+    $.ajax({
+        method:'post',
+        url:'/restaurant/food/item-plus',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id:id
+        }
+    }).done(function (result) {
+        if(result.status ==false){
+
+        }else{
+            DetailOrder(restaurant_id);
+        }
+    })
+}
+
+function fnResetOrder(id) {
+    $.ajax({
+        method:'post',
+        url:'/restaurant/food/order-reset',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id:id
+        }
+    }).done(function (result) {
+        DetailOrder(id);
+    })
+}
+
+function fnOrderNow(id) {
+    $.ajax({
+        method:'post',
+        url:'/check-user-info',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+        }
+    }).done(function (result) {
+
+        if(result.status ==true){
+            $('#modalOrder').load('/restaurant/food/order-detail-modal?restaurant_id='+id+'&user_id='+result.user_id ,function (e) {
+                $('#modalOrder').modal('show');
+            })
+        }else{
+            alert(result.msg);
+        }
+    })
+}
+
+function fnDatHang(id) {
+    $.ajax({
+        method:'post',
+        url:'/restaurant/order_now',
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            id:id
+        }
+    }).done(function (result) {
+        if(result.status == false){
+            alert(result.msg);
+        }else{
+            $('#modalOrder').modal('hide');
+            DetailOrder(result.restaurant_id);
+        }
+    })
+}
