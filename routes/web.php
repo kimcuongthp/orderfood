@@ -82,10 +82,33 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'uses' => 'RestaurantController@orderItemModal'
     ]);
     Route::post('/restaurant/food/order-item-no-modal', [
-        'as' => 'restaurant.order_item',
         'uses' => 'RestaurantController@orderItemNoModal'
     ]);
+    Route::post('/restaurant/food/order-detail', [
+        'uses' => 'RestaurantController@orderDetail'
+    ]);
+    Route::post('/restaurant/food/item-minus', [
+        'uses' => 'RestaurantController@itemMinus'
+    ]);
+    Route::post('/restaurant/food/item-plus', [
+        'uses' => 'RestaurantController@itemPlus'
+    ]);
+    Route::post('/restaurant/food/order-reset', [
+        'uses' => 'RestaurantController@orderReset'
+    ]);
+    Route::get('/restaurant/food/order-detail-modal', [
+        'uses' => 'RestaurantController@OrderDetailModal'
+    ]);
 
+    Route::post('/check-user-info', [
+        'uses' => 'RestaurantController@CheckInfoUser'
+    ]);
+    Route::post('/restaurant/order_now', [
+        'uses' => 'RestaurantController@OrderNow'
+    ]);
+    Route::get('/order-history', [
+        'uses' => 'OrderHistoryController@history'
+    ]);
 });
 
 
