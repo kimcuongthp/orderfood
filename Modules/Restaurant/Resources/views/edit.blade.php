@@ -46,6 +46,12 @@
                                     <input type="text" class="form-control" name="{{ $locale }}_alert" id="{{ $locale }}_alert" value="{{ $restaurant->translate($locale)->alert or "" }}" placeholder="Nhập thông báo của nhà hàng">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tags</label>
+                                <div class="col-sm-7">
+                                    <input type="text" value="" name="{{ $locale }}_tag" class="form-control" data-role="tagsinput" />
+                                </div>
+                            </div>
                         </div>
                         <?php endforeach; ?>
                     </div>
@@ -175,6 +181,7 @@
     <link rel="stylesheet" href="/admin/assets/js/select2/select2-bootstrap.css">
     <link rel="stylesheet" href="/admin/assets/js/select2/select2.css">
     <link rel="stylesheet" href="/admin/assets/js/selectboxit/jquery.selectBoxIt.css">
+    <link rel="stylesheet" href="/admin/plugins/tagsinput/bootstrap-tagsinput.css">
 @endpush
 @push('js-stack')
     <script src="/admin/assets/js/bootstrap-timepicker.min.js"></script>
@@ -183,6 +190,7 @@
     <script src="{{ asset('vendor/media/packages/ckeditor/ckeditor.js') }}"></script>
     @include('media::partials.media')
     <script src="{{ asset('vendor/media/js/jquery.addMedia.js') }}"></script>
+        <script src="/admin/plugins/tagsinput/bootstrap-tagsinput.min.js"></script>
     <script>
         if (jQuery().rvMedia) {
 

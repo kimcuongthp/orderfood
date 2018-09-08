@@ -42,6 +42,9 @@ return [
     'list_favorite' => 'Danh sách nhà hàng yêu thích',
     'change_pass' => 'Đổi mật khẩu',
     'admin_manager' => 'Trang quản trị',
-    'order_now'=>'Đặt hàng'
+    'order_now'=>'Đặt hàng',
+    'area' => 'Khu vực',
+    'classify' => 'Phân loại',
+    'result' => 'kết quả'
 
 ];

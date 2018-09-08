@@ -11,7 +11,7 @@ $stt=-1;$temp=-1;$tmp=-1;
         @if($food->id ==0)
             <h3><i class="entypo-archive"></i>   Thêm mới món ăn - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
             @else
-            <h3><i class="entypo-archive"></i>   Cập nhật món ăn{{$stt}} - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
+            <h3><i class="entypo-archive"></i>   Cập nhật món  {{$stt}} - Nhà hàng : restaurant_id  {{$restaurant_id}}</h3>
         @endif
     </div>
     {!! Form::open(['route' => ['foods.update'], 'method' => 'post','class'=>'form-horizontal form-groups-bordered' ,'id' => 'update-food-form']) !!}
@@ -77,7 +77,6 @@ $stt=-1;$temp=-1;$tmp=-1;
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -242,6 +241,7 @@ $stt=-1;$temp=-1;$tmp=-1;
     <script src="/admin/assets/js/jquery.nestable.js"></script>
     <script src="/admin/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.js"></script>
+    <script src="/admin/assets/js/bootstrap-tagsinput.min.js"></script>
     @include('media::partials.media')
     <script src="{{ asset('vendor/media/js/jquery.addMedia.js') }}"></script>
     <script>

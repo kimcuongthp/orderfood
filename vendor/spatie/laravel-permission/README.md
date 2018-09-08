@@ -84,14 +84,7 @@ You can publish [the migration](https://github.com/spatie/laravel-permission/blo
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 ```
 
-If you're using UUIDs or GUIDs for your `User` models you can update the `create_permission_tables.php` migration and replace `$table->morphs('model')` with:
-
-```php
-$table->uuid(config('permission.column_names.model_morph_key'));
-$table->string('model_type');
-$table->index([config('permission.column_names.model_morph_key'), 'model_type', ]);
-```
-
+If you're using UUIDs or GUIDs for your `User` models you can update the `create_permission_tables.php` migration and replace `$table->unsignedBigInteger($columnNames['model_morph_key'])` with `$table->uuid($columnNames['model_morph_key'])`.
 For consistency, you can also update the package configuration file to use the `model_uuid` column name instead of the default `model_id` column.
 
 After the migration has been published you can create the role- and permission-tables by running the migrations:
@@ -331,7 +324,7 @@ $permissions = $user->getDirectPermissions();
 $permissions = $user->getPermissionsViaRoles();
 $permissions = $user->getAllPermissions();
 
-// get a collection of all defined roles
+// get the names of the user's roles
 $roles = $user->getRoleNames(); // Returns a collection
 ```
 
@@ -712,7 +705,7 @@ php artisan permission:create-role writer
 php artisan permission:create-permission "edit articles"
 ```
 
-When creating permissions and roles for specific guards you can specify the guard names as a second argument:
+When creating permissions/roles for specific guards you can specify the guard names as a second argument:
 
 ```bash
 php artisan permission:create-role writer web
@@ -721,6 +714,13 @@ php artisan permission:create-role writer web
 ```bash
 php artisan permission:create-permission "edit articles" web
 ```
+
+When creating roles you can also create and link permissions at the same time:
+
+```bash
+php artisan permission:create-role writer web "create articles|edit articles"
+```
+
 
 ## Unit Testing
 

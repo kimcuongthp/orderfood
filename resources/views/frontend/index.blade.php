@@ -23,7 +23,7 @@
                                 </a>
                             @endforeach
                         @endif
-                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" >Nhiều hơn...</a>
+                        <a href="{{ route('restaurant.all') }}" class="list-group-item list-group-item-action action" id="list-settings-list" data-toggle="list" >Nhiều hơn...</a>
                     </div>
                 </div>
                 <div class="col-md-9" id="listCardv2">

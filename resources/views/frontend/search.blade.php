@@ -6,15 +6,18 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" >Tat ca
-                            <span class="badge badge-pill light-blue float-right">92</span>
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" >{{ trans('frontend.all') }}
+                            <span class="badge badge-pill light-blue float-right">{{ $restaurants->count() }}</span>
                         </a>
-                        <?php for($i=1;$i<=8;$i++){ ?>
-                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" >Mon nhat & Sushi
-                            <span class="badge badge-pill light-blue float-right">12</span>
-                        </a>
-                        <?php } ?>
-                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" >More...</a>
+                        <?php
+                            $categories = collect();
+                            foreach($restaurants as $restaurant){
+                                $categories = $categories->merge($restaurant->categories);
+                            }
+                        ?>
+                        @foreach($categories as $category)
+                            <a href="{{ url()->full() }}&category={{ $category->id }}" class="list-group-item list-group-item-action action" id="list-profile-list" data-toggle="list" >{{ $category->name }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-9" id="listCardv2">

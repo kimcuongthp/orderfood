@@ -29,7 +29,7 @@ return [
     ],
     'route' => [
         'prefix' => '/backend/media', // Media URL. Ex: media => http://laravel.dev/media
-        'middleware' => ['web', 'auth', 'role:Staff'],
+        'middleware' => ['web', 'auth'],
         'options' => [],
     ],
     'views' => [

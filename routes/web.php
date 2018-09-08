@@ -61,6 +61,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'as' => 'home',
         'uses' => 'HomeController@index'
     ]);
+
+    #Trang lọc nhà hàng
+    Route::get('/restaurants', [
+        'as' => 'restaurant.all',
+        'uses' => 'FilterController@index'
+    ]);
+
     Route::get('restaurant/{id?}', [
         'as' => 'restaurant',
         'uses' => 'RestaurantController@index'

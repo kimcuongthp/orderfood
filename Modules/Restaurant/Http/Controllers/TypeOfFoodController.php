@@ -8,9 +8,11 @@
 
 namespace Modules\Restaurant\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Restaurant\Entities\Restaurant;
 use Modules\Restaurant\Entities\TypeOfFood;
@@ -20,6 +22,17 @@ class TypeOfFoodController extends  Controller
 {
     public function index(Request $request)
     {
+        #Check quyền agency
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        if(!$user->hasRole('Staff'))
+        {
+            $own_restaurant = Restaurant::where('user_id', $user->id)->firstOrFail();
+            if($own_restaurant->id != $request->restaurant_id)
+            {
+                abort('404');
+            }
+        }
+
         $restaurant_id = $request->input("restaurant_id");
         $typeoffood = Typeoffood::where('restaurant_id',$restaurant_id)->with('foods')->get();
         return view('restaurant::typeoffood.index',compact('typeoffood','restaurant_id'));

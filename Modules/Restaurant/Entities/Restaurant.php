@@ -53,9 +53,16 @@ class Restaurant extends Model
     public function typeoffood(){
         return $this->hasMany(Typeoffood::class);
     }
-
     public function city(){
 
         return $this->belongsTo(City::class);
+    }
+
+    public static function getCategoriesOfRestaurants($restaurants){
+        $categories = [];
+        foreach($restaurants as $restaurant){
+            array_push( $categories, $restaurant->categories->pluck('id')->toArray());
+        }
+        return Category::WhereIn('id', array_unique($categories))->get();
     }
 }

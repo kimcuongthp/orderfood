@@ -149,7 +149,13 @@ textarea.parsley-error {
 }
 .table-cus td{
     line-height: 20px !important;
-
-
-
+}
+.bootstrap-tagsinput .tag {
+    margin-bottom: 5px;
+}
+.label + .label {
+    margin-left: 0;
+}
+.bootstrap-tagsinput {
+    width: 100%;
 }

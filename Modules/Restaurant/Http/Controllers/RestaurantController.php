@@ -5,6 +5,7 @@ namespace Modules\Restaurant\Http\Controllers;
 use App\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Address\Entities\City;
@@ -96,7 +97,7 @@ class RestaurantController extends Controller
         if(!$user->hasRole('Staff'))
         {
             $own_restaurant = Restaurant::where('user_id', $user->id)->firstOrFail();
-            if($own_restaurant->id !== $restaurant->id)
+            if($own_restaurant->id != $restaurant->id)
             {
                 abort('404');
             }
@@ -134,6 +135,13 @@ class RestaurantController extends Controller
                 abort('404');
             }
         }
+        #update and add tags
+        foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
+            $tags_array = explode(',',$request->input($locale . '_tag'));
+            if($locale == 'vi') dd($tags_array);
+            DB::table('');
+        }
+
         #update thông tin nhà hàng
         $restaurant->update($request->all());
 

@@ -49,7 +49,13 @@
                         <?php $res = \Modules\Restaurant\Entities\Restaurant::where('user_id',Auth::user()->id)->first(); ?>
                         <a href="{{ route('restaurant.edit', $res->id) }}">
                             <i class="entypo-right-open-mini"></i>
-                            <span class="title">Sửa thông tin nhà hàng</span>
+                            <span class="title">Thông tin nhà hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('typeoffood.index') }}?restaurant_id={{ $res->id }}">
+                            <i class="entypo-right-open-mini"></i>
+                            <span class="title">Loại món ăn</span>
                         </a>
                     </li>
                 </ul>
