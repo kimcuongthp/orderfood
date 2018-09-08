@@ -1,3 +1,4 @@
+var lang= "/"+$('html').attr('lang');
 $('#form-rate').submit(function () {
     var rate =$('[name=rates]').val();
     var message =$('[name=message]').val();
@@ -27,7 +28,7 @@ var order= {food_id:0,total:0,item:0,data:[]};
 function addOrderOption(id){
     $.ajax({
         method:'post',
-        url:'/restaurant/food/order-item-no-modal',
+        url:lang+'/restaurant/food/order-item-no-modal',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
             food_id:id
@@ -120,7 +121,7 @@ $('#modalFood').on('shown.bs.modal',function (e) {
         var token =$('#modalFood [name=_token]').val();
         $.ajax({
             method:'post',
-            url:'/restaurant/food/order-item',
+            url:lang+'/restaurant/food/order-item',
             data:{
                 _token: token,
                 item : order
@@ -190,7 +191,7 @@ app.controller('RestaurantCtrl', function($scope, $http) {
     DetailOrder = function (id) {
         $http({
             method: 'POST',
-            url: '/restaurant/food/order-detail',
+            url: lang+'/restaurant/food/order-detail',
             data:{
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 restaurant_id:id
@@ -217,7 +218,7 @@ function fnFoodMinus(e,restaurant_id) {
     var id = $(e).attr('data-id');
     $.ajax({
         method:'post',
-        url:'/restaurant/food/item-minus',
+        url:lang+'/restaurant/food/item-minus',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
             id:id
@@ -234,7 +235,7 @@ function fnFoodPlus(e,restaurant_id) {
     var id = $(e).attr('data-id');
     $.ajax({
         method:'post',
-        url:'/restaurant/food/item-plus',
+        url:lang+'/restaurant/food/item-plus',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
             id:id
@@ -251,7 +252,7 @@ function fnFoodPlus(e,restaurant_id) {
 function fnResetOrder(id) {
     $.ajax({
         method:'post',
-        url:'/restaurant/food/order-reset',
+        url:lang+'/restaurant/food/order-reset',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
             id:id
@@ -264,14 +265,14 @@ function fnResetOrder(id) {
 function fnOrderNow(id) {
     $.ajax({
         method:'post',
-        url:'/check-user-info',
+        url:lang+'/check-user-info',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
         }
     }).done(function (result) {
 
         if(result.status ==true){
-            $('#modalOrder').load('/restaurant/food/order-detail-modal?restaurant_id='+id+'&user_id='+result.user_id ,function (e) {
+            $('#modalOrder').load(lang+'/restaurant/food/order-detail-modal?restaurant_id='+id+'&user_id='+result.user_id ,function (e) {
                 $('#modalOrder').modal('show');
             })
         }else{
@@ -283,7 +284,7 @@ function fnOrderNow(id) {
 function fnDatHang(id) {
     $.ajax({
         method:'post',
-        url:'/restaurant/order_now',
+        url:lang+'/restaurant/order_now',
         data:{
             _token: $('meta[name="csrf-token"]').attr('content'),
             id:id

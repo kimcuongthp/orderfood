@@ -102,5 +102,35 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
                 'uses' => 'FoodsController@changestatus'
             ]);
         });
+
+        #Router don hang
+        Route::group(['prefix' => 'order'], function(){
+            Route::get('/', [
+                'as'=>'order.index',
+                'uses' => 'OrderController@index'
+            ]);
+            Route::get('/detai', [
+                'as'=>'order.detail',
+                'uses' => 'OrderController@detail'
+            ]);
+            Route::get('/destroy', [
+                'as'=>'order.destroy',
+                'uses' => 'OrderController@destroy'
+            ]);
+            Route::post('/ondestroy', [
+                'as'=>'order.ondestroy',
+                'uses' => 'OrderController@ondestroy'
+            ]);
+
+            Route::get('/change', [
+                'as'=>'order.change',
+                'uses' => 'OrderController@changeStatus'
+            ]);
+            Route::post('/onchange', [
+                'as'=>'order.onchange',
+                'uses' => 'OrderController@onchangeStatus'
+            ]);
+        });
+
     });
 });

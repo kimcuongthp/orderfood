@@ -2,6 +2,7 @@
 
 namespace Modules\Restaurant\Entities;
 
+use App\OrderDetail;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Dimsav\Translatable\Translatable;

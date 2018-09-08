@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{LaravelLocalization::getCurrentLocale()}}">
 
 <head>
     <!-- Required meta tags -->

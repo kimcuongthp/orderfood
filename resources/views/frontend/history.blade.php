@@ -56,33 +56,50 @@
                 <div class="col-sm-9">
                     <h3>Lịch sử đơn hàng</h3>
                     <hr>
-                    <?php for($i=1;$i<=10;$i++){ ?>
-                    <div class="card lichsu">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <img src="public/images/logo-7.jpg" class="img-thumbnail" alt="" width="120" height="120">
-                                </div>
-                                <div class="col-sm-8">
-                                    <p class="ls-nhahang"><a href="/nhahang">Trà Sữa Hiberry - Nguyễn Văn Bảo</a> </p>
-                                    <p class="ls-sotien"> Tổng tiền: <span>400.000 <sup>đ</sup></span>  </p>
-                                    <p class="ls-trangthai"> Đang vận chuyển </p>
-                                    <p class="ls-time"> <i class="icon-clock"></i> 12:10 8/10/2018 </p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="button" name="button" onclick="fnModalHistory()" class="btn btn-warning btn-sm">Detail</button>
+                    @foreach($orders as $order)
+                        <div class="card lichsu">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <img src="{{@$order->image}}" class="img-thumbnail" alt="" width="120" height="120">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <p class="ls-nhahang"><a href="restaurant/{{$order->restaurant_id}}">{{$order->restaurant}}</a> </p>
+                                        <p class="ls-sotien"> Tổng tiền: <span>{{number_format($order->sum_price)}} <sup>đ</sup></span>  </p>
+                                        <p class="ls-trangthai"> {{$order->status}} </p>
+                                        <p class="ls-time"> <i class="icon-clock"></i> {{ Carbon\Carbon::parse($order->time)->format('H:i M d Y') }} </p>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" name="button" onclick="fnModalHistory('{{$order->id}}')" class="btn btn-warning btn-sm">{{trans('frontend.detail')}}</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <?php } ?>
+                    @endforeach
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">{{ $order_list->links() }}</div>
+            </div>
         </div>
+
     </div>
+
+
+
+    <div class="modal fade" id="modalHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    </div>
+
 @endsection
 @push('scripts')
     <script>
         $('[href="/order-history"]').addClass('active');
+        function fnModalHistory(id){
+            $('#modalHistory').load('/{{LaravelLocalization::getCurrentLocale()}}/order-history/modal?order_id='+id,function (e) {
+                $('#modalHistory').modal('show');
+            });
+        }
     </script>
 @endpush

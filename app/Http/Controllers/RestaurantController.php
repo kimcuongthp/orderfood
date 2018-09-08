@@ -14,6 +14,7 @@ use App\Order;
 use App\OrderDetail;
 use App\OrderOptionDetail;
 use App\Rates;
+use App\StatusTimeline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -421,11 +422,22 @@ class RestaurantController extends Controller
         }
         $order->status =2;
         $order->save();
+
+        $timeline = new StatusTimeline();
+        $timeline->status_id=1; // tao moi
+        $timeline->user_id =Auth::user()->id;
+        $timeline->order_id= $order->id;
+        $timeline->save();
+        $timeline = new StatusTimeline();
+        $timeline->status_id=2; // chuyen don hang cho kiem duyet
+        $timeline->user_id =Auth::user()->id;
+        $timeline->order_id= $order->id;
+        $timeline->save();
+
         return response()->json([
             'status'=>true,
             'msg'=>'Thay đổi trạng thái thành công',
             'restaurant_id'=>$order->restaurant_id
         ]);
     }
-
 }

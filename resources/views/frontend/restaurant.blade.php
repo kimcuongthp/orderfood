@@ -122,7 +122,7 @@
                                     @foreach($restaurant->typeoffood as $typeoffood)
                                         <div class="box-item" id="box-item-{{$typeoffood->id}}">
                                             <h2>{{$typeoffood->name}}</h2>
-                                            @php $foods = \Modules\Restaurant\Entities\Food::with('food_options')->where(['typeoffood_id'=>$typeoffood->id,'status'=>1])->get(); @endphp
+                                            @php $foods = \Modules\Restaurant\Entities\Food::with('food_options','order_detail')->where(['typeoffood_id'=>$typeoffood->id,'status'=>1])->get(); @endphp
 
                                             @foreach($foods as $food)
                                                 <div class="box-item-detail">
@@ -133,7 +133,7 @@
                                                         <h3 class="box-info-title">{{$food->name}}</h3>
                                                         <p class="box-info-attr">{{$food->description1 or ""}}</p>
                                                         <p class="box-info-text">{{$food->description2 or ''}}</p>
-                                                        <p class="box-info-count">Da duoc dat 120 lan</p>
+                                                        <p class="box-info-count">Đã được đặt {{$food->order_detail->count()}} lần</p>
                                                     </div>
                                                     <div class="box-price">
                                                         <span>{{number_format($food->price)}} <sup>đ</sup></span>

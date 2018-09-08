@@ -158,4 +158,33 @@ textarea.parsley-error {
 }
 .bootstrap-tagsinput {
     width: 100%;
+}#modalOrderDetail{
+    color: #000;
+}
+#modalOrderDetail .row{
+    margin: 0px !important;
+}
+#modalOrderDetail .list-group-item{
+    border-radius: 0px;
+    color: #000;
+}
+
+#listOrderDetail li{
+    position: relative;
+    min-height: 40px;
+    line-height: 20px;
+}
+#listOrderDetail li div{
+    width: calc(100% - 100px);
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#listOrderDetail li span{
+    width: 90px;
+    float: right;
+}
+#listTimeline li p:last-child{
+    margin: 0px;
 }

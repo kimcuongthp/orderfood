@@ -43,8 +43,12 @@ return [
     'change_pass' => 'Đổi mật khẩu',
     'admin_manager' => 'Trang quản trị',
     'order_now'=>'Đặt hàng',
+    'order_now'=>'Đặt hàng',
     'area' => 'Khu vực',
     'classify' => 'Phân loại',
     'result' => 'kết quả'
+    'order_now'=>'Đặt hàng',
+    'detail'=>'Chi tiết',
+    'order_detail'=>'Chi tiết đơn hàng'
 
 ];

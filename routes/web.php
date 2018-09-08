@@ -116,6 +116,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
     Route::get('/order-history', [
         'uses' => 'OrderHistoryController@history'
     ]);
+    Route::get('/order-history/modal', [
+        'uses' => 'OrderHistoryController@ModalHistory'
+    ]);
 });
 
 
