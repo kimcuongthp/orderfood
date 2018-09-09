@@ -11,7 +11,7 @@
                             $active = (request('category')) ? '' : ' active';
                         @endphp
                         <a href="{{ url('/') }}" class="list-group-item list-group-item-action action{{ $active }}" id="list-home-list" data-toggle="list">{{ trans('frontend.all') }}
-                            <span class="badge badge-pill light-blue float-right">{{ $count_restaurants }}</span>
+                            <span class="badge badge-pill float-right" {!! (!$active) ? 'style="color: #5a5a5a !important;"' : '' !!}>{{ $count_restaurants }}</span>
                         </a>
                         @if(count($categories))
                             @foreach($categories as $category)
@@ -19,7 +19,7 @@
                                     $active = (request('category') == $category->id) ? ' active' : '';
                                 @endphp
                                 <a href="{{ url('/').'?category='.$category->id }}" class="list-group-item list-group-item-action action{{ $active }}" id="list-profile-list" data-toggle="list">{{ $category->name }}
-                                    <span class="badge badge-pill light-blue float-right">{{ $category->restaurants->count() }}</span>
+                                    <span class="badge badge-pill float-right" {!! (!$active) ? 'style="color: #5a5a5a !important;"' : '' !!}>{{ $category->restaurants->count() }}</span>
                                 </a>
                             @endforeach
                         @endif
@@ -43,7 +43,7 @@
                                         <div class="card-body">
                                             <p class="card-head">{{ $restaurant->name }}</p>
                                             <p class="card-text">{{ $restaurant->address }}</p>
-                                            <p class="card-note">{{ $restaurant->alert }}</p>
+                                            <p class="card-note"><i class="fas fa-tags"></i> {{ $restaurant->alert }}</p>
                                         </div>
                                     </a>
                                 </div>
@@ -348,9 +348,11 @@
                 <h4 class="h4-subtitle">Classification of foods</h4>
             </div>
             <div class="row" id="typelist-body">
-                <?php for($i =1;$i<=100;$i++){ ?>
-                <div class="home-categories"><a href="#">Bento Box  <?php echo $i; ?> </a></div>
-                <?php } ?>
+                @if(count($tags))
+                    @foreach($tags as $tag)
+                        <div class="home-categories"><a href="{{ route('show.tag', $tag->tag->slug) }}">{{ $tag->tag->name or "" }}</a></div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

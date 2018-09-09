@@ -38,7 +38,7 @@ return [
     'your_phone' => 'Số điện thoại',
     'your_name' => 'Tên của bạn',
     'save_changes' => 'Lưu thay đổi',
-    'favorite' => 'Yêu thích',
+    'favorite' => 'Yêu thích',  
     'list_favorite' => 'Danh sách nhà hàng yêu thích',
     'change_pass' => 'Đổi mật khẩu',
     'admin_manager' => 'Trang quản trị',
@@ -46,9 +46,10 @@ return [
     'order_now'=>'Đặt hàng',
     'area' => 'Khu vực',
     'classify' => 'Phân loại',
-    'result' => 'kết quả'
+    'result' => 'kết quả',
     'order_now'=>'Đặt hàng',
     'detail'=>'Chi tiết',
-    'order_detail'=>'Chi tiết đơn hàng'
+    'order_detail'=>'Chi tiết đơn hàng',
+    'select_district' => 'Chọn quận huyện'
 
 ];

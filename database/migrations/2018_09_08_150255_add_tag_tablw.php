@@ -17,6 +17,8 @@ class AddTagTablw extends Migration
         {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
+            $table->timestamps();
         });
         Schema::create('tag_translation', function (Blueprint $table)
         {

@@ -23,9 +23,13 @@
                     <div class="row nd-name">
                         {{$restaurant->name}}
                         @if($fav)
-                            <a class="btn-love btn btn-sm btn-white" data-action="remove-favorite"> <i class="favorite-icon fas fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                            <a class="btn-love btn btn-sm btn-white" id="btn-love" data-action="remove-favorite"> <i class="favorite-icon fas fa-heart"></i> {{ trans('frontend.favorite') }}</a>
                         @else
-                            <a class="btn-love btn btn-sm btn-white" data-action="add-favorite"> <i class="favorite-icon far fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                            @if(!Auth::check())
+                                <a class="btn-love btn btn-sm btn-white" onclick="$('#modalLRFormDemo').modal('show');"> <i class="favorite-icon far fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                            @else
+                                <a class="btn-love btn btn-sm btn-white" id="btn-love" data-action="add-favorite"> <i class="favorite-icon far fa-heart"></i> {{ trans('frontend.favorite') }}</a>
+                            @endif
                         @endif
                     </div>
                     <div class="row nd-adress">
@@ -123,7 +127,6 @@
                                         <div class="box-item" id="box-item-{{$typeoffood->id}}">
                                             <h2>{{$typeoffood->name}}</h2>
                                             @php $foods = \Modules\Restaurant\Entities\Food::with('food_options','order_detail')->where(['typeoffood_id'=>$typeoffood->id,'status'=>1])->get(); @endphp
-
                                             @foreach($foods as $food)
                                                 <div class="box-item-detail">
                                                     <div class="box-img">
@@ -217,7 +220,7 @@
 
                         </div>
                         <!-- -----------------------------End Tab danh gia----------------------------------- -->
-                        <div class="tab-pane fade text-center" id="gioithieu" role="tabpanel" aria-labelledby="gioithieu-tab">
+                        <div class="tab-pane fade" id="gioithieu" role="tabpanel" aria-labelledby="gioithieu-tab">
                             {!! $restaurant->description !!}
                         </div>
                     </div>
@@ -286,7 +289,7 @@
     <script src="/frontend/js/angular-sanitize.min.js"></script>
     <script src="/frontend/js/order.js"></script>
     <script>
-        $('.btn-love').click(function () {
+        $('#btn-love').click(function () {
             var action = $(this).attr('data-action');
             $.ajax({
                 url: '{{ route('favorite') }}',
@@ -301,12 +304,12 @@
                     if(data.status === 'success')
                     {
                         if(data.type === 1){
-                            $('.btn-love').attr('data-action', 'remove-favorite');
+                            $('#btn-love').attr('data-action', 'remove-favorite');
                             $('.favorite-icon').removeClass('far');
                             $('.favorite-icon').addClass('fas');
                         }
                         else{
-                            $('.btn-love').attr('data-action', 'add-favorite');
+                            $('#btn-love').attr('data-action', 'add-favorite');
                             $('.favorite-icon').removeClass('fas');
                             $('.favorite-icon').addClass('far');
                         }

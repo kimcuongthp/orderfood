@@ -162,6 +162,12 @@
                                         <input type="text" class="form-control" name="{{ $locale }}_alert" id="{{ $locale }}_alert" value="{{ old("{$locale}_alert") }}" placeholder="Nhập thông báo của nhà hàng">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Tags</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" value="" name="{{ $locale }}_tag" class="form-control" data-role="tagsinput" />
+                                    </div>
+                                </div>
                             </div>
                             <?php endforeach; ?>
                         </div>

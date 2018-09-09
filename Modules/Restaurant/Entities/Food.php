@@ -36,5 +36,8 @@ class Food extends Model
     public function food_options(){
         return $this->hasMany(FoodOption::class);
     }
+    public function order_detail(){
+        return $this->hasMany(OrderDetail::class);
+    }
 
 }

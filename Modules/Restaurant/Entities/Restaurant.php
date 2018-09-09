@@ -65,4 +65,9 @@ class Restaurant extends Model
         }
         return Category::WhereIn('id', array_unique($categories))->get();
     }
+
+    public function tags()
+    {
+        return $this->hasMany(TagTranslation::class);
+    }
 }

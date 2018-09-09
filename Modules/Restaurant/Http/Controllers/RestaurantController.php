@@ -16,6 +16,9 @@ use Modules\Restaurant\Entities\Restaurant;
 use Modules\Restaurant\Http\Requests\CreateRestaurantRequest;
 use Modules\Restaurant\Http\Requests\UpdateRestaurantRequest;
 use Modules\User\Entities\UserInfo;
+use Modules\Restaurant\Entities\Tag;
+use Modules\Restaurant\Entities\TagTranslation;
+
 
 class RestaurantController extends Controller
 {
@@ -84,6 +87,26 @@ class RestaurantController extends Controller
             }
         }
 
+        #update and add tags
+        foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
+            $tags_array = explode(',',$request->input($locale . '_tag'));
+            foreach ($tags_array as $item)
+            {
+                if($item != '')
+                {
+                    $tag = Tag::firstOrCreate([
+                        'name' => $item
+                    ]);
+                    TagTranslation::create([
+                        'restaurant_id' => $restaurant->id,
+                        'tag_id' => $tag->id,
+                        'locale' => $locale
+                    ]);
+                }
+            }
+        }
+
+
         return redirect()->back()->with([
             'note_type' => 'success',
             'note'      => 'Tạo nhà hàng thành công!'
@@ -102,6 +125,8 @@ class RestaurantController extends Controller
                 abort('404');
             }
         }
+        #lấy danh sách tag
+        $tags = TagTranslation::with('tag')->where('restaurant_id', $restaurant->id)->get();
 
         $categories = Category::all();
         $cities = City::all();
@@ -120,7 +145,7 @@ class RestaurantController extends Controller
             }
         }
 
-        return view('restaurant::edit', compact('restaurant','categories','cities','selected_categories', 'html'));
+        return view('restaurant::edit', compact('restaurant','categories','cities','selected_categories', 'html','tags'));
     }
 
     public function updateRestaurant(UpdateRestaurantRequest $request, Restaurant $restaurant)
@@ -135,11 +160,26 @@ class RestaurantController extends Controller
                 abort('404');
             }
         }
+
+        #remove all tags first
+        TagTranslation::where('restaurant_id',$restaurant->id)->delete();
         #update and add tags
         foreach (LaravelLocalization::getSupportedLocales() as $locale => $language) {
             $tags_array = explode(',',$request->input($locale . '_tag'));
-            if($locale == 'vi') dd($tags_array);
-            DB::table('');
+            foreach ($tags_array as $item)
+            {
+                if($item != '')
+                {
+                    $tag = Tag::firstOrCreate([
+                        'name' => $item
+                    ]);
+                    TagTranslation::create([
+                        'restaurant_id' => $restaurant->id,
+                        'tag_id' => $tag->id,
+                        'locale' => $locale
+                    ]);
+                }
+            }
         }
 
         #update thông tin nhà hàng

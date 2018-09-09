@@ -27,6 +27,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'middleware' => 'auth'
     ]);
 
+    #Route tag
+    Route::get('tags/{slug}', [
+        'as' => 'show.tag',
+        'uses' => 'TagController@showTag'
+    ]);
+
     #Route favorite restaurant
     Route::get('favorite', [
         'as' => 'show.favorite',

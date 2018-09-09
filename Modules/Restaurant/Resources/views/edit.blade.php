@@ -49,7 +49,16 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Tags</label>
                                 <div class="col-sm-7">
-                                    <input type="text" value="" name="{{ $locale }}_tag" class="form-control" data-role="tagsinput" />
+                                    <?php
+                                        $val = $tags->where('locale',$locale);
+                                        $input = '';
+                                        foreach($val as $value)
+                                        {
+                                            $input .= $value->tag->name.',';
+                                        }
+                                        $input = rtrim($input,',');
+                                    ?>
+                                    <input type="text" value="{{ $input }}" name="{{ $locale }}_tag" class="form-control" data-role="tagsinput" />
                                 </div>
                             </div>
                         </div>

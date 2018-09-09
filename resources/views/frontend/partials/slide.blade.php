@@ -1,8 +1,3 @@
-<?php
-    if(Route::currentRouteName() === 'restaurant.search') {
-
-    }
-?>
 <div class="row" id="slide">
     <div class="owl-carousel owl-theme">
         @if(count($slides))
@@ -35,7 +30,7 @@
                                     }
                                     else {
                                         $selected = '';
-                                        $html = '<option value="0">Chọn quận huyện</option>';
+                                        $html = '<option value="0">'.trans('frontend.select_district').'</option>';
                                     }
                                     ?>
                                     <option value="{{ $city->id }}"{{$selected}}>{{ $city->name }}</option>

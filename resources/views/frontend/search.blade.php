@@ -37,7 +37,7 @@
                                         <div class="card-body">
                                             <p class="card-head">{{ $restaurant->name }}</p>
                                             <p class="card-text">{{ $restaurant->address }}</p>
-                                            <p class="card-note">{{ $restaurant->alert }}</p>
+                                            <p class="card-note"><i class="fas fa-tags"></i> {{ $restaurant->alert }}</p>
                                         </div>
                                     </a>
                                 </div>

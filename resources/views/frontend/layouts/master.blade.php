@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <link rel="stylesheet" href="/frontend/css/site.css" />
 
-    <title>Hello, world!</title>
+    <title>OrderFood.Vn</title>
 </head>
 
 <body >
@@ -31,12 +31,12 @@
                 <div class="menu-right">
                     <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle waves-effect waves-light" data-toggle="dropdown">
-                            <div class="flag"> <i class="flag-us"></i> <span style="text-transform: none">{{ LaravelLocalization::getCurrentLocaleName() }}</span>  </div>
+                            <div class="flag"> <i class="flag-{{ LaravelLocalization::getCurrentLocale() }}"></i> <span style="text-transform: none">{{ LaravelLocalization::getCurrentLocaleName() }}</span>  </div>
                         </button>
                         <div class="dropdown-menu">
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                    <div class="flag"><i class="flag-us"></i> <span>{{ $properties['native'] }}</span></div>
+                                <div class="flag"><i class="flag-{{ $localeCode }}"></i> <span>{{ $properties['native'] }}</span></div>
                                 </a>
                             @endforeach
                         </div>

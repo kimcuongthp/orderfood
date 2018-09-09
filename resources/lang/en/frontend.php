@@ -47,5 +47,6 @@ return [
     'detail'=>'Detail',
     'order_detail'=>'Order detail',
     'classify' => 'Classify',
-    'result' => 'results'
+    'result' => 'results',
+    'select_district' => 'Select district'
 ];

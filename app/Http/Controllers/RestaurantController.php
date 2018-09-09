@@ -45,8 +45,11 @@ class RestaurantController extends Controller
             $rated = false;
         }
 
-        $fav = FavoriteRestaurant::where('restaurant_id',$restaurant->id)->where('user_id',Auth::user()->id)->first() ? true : false;
-
+        $fav = false;
+        if(Auth::check())
+        {
+            $fav = FavoriteRestaurant::where('restaurant_id',$restaurant->id)->where('user_id',Auth::user()->id)->first() ? true : false;
+        }
         return view('frontend.restaurant',compact('restaurant','isOpen','priceMaxMin','star','comments','rated','fav'));
     }
 

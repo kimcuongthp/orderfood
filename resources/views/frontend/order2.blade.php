@@ -23,7 +23,7 @@
                     </select>
                 </li>
             </ul>
-            <div class="tab-content" id="box-order-tab-content" style="display:none">
+            <div class="tab-content" id="box-order-tab-content" style="display:none; border-bottom: 1px solid rgb(236, 236, 236);" >
                 <div class="tab-pane fade show active" id="area" role="tabpanel" aria-labelledby="area-tab">
                     {!! Form::open(['route' => 'restaurant.all', 'method' => 'get']) !!}
                     <div class="row">

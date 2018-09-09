@@ -12,7 +12,7 @@ class SearchController extends Controller
     public function index(Request $request){
 
         $cities = City::all();
-        $html = '<option value="0">Chọn quận huyện</option>';
+        $html = '<option value="0">'.trans('frontend.select_district').'</option>';
 
         if(!$request->city && !$request->district)
         {
