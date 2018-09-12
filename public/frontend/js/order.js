@@ -15,7 +15,7 @@ function  fnModalFood(id,count) {
     }
 }
 function showModal(id) {
-    $('#modalFood').load('/restaurant/food/option/'+id,function (e) {
+    $('#modalFood').load(lang+'/restaurant/food/option/'+id,function (e) {
         $('#modalFood').modal('show');
     });
 }
@@ -295,6 +295,7 @@ function fnDatHang(id) {
         }else{
             $('#modalOrder').modal('hide');
             DetailOrder(result.restaurant_id);
+            OrderSuccess();
         }
     })
 }
