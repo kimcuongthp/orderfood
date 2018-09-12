@@ -71,7 +71,7 @@ class RestaurantController extends Controller
     }
     public function option(Request $request){
         $id =$request->id;
-        $food = Food::with('food_options.sub_options')->findOrFail($id);
+        $food = Food::with('food_options.sub_options','order_detail')->findOrFail($id);
         $restaurant = collect(DB::select('select t.restaurant_id from foods f, typeoffoods t  where f.id =? and f.typeoffood_id = t.id',[$id]))->first();
         $restaurant_id =$restaurant != null ? $restaurant->restaurant_id : 0;
 
