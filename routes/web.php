@@ -120,6 +120,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
         'uses' => 'RestaurantController@OrderNow'
     ]);
     Route::get('/order-history', [
+        'as'=>'order.history',
         'uses' => 'OrderHistoryController@history'
     ]);
     Route::get('/order-history/modal', [
