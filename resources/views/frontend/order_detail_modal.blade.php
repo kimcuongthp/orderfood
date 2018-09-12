@@ -3,10 +3,10 @@
     <div class="modal-content">
         <div class="modal-body">
             <div class="row">
-                <h4>Chi tiết đơn hàng</h4>
+                <h4>{{trans('frontend.order_detail')}}</h4>
             </div>
             <div class="row">
-                Tổng {{$order->order_detail->count()}} món
+                {{trans('frontend.total')}} {{$order->order_detail->count()}} {{trans('frontend.food_items')}}
             </div>
             <br/>
             <div class="row">
@@ -22,19 +22,19 @@
                     @endforeach
                     <li class="list-group-item" style="border-top: 2px solid orangered; ">
                         <div style="font-weight: 500">
-                            Cộng
+                            {{trans('frontend.sub_total')}}
                         </div>
                         <span>{{number_format($order->price)}} đ</span>
                     </li>
                     <li class="list-group-item">
                         <div style="font-weight: 500">
-                            Phí vận chuyển
+                            {{trans('frontend.delivery_fee')}}
                         </div>
                         <span style="">{{number_format($order->trans_fee)}} đ</span>
                     </li>
                     <li class="list-group-item">
                         <div style="font-weight: 500">
-                            Tổng tiền
+                            {{trans('frontend.total')}}
                         </div>
                         <span style="color:orangered">{{number_format($order->sum_price)}} đ</span>
                     </li>
@@ -43,8 +43,8 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-orange btn-sm" onclick="fnDatHang('{{$order->id}}')"> Đặt hàng</button>
-                <button class="btn btn-blue btn-sm"  data-dismiss="modal"> Đóng</button>
+                <button class="btn btn-orange btn-sm" onclick="fnDatHang('{{$order->id}}')"> {{trans('frontend.order_now')}}</button>
+                <button class="btn btn-blue btn-sm"  data-dismiss="modal"> {{trans('frontend.close_form')}}</button>
             </div>
         </div>
     </div>

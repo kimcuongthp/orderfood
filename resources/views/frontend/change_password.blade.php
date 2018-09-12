@@ -60,6 +60,7 @@
 @endsection
 @push('js-stack')
     <script>
+        $('[href="{{route('user.change_password')}}"]').addClass('active');
         $('#change_button').click(function(e){
             e.preventDefault();
             var newpass = $('#newpass').val();

@@ -11,7 +11,7 @@
                         <h3 class="box-info-title" data-food_id="{{$food->id}}">{{$food->name}} </h3>
                         <p class="box-info-attr">{{$food->description1}}</p>
                         <p class="box-info-text">{{$food->description2}}</p>
-                        <p class="box-info-count">Da duoc dat 120 lan</p>
+                        <p class="box-info-count">{{trans('frontend.ordered')}} {{$food->order_detail->count()}} {{trans('frontend.times')}}</p>
                         <input type="hidden" name="priceFood" value="{{$food->price}}" />
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <button class="btn btn-orange btn-sm"  id="btnAddOrderItem"> <i class="fas fa-plus"></i> <span id="total">{{number_format( $price==0? $food->price:$price)}}</span> <sup>d</sup> </button>
-                <button class="btn btn-blue btn-sm"  data-dismiss="modal"> Close</button>
+                <button class="btn btn-blue btn-sm"  data-dismiss="modal"> {{trans('frontend.close_form')}}</button>
 
             </div>
         </div>

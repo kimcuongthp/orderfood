@@ -11,7 +11,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="video-container"><iframe width="853" height="480" src="{{$restaurant->video}}" frameborder="0" allowfullscreen></iframe></div>
+                    @if($restaurant->video =='' || $restaurant->video ==null)
+                        <div class="video-container"><img style="position: absolute;width: 100%;height: 100%;" src="{{$restaurant->image}}"></div>
+                    @else
+                        <div class="video-container"><iframe width="853" height="480" src="{{$restaurant->video}}" frameborder="0" allowfullscreen></iframe></div>
+                    @endif
                 </div>
                 <div class="col-md-7">
                     <div class="row nh-breadcrum">
@@ -136,7 +140,7 @@
                                                         <h3 class="box-info-title">{{$food->name}}</h3>
                                                         <p class="box-info-attr">{{$food->description1 or ""}}</p>
                                                         <p class="box-info-text">{{$food->description2 or ''}}</p>
-                                                        <p class="box-info-count">Đã được đặt {{$food->order_detail->count()}} lần</p>
+                                                        <p class="box-info-count">{{trans('frontend.ordered')}} {{$food->order_detail->count()}} {{trans('frontend.times')}}</p>
                                                     </div>
                                                     <div class="box-price">
                                                         <span>{{number_format($food->price)}} <sup>đ</sup></span>
@@ -257,15 +261,15 @@
 
                         </div>
                         <div class="row box-order-plus">
-                            <div class="col-4">Cộng</div>
+                            <div class="col-4">{{trans('frontend.sub_total')}}</div>
                             <div class="col-8"><% price | number:0 %> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-vc">
-                            <div class="col-8">Phí vận chuyển</div>
+                            <div class="col-8">{{trans('frontend.delivery_fee')}}</div>
                             <div class="col-4"> <% trans_fee | number:0 %> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-sum">
-                            <div class="col-4">Tổng</div>
+                            <div class="col-4">{{trans('frontend.total')}}</div>
                             <div class="col-8"> <% sum  | number:0%> <sup>đ</sup></div>
                         </div>
                         <div class="row box-order-button">
@@ -287,6 +291,7 @@
 @push('scripts')
     <script src="/frontend/js/angular.min.js"></script>
     <script src="/frontend/js/angular-sanitize.min.js"></script>
+    <script src="/frontend/js/sweetalert.min.js"></script>
     <script src="/frontend/js/order.js"></script>
     <script>
         $('#btn-love').click(function () {
@@ -333,6 +338,14 @@
             }else{
                 fnOrderNow(res_id);
             }
+        }
+        
+        function OrderSuccess() {
+            swal("Thank you!", "{{trans('frontend.sucess_order_text')}}",{
+                icon: "success",
+                button: false,
+                timer: 2000
+            });
         }
     </script>
 @endpush

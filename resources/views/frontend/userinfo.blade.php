@@ -72,6 +72,7 @@
 @endsection
 @push('js-stack')
     <script>
+        $('[href="{{route('user.info')}}"]').addClass('active');
         $('.action').click(function(){
             $('.action').removeClass('active');
             window.location.href = $(this).attr('href');

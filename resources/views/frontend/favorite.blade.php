@@ -42,4 +42,10 @@
             </div>
         </div>
     </div>
+
 @endsection
+@push('js-stack')
+    <script>
+        $('[href="{{ route('show.favorite') }}"]').addClass('active');
+    </script>
+@endpush

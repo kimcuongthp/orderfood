@@ -95,7 +95,7 @@
 @endsection
 @push('scripts')
     <script>
-        $('[href="/order-history"]').addClass('active');
+        $('[href="{{route('order.history')}}"]').addClass('active');
         function fnModalHistory(id){
             $('#modalHistory').load('/{{LaravelLocalization::getCurrentLocale()}}/order-history/modal?order_id='+id,function (e) {
                 $('#modalHistory').modal('show');
