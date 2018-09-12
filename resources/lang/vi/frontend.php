@@ -50,6 +50,18 @@ return [
     'order_now'=>'Đặt hàng',
     'detail'=>'Chi tiết',
     'order_detail'=>'Chi tiết đơn hàng',
-    'select_district' => 'Chọn quận huyện'
+    'select_district' => 'Chọn quận huyện',
+
+
+
+    'ordered'=>'Đã được đặt',
+    'times'=>'Lần',
+    'sub_total'=>'Cộng',
+    'deleviry_fee'=>'Phí vận chuyển',
+    'total'=>'Tổng',
+    'close_form'=>'Đóng',
+    'food_items'=>'món',
+    'order_detail'=>'Chi tiết đơn hàng',
+    'sucess_order_text'=>'Chúng tôi sẽ liên hệ với bạn để xác nhận đơn hàng!'
 
 ];

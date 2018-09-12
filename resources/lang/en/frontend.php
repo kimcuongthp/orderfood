@@ -48,5 +48,15 @@ return [
     'order_detail'=>'Order detail',
     'classify' => 'Classify',
     'result' => 'results',
-    'select_district' => 'Select district'
+    'select_district' => 'Select district',
+    'ordered'=>'Ordered',
+    'times'=>'times',
+    'sub_total'=>'Sub total',
+    'delivery_fee'=>'Delivery fee',
+    'total'=>'Total',
+    'close_form'=>'Close',
+    'food_items'=>'items',
+    'order_detail'=>'Order detail',
+    'sucess_order_text'=>'We will contact you soon!'
+
 ];
